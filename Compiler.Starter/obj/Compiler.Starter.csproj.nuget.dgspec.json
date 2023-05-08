@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.Starter\\Compiler.Starter.csproj": {}
+    "C:\\VSS-DB\\Compiler\\Compiler.Starter\\Compiler.Starter.csproj": {}
   },
   "projects": {
-    "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.Starter\\Compiler.Starter.csproj": {
+    "C:\\VSS-DB\\Compiler\\Compiler.Starter\\Compiler.Starter.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.Starter\\Compiler.Starter.csproj",
+        "projectUniqueName": "C:\\VSS-DB\\Compiler\\Compiler.Starter\\Compiler.Starter.csproj",
         "projectName": "Compiler.Starter",
-        "projectPath": "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.Starter\\Compiler.Starter.csproj",
+        "projectPath": "C:\\VSS-DB\\Compiler\\Compiler.Starter\\Compiler.Starter.csproj",
         "packagesPath": "C:\\Users\\ramir-cr\\.nuget\\packages\\",
-        "outputPath": "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.Starter\\obj\\",
+        "outputPath": "C:\\VSS-DB\\Compiler\\Compiler.Starter\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -23,17 +23,18 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0-windows"
+          "net7.0-windows"
         ],
         "sources": {
           "C:\\Program Files (x86)\\DevExpress 19.1\\Components\\System\\Components\\Packages": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "C:\\VSS-DB\\vss-db-Cristian\\Utilities\\Paquetes Generados Manual": {},
+          "C:\\VSS-DB\\TUV-SPAIN-Nugets": {},
+          "http://de-hv1-sr-diws1/NugetServer/nuget": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0-windows7.0": {
-            "targetAlias": "net6.0-windows",
+          "net7.0-windows7.0": {
+            "targetAlias": "net7.0-windows",
             "projectReferences": {}
           }
         },
@@ -44,8 +45,22 @@
         }
       },
       "frameworks": {
-        "net6.0-windows7.0": {
-          "targetAlias": "net6.0-windows",
+        "net7.0-windows7.0": {
+          "targetAlias": "net7.0-windows",
+          "dependencies": {
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.Extensions.Options": {
+              "target": "Package",
+              "version": "[7.0.1, )"
+            },
+            "System.Management.Automation": {
+              "target": "Package",
+              "version": "[7.3.4, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -65,7 +80,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     }

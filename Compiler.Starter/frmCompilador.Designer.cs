@@ -81,7 +81,7 @@
             // tsbBuscarCarpeta
             // 
             this.tsbBuscarCarpeta.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbBuscarCarpeta.Image = global::Compiler.Starter.Properties.Resources.folder_add;
+          //  this.tsbBuscarCarpeta.Image = global::Compiler.Starter.Properties.Resources.folder_add;
             this.tsbBuscarCarpeta.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbBuscarCarpeta.Name = "tsbBuscarCarpeta";
             this.tsbBuscarCarpeta.Size = new System.Drawing.Size(23, 23);
@@ -150,7 +150,7 @@
             // tsbExecute
             // 
             this.tsbExecute.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbExecute.Image = global::Compiler.Starter.Properties.Resources.media_play;
+          //  this.tsbExecute.Image = global::Compiler.Starter.Properties.Resources.media_play;
             this.tsbExecute.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbExecute.Name = "tsbExecute";
             this.tsbExecute.Size = new System.Drawing.Size(23, 23);
@@ -160,7 +160,7 @@
             // tsbRefresh
             // 
             this.tsbRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbRefresh.Image = global::Compiler.Starter.Properties.Resources.refresh;
+          //  this.tsbRefresh.Image = global::Compiler.Starter.Properties.Resources.refresh;
             this.tsbRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbRefresh.Name = "tsbRefresh";
             this.tsbRefresh.Size = new System.Drawing.Size(23, 23);
@@ -170,7 +170,7 @@
             // tsbClear
             // 
             this.tsbClear.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbClear.Image = global::Compiler.Starter.Properties.Resources.document_new;
+          //  this.tsbClear.Image = global::Compiler.Starter.Properties.Resources.document_new;
             this.tsbClear.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbClear.Name = "tsbClear";
             this.tsbClear.Size = new System.Drawing.Size(23, 23);
@@ -284,12 +284,12 @@
         private ToolStripLabel tslPass;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripButton tsbRefresh;
-        private WinFormsControlLibrary.ToolStripTextHosted tstPass;
-        private WinFormsControlLibrary.TreeViewTools treeCarpetas;
+        private DevToolsNet.WinFormsControlLibrary.ToolStripTextHosted tstPass;
+        private DevToolsNet.WinFormsControlLibrary.TreeViewTools treeCarpetas;
         private ToolStripButton tsbClear;
         private ToolStripSeparator toolStripSeparator2;
         private ToolStripButton tsbBuscarCarpeta;
-        private WinFormsControlLibrary.ToolStripTextHosted tstCarpeta;
+        private DevToolsNet.WinFormsControlLibrary.ToolStripTextHosted tstCarpeta;
         private ToolStripSeparator toolStripSeparator3;
     }
 }

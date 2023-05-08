@@ -1,5 +1,4 @@
 ﻿using DevToolsNet.Shared.Configs;
-using Microsoft.CodeAnalysis.Options;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -22,6 +21,9 @@ using System.IO;
 using Microsoft.CodeAnalysis;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using System.Collections.ObjectModel;
+using DevToolsNet.WindowsApp;
+using DevToolsNet.WindowsApp.ServerTreeManager;
+
 using System.Management.Automation;
 using System.Management.Automation.Runspaces;
 
@@ -36,7 +38,7 @@ public partial class frmCompilador : Form
         public System.Windows.Forms.TextBox TextBox { get; set; }
     }
 
-    ServerTreeManager.TreeServersManger treeServesManager = new ServerTreeManager.TreeServersManger();
+    TreeServersManger treeServesManager = new TreeServersManger();
     ServersConfig<ServerConfig> servers;
     // List<Carpeta> carpetas;
     Dictionary<string, IPowerShellRunner> runners = new Dictionary<string, IPowerShellRunner>();
@@ -168,7 +170,7 @@ public partial class frmCompilador : Form
     {
         try
         {
-           /* InitialSessionState iss = InitialSessionState.Create();
+           /*InitialSessionState iss = InitialSessionState.Create();
             SessionStateCmdletEntry getCommand = new SessionStateCmdletEntry("Get-Command", typeof(Microsoft.PowerShell.Commands.GetCommandCommand), "");
             SessionStateCmdletEntry importModule = new SessionStateCmdletEntry("Import-Module", typeof(Microsoft.PowerShell.Commands.ImportModuleCommand), "");
 
@@ -204,7 +206,7 @@ public partial class frmCompilador : Form
             // string commnd_text = "cd " + elemento.Ruta + "\n";
             //  commnd_text += "ls";
 
-
+            
             System.Management.Automation.PowerShell objPowerShell = System.Management.Automation.PowerShell.Create();
             string commnd_text = "Set-Location \"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\\"" + "\n";
             commnd_text += $".\\MSBuild.exe \"{elemento.Ruta}\" /clp:ErrorsOnly";
@@ -231,6 +233,7 @@ public partial class frmCompilador : Form
 
     private void test()
     {
+        
         //Creamos un espacio de ejecución para capturar el resultado del comando
         Runspace espacioEjecucion = RunspaceFactory.CreateRunspace();
         //Lo iniciamos
@@ -252,7 +255,7 @@ public partial class frmCompilador : Form
         {
             txtCommand.AppendText(lineaResultado.ToString() + Environment.NewLine);
         }
-
+        
 
         //// Runspace rs = RunspaceFactory.CreateRunspace(iss);
         //// rs.Open();
@@ -381,8 +384,10 @@ public partial class frmCompilador : Form
             // treeCarpetas.Nodes.AddRange(carpetas);
 
             // CargarTree(treeCarpetas.Nodes, carpetas);
+
+
             treeCarpetas.Nodes.Clear();
-            CargarTree(treeCarpetas.Nodes, elemento.elementos);
+           CargarTree(treeCarpetas.Nodes, elemento.elementos);
         }
     }
     public void CargarTree(TreeNodeCollection Nodes, List<Elemento> elementos)

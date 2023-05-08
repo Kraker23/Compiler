@@ -2,10 +2,37 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net7.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="7.0.1" />
+    <PackageReference Include="System.Management.Automation" Version="7.3.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="DevToolsNet.DB.Objects">
+      <HintPath>..\..\DevToolsNet6\DevToolsNet.DB.Generator\bin\Debug\net7.0\DevToolsNet.DB.Objects.dll</HintPath>
+    </Reference>
+    <Reference Include="DevToolsNet.DB.Runner">
+      <HintPath>..\..\DevToolsNet6\DevToolsNet.DB.MultiServerRun\bin\Debug\net7.0\DevToolsNet.DB.Runner.dll</HintPath>
+    </Reference>
+    <Reference Include="DevToolsNet.PowerShell">
+      <HintPath>..\..\DevToolsNet6\DevToolsNet6.PowerShell\bin\Debug\net7.0\DevToolsNet.PowerShell.dll</HintPath>
+    </Reference>
+    <Reference Include="DevToolsNet.Shared">
+      <HintPath>..\..\DevToolsNet6\DevToolsNet.Shared\bin\Debug\net7.0\DevToolsNet.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="DevToolsNet.WindowsApp">
+      <HintPath>..\..\DevToolsNet6\DevToolsNet.WindowsApp\bin\Debug\net7.0-windows\DevToolsNet.WindowsApp.dll</HintPath>
+    </Reference>
+    <Reference Include="DevToolsNet.WinFormsControlLibrary">
+      <HintPath>..\..\DevToolsNet6\DevToolsNet.WinFormsControlLibrary\bin\Debug\net7.0-windows\DevToolsNet.WinFormsControlLibrary.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 
 </Project>
