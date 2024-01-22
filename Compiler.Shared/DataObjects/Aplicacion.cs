@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Compiler.Shared.DataObjects
@@ -22,7 +23,9 @@ namespace Compiler.Shared.DataObjects
         public string comandoCompilado { get; set; }
         
         /// <summary>Listado de Reglas para copiar</summary>
-        public List<ArchivoExclusion> archivosExcluidos { get; set; }
+        public List<Guid> archivosExcluidos { get; set; }
+        [JsonIgnore]
+        public List<ArchivoExclusion> _archivosExcluidos { get; set; }
         public Aplicacion()
         {
             id = Guid.NewGuid();
