@@ -10,15 +10,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="ControlsMetro\MetroDateTime.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="MetroFramework" Version="1.2.0.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ControlsMetro\" />
+    <PackageReference Include="MetroFramework" Version="1.0.0" />
+    <PackageReference Include="MetroFramework.Design" Version="1.0.0" />
+    <PackageReference Include="MetroFramework.Fonts" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,9 +20,25 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="frmAplicaciones.cs">
+    <Compile Update="frmConfiguracionArchivosExcluyentes.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="frmConfiguracionProyectos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="frmConfiguracionAplicaciones.cs" />
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

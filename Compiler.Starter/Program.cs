@@ -35,7 +35,8 @@ namespace Compiler.Starter
 
             //Inject
             Dependecies.FillDependencies();
-            Application.Run(new frmAplicaciones());
+            Application.Run(new frmMain());
+            //Application.Run(new frmConfiguracionAplicaciones());
 
         }
 
