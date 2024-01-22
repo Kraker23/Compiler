@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="MetroFramework" Version="1.0.0" />
+    <PackageReference Include="MetroFramework.ControlsPersonalizados" Version="1.0.1" />
     <PackageReference Include="MetroFramework.Design" Version="1.0.0" />
     <PackageReference Include="MetroFramework.Fonts" Version="1.0.0" />
   </ItemGroup>

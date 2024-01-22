@@ -42,7 +42,7 @@
             toolStrip1.Items.AddRange(new ToolStripItem[] { tsCompilador, toolStripDropDownButton1 });
             toolStrip1.Location = new Point(1, 30);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(798, 25);
+            toolStrip1.Size = new Size(1121, 25);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -88,7 +88,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1123, 693);
             Controls.Add(toolStrip1);
             IsMdiContainer = true;
             Name = "frmMain";

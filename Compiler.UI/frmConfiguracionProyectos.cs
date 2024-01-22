@@ -20,10 +20,6 @@ namespace Compiler.UI
             InitializeComponent();
             managerAplicacion = Inject.Instance.ServiceProvider.GetService<IAplicacion_Data>();
             managerProyecto = Inject.Instance.ServiceProvider.GetService<IProyecto_Data>();
-            managerProyecto.Add(new Proyecto { nombre = "test" });
-            managerProyecto.Add(new Proyecto { nombre = "test1" });
-            managerProyecto.Add(new Proyecto { nombre = "test2" });
-            managerProyecto.Add(new Proyecto { nombre = "test3" });
         }
 
         private void frmConfiguracionProyectos_Load(object sender, EventArgs e)
