@@ -1,0 +1,11 @@
+﻿Compiler.UI/obj
+Compiler.Starter/obj
+Compiler.Starter/bin/Debug
+Compiler.Shared/bin
+Compiler.Shared/obj
+Compiler.EF/bin
+Compiler.EF/obj
+Compiler.BL/bin
+Compiler.BL/obj
+.vs/ProjectEvaluation
+.vs/Compiler
