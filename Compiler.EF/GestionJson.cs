@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -37,12 +38,21 @@ namespace Compiler.EF
             if (!File.Exists(pathArchivoDatos))
             {
                 File.Create(pathArchivoDatos).Close();
+                return new T();
             }
-            using (StreamReader reader = new StreamReader(pathArchivoDatos))
+            else
             {
-                var json = reader.ReadToEnd();
-                T? usuariosAux = JsonConvert.DeserializeObject<T>(json);
-                return usuariosAux ?? new T();
+                using (StreamReader reader = new StreamReader(pathArchivoDatos))
+                {
+                    var json = reader.ReadToEnd();
+                    var settings = new JsonSerializerSettings
+                    {
+                        NullValueHandling = NullValueHandling.Ignore,
+                        MissingMemberHandling = MissingMemberHandling.Ignore
+                    };
+                    T? aux = JsonConvert.DeserializeObject<T>(json, settings);
+                    return aux ?? new T();
+                }
             }
         }
 

@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Compiler.EF;
+using Compiler.Shared.Interface.IData;
+using Compiler.UI;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -40,57 +44,68 @@ namespace Compiler.Starter
         public static void FillDependencies()
         {
             // load configs
-            /*
-            var tj = TUVject.Instance;
-            tj.App = "SICER.Linea.UI";
-            tj.Group = "Centro_" + BL.Globales.Linea.IdCentro.ToString();
-            tj.ApiRecoverConfig = new TuvFrameworkSpainBSM.AppConfig.APIRecover.AppConfigAPIRecoverConfig()
-            {
-                BaseUrl = "https://central.es.tuv.group/TUVAppConfigAPI/",
-                ApiKey = "Te$tDe$arroll0",
-                UseDefaultCredentials = false,
-                UseUserPassToken = false,
-                Name = "TUVAppConfigAPI"
-            };
-            tj.ImportarConfigsFromAPI(out string err);
-            if (!string.IsNullOrEmpty(err))
-            {
-                tj.AddJsonConfigFile($"configbkp_{tj.App}.json");
-                MessageBox.Show("Error al cargar la configuración de la aplicación");
-            }
+            
+            var tj = Inject.Instance;
+            //tj.App = "SICER.Linea.UI";
+            //tj.Group = "Centro_" + BL.Globales.Linea.IdCentro.ToString();
+            //tj.ApiRecoverConfig = new TuvFrameworkSpainBSM.AppConfig.APIRecover.AppConfigAPIRecoverConfig()
+            //{
+            //    BaseUrl = "https://central.es.tuv.group/TUVAppConfigAPI/",
+            //    ApiKey = "Te$tDe$arroll0",
+            //    UseDefaultCredentials = false,
+            //    UseUserPassToken = false,
+            //    Name = "TUVAppConfigAPI"
+            //};
+            //tj.ImportarConfigsFromAPI(out string err);
+            //if (!string.IsNullOrEmpty(err))
+            //{
+            //    tj.AddJsonConfigFile($"configbkp_{tj.App}.json");
+            //    MessageBox.Show("Error al cargar la configuración de la aplicación");
+            //}
 
             tj.AddServices = (s) =>
             {
-                s.Configure<LineaDataApiClientConfig>(tj.Configuration.GetSection("SicerAPIClientConfig"));
-                s.Configure<SeguridadDataApiClientConfig>(tj.Configuration.GetSection("SicerAPIClientConfig"));
-                s.Configure<GlobalDataApiClientConfig>(tj.Configuration.GetSection("SicerAPIClientConfig"));
-                s.Configure<InspectionQueueClientConfig>(tj.Configuration.GetSection("SicerAPIClientConfig"));
-                s.Configure<InspectionFileManagerClientConfig>(tj.Configuration.GetSection("SicerAPIClientConfig"));
+                //s.Configure<LineaDataApiClientConfig>(tj.Configuration.GetSection("SicerAPIClientConfig"));
+                //s.Configure<SeguridadDataApiClientConfig>(tj.Configuration.GetSection("SicerAPIClientConfig"));
+                //s.Configure<GlobalDataApiClientConfig>(tj.Configuration.GetSection("SicerAPIClientConfig"));
+                //s.Configure<InspectionQueueClientConfig>(tj.Configuration.GetSection("SicerAPIClientConfig"));
+                //s.Configure<InspectionFileManagerClientConfig>(tj.Configuration.GetSection("SicerAPIClientConfig"));
 
-                s.Configure<FilesApiConfig>(tj.Configuration.GetSection("FilesApiConfig"));
-                s.Configure<DigitalSignatureApiClientConfig>(tj.Configuration.GetSection("DigitalSignatureApiClientConfig"));
+                //s.Configure<FilesApiConfig>(tj.Configuration.GetSection("FilesApiConfig"));
+                //s.Configure<DigitalSignatureApiClientConfig>(tj.Configuration.GetSection("DigitalSignatureApiClientConfig"));
 
 
-                s.AddTransient<IInspeccionReportData, LineaDataApiClient>();
-                s.AddTransient<IInspeccionLineaFicheroData, LineaDataApiClient>();
-                s.AddTransient<IInspeccionData, LineaDataApiClient>();
-                s.AddTransient<IConfiguracionData, GlobalDataApiClient>();
-                s.AddTransient<ITipoContenidoData, GlobalDataApiClient>();
-                s.AddTransient<IConfigManager, GlobalDataApiClient>();
-                s.AddTransient<IUsuarioData, SeguridadDataApiClient>();
-                s.AddTransient<IUsuarioData, SeguridadDataApiClient>();
-                s.AddTransient<IFilesClient, FilesApiClient>();
+                //s.AddTransient<IInspeccionReportData, LineaDataApiClient>();
+                //s.AddTransient<IInspeccionLineaFicheroData, LineaDataApiClient>();
+                //s.AddTransient<IInspeccionData, LineaDataApiClient>();
+                //s.AddTransient<IConfiguracionData, GlobalDataApiClient>();
+                //s.AddTransient<ITipoContenidoData, GlobalDataApiClient>();
+                //s.AddTransient<IConfigManager, GlobalDataApiClient>();
+                //s.AddTransient<IUsuarioData, SeguridadDataApiClient>();
+                //s.AddTransient<IUsuarioData, SeguridadDataApiClient>();
+                //s.AddTransient<IFilesClient, FilesApiClient>();
 
-                s.AddTransient<ISignPDF, DigitalSignatureApiClient>();
+                //s.AddTransient<ISignPDF, DigitalSignatureApiClient>();
 
-                s.AddTransient<IConfigManager, GlobalDataApiClient>();
-                s.AddTransient<IInspectionQueueData, InspectionQueueClient>();
-                s.AddTransient<ILineInspectionFileManager, InspeccionLineaFicheroManager>();
-                s.AddTransient<IInspeccionReportManager, InspeccionReportManager>();
+                //s.AddTransient<IConfigManager, GlobalDataApiClient>();
+                //s.AddTransient<IInspectionQueueData, InspectionQueueClient>();
+                //s.AddTransient<ILineInspectionFileManager, InspeccionLineaFicheroManager>();
+                //s.AddTransient<IInspeccionReportManager, InspeccionReportManager>();
+
+                s.AddTransient<IManagerJson, ManagerJson>();
+                //Data
+                s.AddTransient<IProyecto_Data, Proyecto_EF>();
+                s.AddTransient<IAplicacion_Data, Aplicacion_EF>();
+                //BL
+                //services.AddTransient<IBL_Carpeta, BL_Carpeta>();
+                //services.AddTransient<IBL_Tarea, BL_Tarea>();
+                //services.AddTransient<IBL_Nota, BL_Nota>();
+
+                s.AddTransient<frmAplicaciones>();
             };
 
             tj.Build();
-            */
+            
         }
     }
 }

@@ -21,4 +21,14 @@
     <Folder Include="ControlsMetro\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Compiler.Shared\Compiler.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="frmAplicaciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>
