@@ -1,0 +1,63 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Compiler.Shared.Extenders
+{
+    public static class ObjectExtensions
+    {
+        public static bool isEqualTo<T>(this T val1, T val2)
+        {
+            PropertyInfo[] propertyInfos = val1.GetType().GetProperties();
+            foreach (PropertyInfo p in propertyInfos)
+            {
+                var Prop = p.Name;
+                var valA = p.GetValue(val1);
+                var valB = p.GetValue(val2);
+                if (valA != valB)
+                    return false;
+            }
+            return true;
+        }
+
+        public static bool CompareObjects<T, T2>(T a, T2 b)
+        {
+            bool res = true;
+            var tipoA = typeof(T);
+            var tipoB = typeof(T2);
+            var props = tipoA.GetProperties().FindAllToList(x => tipoB.GetProperties().Any(y => y.Name == x.Name && y.PropertyType == x.PropertyType));
+            foreach (var p in props)
+            {
+                var valA = tipoA.GetProperty(p.Name).GetValue(a);
+                var valB = tipoB.GetProperty(p.Name).GetValue(b);
+                if (valA == null && valB == null)
+                {
+                    res = true;
+                }
+                else if (valA != null && valB != null)
+                {
+                    res = valA.Equals(valB);// (valA == valB);
+                    if (!res)
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+            return res;
+        }
+
+        public static List<T> FindAllToList<T>(this T[] array, Predicate<T> match)
+        {
+            return Array.FindAll(array, match).ToList<T>();
+        }
+
+    }
+}

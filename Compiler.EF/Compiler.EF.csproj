@@ -7,4 +7,12 @@
 	  <BaseOutputPath>C:\VSS-DB\vss-db-Cristian\Compiler\Publicacion</BaseOutputPath>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Compiler.Shared\Compiler.Shared.csproj" />
+  </ItemGroup>
+
 </Project>
