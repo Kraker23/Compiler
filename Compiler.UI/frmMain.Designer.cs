@@ -1,6 +1,6 @@
-﻿namespace Compiler.Starter
+﻿namespace Compiler.UI
 {
-    partial class Form1
+    partial class frmMain
     {
         /// <summary>
         ///  Required designer variable.
