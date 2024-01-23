@@ -7,4 +7,8 @@
 	  <BaseOutputPath>C:\VSS-DB\vss-db-Cristian\Compiler\Publicacion</BaseOutputPath>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Compiler.Shared\Compiler.Shared.csproj" />
+  </ItemGroup>
+
 </Project>
