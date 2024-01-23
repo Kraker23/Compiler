@@ -21,6 +21,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="Utilities.Clases">
+      <HintPath>..\..\Kraker23\Utilities\dllsComunes\Utilities.Clases.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Utilities.Extensions">
+      <HintPath>..\..\Kraker23\Utilities\dllsComunes\Utilities.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Controls\cArchivoExclusion.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="frmConfiguracionArchivosExcluyentes.cs">
       <SubType>Form</SubType>
     </Compile>

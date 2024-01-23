@@ -1,5 +1,8 @@
 ﻿using Compiler.Shared.DataObjects;
+using Compiler.Shared.Interface.IBL;
+using Compiler.Starter;
 using MetroFramework.Controls;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,6 +12,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Utilities.Clases.BuscarFicheros;
+using Utilities.Extensions;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace Compiler.UI.Controls
@@ -19,16 +24,17 @@ namespace Compiler.UI.Controls
 
         public delegate void GuardarEvento(Aplicacion aplicacion);
         public event GuardarEvento Guardar;
-
+        IArchivoExclusion_BL managerExclusion;
+        List<ArchivoExclusion> archivosExclusion;
         Aplicacion aplicacion;
         public cAplicacion()
         {
             InitializeComponent();
+            managerExclusion = Inject.Instance.ServiceProvider.GetService<IArchivoExclusion_BL>();
         }
 
-        public cAplicacion(Aplicacion aplicacion)
+        public cAplicacion(Aplicacion aplicacion) : this()
         {
-            InitializeComponent();
             this.aplicacion = aplicacion;
         }
 
@@ -45,6 +51,8 @@ namespace Compiler.UI.Controls
 
         private void LoadData()
         {
+            archivosExclusion = managerExclusion.getArchivoExclusiones();
+            treeArchivos.Nodes.Clear();
             propId.Enabled = false;
             if (aplicacion != null)
             {
@@ -54,6 +62,13 @@ namespace Compiler.UI.Controls
                 propCarpetaCompilado.text = aplicacion.carpetaCompilado;
                 propCarpetaPublicacion.text = aplicacion.carpetaPublicacion;
                 propComandoCompilado.text = aplicacion.comandoCompilado;
+            }
+            foreach (ArchivoExclusion archivo in archivosExclusion)
+            {
+                TreeNode node = new TreeNode(archivo.texto);
+                node.Tag = archivo;
+                node.Checked = aplicacion != null && aplicacion.archivosExcluidos.Contains(archivo.id);
+                treeArchivos.Nodes.Add(node);
             }
         }
 
@@ -66,8 +81,50 @@ namespace Compiler.UI.Controls
                 aplicacion.carpetaCompilado = propCarpetaCompilado.text;
                 aplicacion.carpetaPublicacion = propCarpetaPublicacion.text;
                 aplicacion.comandoCompilado = propComandoCompilado.text;
+
             }
             Guardar?.Invoke(aplicacion);
+        }
+
+        private void btUbicacionAplicacion_Click(object sender, EventArgs e)
+        {
+            string[] path = BuscarArchivos.SeleccionarArchivo(true, multiSelect: false);
+            if (path.HasContent() && path.Length == 1)
+            {
+                propUbicacionAplicacion.text = path[0];
+            }
+        }
+
+        private void btCarpetaCompilado_Click(object sender, EventArgs e)
+        {
+            string path = BuscarArchivos.SeleccionarCarpetaClassico();
+            if (!string.IsNullOrEmpty(path))
+            {
+                propCarpetaCompilado.text = path;
+            }
+        }
+
+        private void btCarpetaPublicacion_Click(object sender, EventArgs e)
+        {
+            string path = BuscarArchivos.SeleccionarCarpetaClassico();
+            if (!string.IsNullOrEmpty(path))
+            {
+                propCarpetaPublicacion.text = path;
+            }
+        }
+
+        private void treeArchivos_AfterCheck(object sender, TreeViewEventArgs e)
+        {
+            TreeNode nodo = ((TreeNode)e.Node);
+            ArchivoExclusion archivoExclusion = ((ArchivoExclusion)nodo.Tag);
+            if (aplicacion.archivosExcluidos.Contains(archivoExclusion.id) && !nodo.Checked)
+            {
+                aplicacion.archivosExcluidos.Remove(archivoExclusion.id);
+            }
+            else if (!aplicacion.archivosExcluidos.Contains(archivoExclusion.id) && nodo.Checked)
+            {
+                aplicacion.archivosExcluidos.Add(archivoExclusion.id);
+            }
         }
     }
 }

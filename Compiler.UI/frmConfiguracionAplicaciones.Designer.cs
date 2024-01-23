@@ -43,7 +43,7 @@
             // 
             splitter1.Location = new Point(1, 30);
             splitter1.Name = "splitter1";
-            splitter1.Size = new Size(3, 621);
+            splitter1.Size = new Size(3, 536);
             splitter1.TabIndex = 1;
             splitter1.TabStop = false;
             // 
@@ -57,7 +57,7 @@
             metroPanel1.HorizontalScrollbarSize = 10;
             metroPanel1.Location = new Point(4, 30);
             metroPanel1.Name = "metroPanel1";
-            metroPanel1.Size = new Size(328, 621);
+            metroPanel1.Size = new Size(328, 536);
             metroPanel1.TabIndex = 3;
             metroPanel1.VerticalScrollbarBarColor = true;
             metroPanel1.VerticalScrollbarHighlightOnWheel = false;
@@ -68,7 +68,7 @@
             treeAplicaciones.Dock = DockStyle.Fill;
             treeAplicaciones.Location = new Point(0, 25);
             treeAplicaciones.Name = "treeAplicaciones";
-            treeAplicaciones.Size = new Size(328, 596);
+            treeAplicaciones.Size = new Size(328, 511);
             treeAplicaciones.TabIndex = 3;
             treeAplicaciones.AfterSelect += treeAplicaciones_AfterSelect;
             // 
@@ -105,8 +105,9 @@
             // 
             ctrAplicacion.Dock = DockStyle.Fill;
             ctrAplicacion.Location = new Point(332, 30);
+            ctrAplicacion.MinimumSize = new Size(438, 330);
             ctrAplicacion.Name = "ctrAplicacion";
-            ctrAplicacion.Size = new Size(893, 621);
+            ctrAplicacion.Size = new Size(698, 536);
             ctrAplicacion.TabIndex = 4;
             ctrAplicacion.UseSelectable = true;
             ctrAplicacion.Guardar += ctrAplicacion_Guardar;
@@ -115,7 +116,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1226, 652);
+            ClientSize = new Size(1031, 567);
             Controls.Add(ctrAplicacion);
             Controls.Add(metroPanel1);
             Controls.Add(splitter1);

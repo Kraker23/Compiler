@@ -1,5 +1,6 @@
 
 using Compiler.Shared.DataObjects;
+using Compiler.Shared.Interface.IBL;
 using Compiler.Shared.Interface.IData;
 using Compiler.Starter;
 using MetroFramework.Controls;
@@ -11,15 +12,17 @@ namespace Compiler.UI
     public partial class frmConfiguracionProyectos : MetroForm
     {
 
-        IAplicacion_Data managerAplicacion;
-        IProyecto_Data managerProyecto;
+        IAplicacion_BL managerAplicacion;
+        IProyecto_BL managerProyecto;
+        IArchivoExclusion_BL managerExclusion;
         List<Aplicacion> aplicaciones;
         List<Proyecto> proyectos;
         public frmConfiguracionProyectos()
         {
             InitializeComponent();
-            managerAplicacion = Inject.Instance.ServiceProvider.GetService<IAplicacion_Data>();
-            managerProyecto = Inject.Instance.ServiceProvider.GetService<IProyecto_Data>();
+            managerAplicacion = Inject.Instance.ServiceProvider.GetService<IAplicacion_BL>();
+            managerExclusion = Inject.Instance.ServiceProvider.GetService<IArchivoExclusion_BL>();
+            managerProyecto = Inject.Instance.ServiceProvider.GetService<IProyecto_BL>();
         }
 
         private void frmConfiguracionProyectos_Load(object sender, EventArgs e)
@@ -29,8 +32,8 @@ namespace Compiler.UI
 
         private void LoadData()
         {
-            aplicaciones = managerAplicacion.GetAll();
-            proyectos = managerProyecto.GetAll();
+            aplicaciones = managerAplicacion.getAplicaciones();
+            proyectos = managerProyecto.getProyectos();
             foreach (Proyecto proyecto in proyectos)
             {
                 TreeNode node = new TreeNode(proyecto.nombre);

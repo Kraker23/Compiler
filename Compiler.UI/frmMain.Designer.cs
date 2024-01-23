@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             toolStrip1 = new ToolStrip();
-            tsCompilador = new ToolStripLabel();
             toolStripDropDownButton1 = new ToolStripDropDownButton();
             tsmiAplicaciones = new ToolStripMenuItem();
             tsmiProyectos = new ToolStripMenuItem();
@@ -39,19 +38,12 @@
             // 
             // toolStrip1
             // 
-            toolStrip1.Items.AddRange(new ToolStripItem[] { tsCompilador, toolStripDropDownButton1 });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripDropDownButton1 });
             toolStrip1.Location = new Point(1, 30);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(1121, 25);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
-            // 
-            // tsCompilador
-            // 
-            tsCompilador.Name = "tsCompilador";
-            tsCompilador.Size = new Size(70, 22);
-            tsCompilador.Text = "Compilador";
-            tsCompilador.Click += tsCompilador_Click;
             // 
             // toolStripDropDownButton1
             // 
@@ -61,7 +53,7 @@
             toolStripDropDownButton1.ImageTransparentColor = Color.Magenta;
             toolStripDropDownButton1.Name = "toolStripDropDownButton1";
             toolStripDropDownButton1.Size = new Size(29, 22);
-            toolStripDropDownButton1.Text = "toolStripDropDownButton1";
+            toolStripDropDownButton1.Text = "Configuraciones";
             // 
             // tsmiAplicaciones
             // 
@@ -92,7 +84,7 @@
             Controls.Add(toolStrip1);
             IsMdiContainer = true;
             Name = "frmMain";
-            Text = "Form1";
+            Text = "Gestor Compiler";
             TransparencyKey = Color.Empty;
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
@@ -103,7 +95,6 @@
         #endregion
 
         private ToolStrip toolStrip1;
-        private ToolStripLabel tsCompilador;
         private ToolStripDropDownButton toolStripDropDownButton1;
         private ToolStripMenuItem tsmiAplicaciones;
         private ToolStripMenuItem tsmiProyectos;
