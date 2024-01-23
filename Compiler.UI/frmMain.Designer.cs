@@ -28,12 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             toolStrip1 = new ToolStrip();
             toolStripDropDownButton1 = new ToolStripDropDownButton();
             tsmiAplicaciones = new ToolStripMenuItem();
             tsmiProyectos = new ToolStripMenuItem();
             tsmiArchivosExcluyentes = new ToolStripMenuItem();
+            cmBarraIconos = new MetroFramework.Controls.MetroContextMenu(components);
+            notifyIcon = new NotifyIcon(components);
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -80,6 +83,21 @@
             tsmiArchivosExcluyentes.Text = "Archivos Excluyentes";
             tsmiArchivosExcluyentes.Click += tsmiArchivosExcluyentes_Click;
             // 
+            // cmBarraIconos
+            // 
+            cmBarraIconos.Name = "cmBarraIconos";
+            cmBarraIconos.Size = new Size(181, 26);
+            cmBarraIconos.Style = MetroFramework.MetroColorStyle.Orange;
+            cmBarraIconos.Theme = MetroFramework.MetroThemeStyle.Dark;
+            // 
+            // notifyIcon
+            // 
+            notifyIcon.ContextMenuStrip = cmBarraIconos;
+            notifyIcon.Icon = (Icon)resources.GetObject("notifyIcon.Icon");
+            notifyIcon.Text = "Compiler";
+            notifyIcon.Visible = true;
+            notifyIcon.DoubleClick += notifyIcon_DoubleClick;
+            // 
             // frmMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -90,6 +108,8 @@
             Name = "frmMain";
             Text = "Gestor Compiler";
             TransparencyKey = Color.Empty;
+            FormClosing += frmMain_FormClosing;
+            Load += frmMain_Load;
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             ResumeLayout(false);
@@ -103,5 +123,7 @@
         private ToolStripMenuItem tsmiAplicaciones;
         private ToolStripMenuItem tsmiProyectos;
         private ToolStripMenuItem tsmiArchivosExcluyentes;
+        private MetroFramework.Controls.MetroContextMenu cmBarraIconos;
+        private NotifyIcon notifyIcon;
     }
 }
