@@ -1,0 +1,9 @@
+Metro Original
+
+https://www.nuget.org/packages/MetroFramework#usedby-body-tab
+https://thielj.github.io/MetroFramework/
+
+
+Metro Net Core
+https://github.com/dameng324/MetroFramework
+https://www.nuget.org/packages/MetroFramework.NetCore#supportedframeworks-body-tab
