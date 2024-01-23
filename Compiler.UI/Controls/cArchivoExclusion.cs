@@ -31,11 +31,6 @@ namespace Compiler.UI.Controls
             InitializeComponent();
         }
 
-        public cArchivoExclusion(ArchivoExclusion archivo):this()
-        {
-            this.archivo = archivo;
-        }
-
         public void set(ArchivoExclusion aplicacion)
         {
             this.archivo = aplicacion;

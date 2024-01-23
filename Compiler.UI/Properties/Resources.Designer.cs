@@ -103,9 +103,49 @@ namespace Compiler.UI.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap document_gear {
+            get {
+                object obj = ResourceManager.GetObject("document_gear", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap document_view {
             get {
                 object obj = ResourceManager.GetObject("document_view", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap folder_add {
+            get {
+                object obj = ResourceManager.GetObject("folder_add", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap folder_delete {
+            get {
+                object obj = ResourceManager.GetObject("folder_delete", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap folder_gear {
+            get {
+                object obj = ResourceManager.GetObject("folder_gear", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -146,6 +186,16 @@ namespace Compiler.UI.Properties {
         internal static System.Drawing.Bitmap window_delete {
             get {
                 object obj = ResourceManager.GetObject("window_delete", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap window_gear {
+            get {
+                object obj = ResourceManager.GetObject("window_gear", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

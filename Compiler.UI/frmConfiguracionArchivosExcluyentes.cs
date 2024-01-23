@@ -68,14 +68,18 @@ namespace Compiler.UI
                             managerExclusion.BorrarArchivoExclusion(((ArchivoExclusion)nodo.Tag).id);
                             LoadData();
                         }
+                        else
+                        {
+                            MessageBox.Show("No puedes borrar un Archivo que este en alguna Aplicacion", "Borrar Archivo Exclusion",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 }
                 else
                 {
-                    MessageBox.Show("No puedes borrar un Archivo que este en alguna Aplicacion",
-                            "Borrar Carpeta",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Information);
+                    MessageBox.Show("No Existe el Archivo Exclusion", "Borrar Archivo Exclusion"
+                            + ((ArchivoExclusion)treeArchivos.SelectedNode.Tag).texto,
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

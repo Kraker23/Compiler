@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             toolStrip1 = new ToolStrip();
             toolStripDropDownButton1 = new ToolStripDropDownButton();
             tsmiAplicaciones = new ToolStripMenuItem();
@@ -57,6 +58,7 @@
             // 
             // tsmiAplicaciones
             // 
+            tsmiAplicaciones.Image = Properties.Resources.window_gear;
             tsmiAplicaciones.Name = "tsmiAplicaciones";
             tsmiAplicaciones.Size = new Size(185, 22);
             tsmiAplicaciones.Text = "Aplicaciones";
@@ -64,6 +66,7 @@
             // 
             // tsmiProyectos
             // 
+            tsmiProyectos.Image = Properties.Resources.folder_gear;
             tsmiProyectos.Name = "tsmiProyectos";
             tsmiProyectos.Size = new Size(185, 22);
             tsmiProyectos.Text = "Proyectos";
@@ -71,6 +74,7 @@
             // 
             // tsmiArchivosExcluyentes
             // 
+            tsmiArchivosExcluyentes.Image = Properties.Resources.document_gear;
             tsmiArchivosExcluyentes.Name = "tsmiArchivosExcluyentes";
             tsmiArchivosExcluyentes.Size = new Size(185, 22);
             tsmiArchivosExcluyentes.Text = "Archivos Excluyentes";
@@ -82,7 +86,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1123, 693);
             Controls.Add(toolStrip1);
-            IsMdiContainer = true;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "frmMain";
             Text = "Gestor Compiler";
             TransparencyKey = Color.Empty;

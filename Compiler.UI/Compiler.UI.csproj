@@ -7,6 +7,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <BaseOutputPath>C:\VSS-DB\vss-db-Cristian\Compiler\Publicacion</BaseOutputPath>
+	  
   </PropertyGroup>
 
   <ItemGroup>
@@ -32,6 +33,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Controls\cProyecto.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Controls\cArchivoExclusion.cs">
       <SubType>UserControl</SubType>
     </Compile>

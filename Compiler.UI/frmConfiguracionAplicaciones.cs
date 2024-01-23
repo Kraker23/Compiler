@@ -61,7 +61,7 @@ namespace Compiler.UI
                 TreeNode nodo = treeAplicaciones.SelectedNode;
                 if (managerAplicacion.ExisteAplicacion(((Aplicacion)nodo.Tag).id))
                 {
-                    frmConfirmacion frmConfir = new frmConfirmacion("Borrar Aplicacion", "Estas seguro que quiere borrar esta Carpeta '" 
+                    frmConfirmacion frmConfir = new frmConfirmacion("Borrar Aplicacion", "Estas seguro que quiere borrar esta Aplicacion '"
                         + ((Aplicacion)treeAplicaciones.SelectedNode.Tag).nombre + "' ?");
                     frmConfir.ShowDialog();
                     if (frmConfir.DialogResult == System.Windows.Forms.DialogResult.OK)
@@ -71,15 +71,19 @@ namespace Compiler.UI
                             managerAplicacion.BorrarAplicacion(((Aplicacion)nodo.Tag).id);
                             LoadData();
                         }
+                        else
+                        {
+                            MessageBox.Show("No puedes borrar una Aplicacion que este en algun Proyecto", "Borrar Aplicacion",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 }
                 else
                 {
-                    MessageBox.Show("No puedes borrar una Aplicacion que este en algun Proyecto",
-                            "Borrar Carpeta",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Information);
+                    MessageBox.Show("No Existe la Aplicacion", "Borrar Aplicacion" + ((Aplicacion)treeAplicaciones.SelectedNode.Tag).nombre,
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+
             }
 
         }

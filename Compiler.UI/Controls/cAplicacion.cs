@@ -33,10 +33,6 @@ namespace Compiler.UI.Controls
             managerExclusion = Inject.Instance.ServiceProvider.GetService<IArchivoExclusion_BL>();
         }
 
-        public cAplicacion(Aplicacion aplicacion) : this()
-        {
-            this.aplicacion = aplicacion;
-        }
 
         public void set(Aplicacion aplicacion)
         {
