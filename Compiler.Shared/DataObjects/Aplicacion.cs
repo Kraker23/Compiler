@@ -29,6 +29,7 @@ namespace Compiler.Shared.DataObjects
         public Aplicacion()
         {
             id = Guid.NewGuid();
+            archivosExcluidos = new List<Guid>();
         }
 
         public override string ToString()

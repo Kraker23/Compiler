@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Compiler.Shared.Extenders;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,10 +15,15 @@ namespace Compiler.Shared.DataObjects
         /// <summary>Nombre de la Regla</summary>
         public string texto { get; set; }
         /// <summary>de que tipo es la regla</summary>
-        public TipoExclusion tipoExclusion { get; set; }
+        public int tipoExclusion { get; set; }
         public ArchivoExclusion()
         {
-            id = Guid.NewGuid();        
+            id = Guid.NewGuid();
+            tipoExclusion = (int)TipoExclusion.Extension;
+        }
+        public override string ToString()
+        {
+            return $"[{Extenders.EnumExtensions.GetDescription((Enums.Enumeraciones.TipoExclusion)tipoExclusion)}] {texto}";
         }
     }
 }

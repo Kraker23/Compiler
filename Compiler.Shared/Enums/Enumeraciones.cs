@@ -7,6 +7,15 @@ using System.Threading.Tasks;
 
 namespace Compiler.Shared.Enums
 {
+    public class EnumBase
+    {
+        public int Id { get; set; }
+        public string Descripcion { get; set; }
+        public override string ToString()
+        {
+            return $"[{Id}]-{Descripcion}"; 
+        }
+    }
     public static class Enumeraciones
     {
         public enum ImagenNodo
@@ -58,6 +67,16 @@ namespace Compiler.Shared.Enums
             // int valor = (int)imagenNodo.SI; //-> te devuelve el valor
             // string literal = imagenNodo.ToString(); //-> te devuelve el literal
             return imagenNodo.ToString();
+        }
+
+        public static List<EnumBase> getListTipoExclusion()
+        {
+            List<EnumBase> estados = Enum.GetValues(typeof(TipoExclusion))
+                     .Cast<TipoExclusion>()
+                     .Select(d => new EnumBase { Id = (int)d, Descripcion = d.ToString() })
+                     .ToList();
+
+            return estados;
         }
     }
 }

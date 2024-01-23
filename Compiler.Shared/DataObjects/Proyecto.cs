@@ -21,6 +21,7 @@ namespace Compiler.Shared.DataObjects
         public Proyecto()
         {
             id = Guid.NewGuid();
+            aplicaciones = new List<Guid>();
         }
         public override string ToString()
         {

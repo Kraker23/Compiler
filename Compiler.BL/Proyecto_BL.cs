@@ -66,10 +66,6 @@ namespace Compiler.BL
             return data.GetById(IdProyecto);
         }
 
-        public List<Proyecto> getProyectoes()
-        {
-            return data.GetAll();
-        }
 
         public List<Proyecto> getProyectoes(List<Guid> idsProyectoes)
         {
@@ -78,7 +74,7 @@ namespace Compiler.BL
 
         public List<Proyecto> getProyectos()
         {
-            throw new NotImplementedException();
+            return data.GetAll();
         }
 
         public void ModificarProyecto(Proyecto Proyecto)
