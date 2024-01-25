@@ -33,8 +33,9 @@
             treeAplicaciones = new TreeView();
             toolStrip1 = new ToolStrip();
             tsbAdd = new ToolStripButton();
+            tsbDuplicar = new ToolStripButton();
             tsbBorrar = new ToolStripButton();
-            ctrAplicacion = new Controls.cAplicacion();
+            pAplicacion = new MetroFramework.Controls.MetroPanel();
             metroPanel1.SuspendLayout();
             toolStrip1.SuspendLayout();
             SuspendLayout();
@@ -74,7 +75,7 @@
             // 
             // toolStrip1
             // 
-            toolStrip1.Items.AddRange(new ToolStripItem[] { tsbAdd, tsbBorrar });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { tsbAdd, tsbDuplicar, tsbBorrar });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(328, 25);
@@ -91,6 +92,16 @@
             tsbAdd.Text = "Añadir";
             tsbAdd.Click += tsbAdd_Click;
             // 
+            // tsbDuplicar
+            // 
+            tsbDuplicar.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            tsbDuplicar.Image = Properties.Resources.windows;
+            tsbDuplicar.ImageTransparentColor = Color.Magenta;
+            tsbDuplicar.Name = "tsbDuplicar";
+            tsbDuplicar.Size = new Size(23, 22);
+            tsbDuplicar.Text = "Duplicar";
+            tsbDuplicar.Click += tsbDuplicar_Click;
+            // 
             // tsbBorrar
             // 
             tsbBorrar.DisplayStyle = ToolStripItemDisplayStyle.Image;
@@ -101,23 +112,26 @@
             tsbBorrar.Text = "toolStripButton2";
             tsbBorrar.Click += tsbBorrar_Click;
             // 
-            // ctrAplicacion
+            // pAplicacion
             // 
-            ctrAplicacion.Dock = DockStyle.Fill;
-            ctrAplicacion.Location = new Point(332, 30);
-            ctrAplicacion.MinimumSize = new Size(438, 330);
-            ctrAplicacion.Name = "ctrAplicacion";
-            ctrAplicacion.Size = new Size(698, 536);
-            ctrAplicacion.TabIndex = 4;
-            ctrAplicacion.UseSelectable = true;
-            ctrAplicacion.Guardar += ctrAplicacion_Guardar;
+            pAplicacion.Dock = DockStyle.Fill;
+            pAplicacion.HorizontalScrollbarBarColor = true;
+            pAplicacion.HorizontalScrollbarHighlightOnWheel = false;
+            pAplicacion.HorizontalScrollbarSize = 10;
+            pAplicacion.Location = new Point(332, 30);
+            pAplicacion.Name = "pAplicacion";
+            pAplicacion.Size = new Size(698, 536);
+            pAplicacion.TabIndex = 4;
+            pAplicacion.VerticalScrollbarBarColor = true;
+            pAplicacion.VerticalScrollbarHighlightOnWheel = false;
+            pAplicacion.VerticalScrollbarSize = 10;
             // 
             // frmConfiguracionAplicaciones
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1031, 567);
-            Controls.Add(ctrAplicacion);
+            Controls.Add(pAplicacion);
             Controls.Add(metroPanel1);
             Controls.Add(splitter1);
             Name = "frmConfiguracionAplicaciones";
@@ -139,6 +153,7 @@
         private Splitter splitter1;
         private ToolStripButton tsbAdd;
         private ToolStripButton tsbBorrar;
-        private Controls.cAplicacion ctrAplicacion;
+        private ToolStripButton tsbDuplicar;
+        private MetroFramework.Controls.MetroPanel pAplicacion;
     }
 }

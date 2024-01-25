@@ -33,7 +33,7 @@ namespace Compiler.Starter
                 s.AddTransient<IProyecto_BL, Proyecto_BL>();
                 s.AddTransient<IArchivoExclusion_BL, ArchivoExclusion_BL>();
 
-                s.AddTransient<frmCompilador>();
+               // s.AddTransient<frmCompilador>();
                 s.AddTransient<frmConfiguracionAplicaciones>();
                 s.AddTransient<frmConfiguracionArchivosExcluyentes>();
                 s.AddTransient<frmConfiguracionProyectos>();

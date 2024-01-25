@@ -3,6 +3,7 @@ using Compiler.Shared.DataObjects;
 using Compiler.Shared.Interface.IBL;
 using Compiler.Shared.Interface.IData;
 using Compiler.Starter;
+using Compiler.UI.Controls;
 using MetroFramework.Controls;
 using MetroFramework.Forms;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,12 +19,27 @@ namespace Compiler.UI
         IArchivoExclusion_BL managerExclusion;
         List<Aplicacion> aplicaciones;
 
+        cAplicacion ctrAplicacion = new cAplicacion();
         public frmConfiguracionAplicaciones()
         {
             InitializeComponent();
             managerAplicacion = Inject.Instance.ServiceProvider.GetService<IAplicacion_BL>();
             managerProyecto = Inject.Instance.ServiceProvider.GetService<IProyecto_BL>();
             managerExclusion = Inject.Instance.ServiceProvider.GetService<IArchivoExclusion_BL>();
+
+            CrearControlAplicacion();
+        }
+
+        private void CrearControlAplicacion()
+        {
+            ctrAplicacion.Dock = DockStyle.Fill;
+            ctrAplicacion.Location = new Point(332, 30);
+            ctrAplicacion.Name = "ctrAplicacion";
+            ctrAplicacion.TabIndex = 4;
+            ctrAplicacion.UseSelectable = true;
+            ctrAplicacion.Guardar += ctrAplicacion_Guardar;
+            pAplicacion.Controls.Add(ctrAplicacion);
+
         }
 
         private void frmConfiguracionAplicaciones_Load(object sender, EventArgs e)
@@ -53,7 +69,27 @@ namespace Compiler.UI
             treeAplicaciones.Nodes.Add(node);
             treeAplicaciones.SelectedNode = node;
         }
+        private void tsbDuplicar_Click(object sender, EventArgs e)
+        {
+            if (treeAplicaciones.SelectedNode != null)
+            {
+                TreeNode nodo = treeAplicaciones.SelectedNode;
+                Aplicacion copiar = ((Aplicacion)nodo.Tag);
 
+                Aplicacion aux = new Aplicacion();
+                aux.nombre = copiar.nombre;
+                aux.ubicacionAplicacion = copiar.ubicacionAplicacion;
+                aux.carpetaPublicacion = copiar.carpetaPublicacion;
+                aux.carpetaCompilado = copiar.carpetaCompilado;
+                aux.comandoCompilado = copiar.comandoCompilado;
+                aux.archivosExcluidos = copiar.archivosExcluidos;
+
+                TreeNode node = new TreeNode(aux.nombre);
+                node.Tag = aux;
+                treeAplicaciones.Nodes.Add(node);
+                treeAplicaciones.SelectedNode = node;
+            }
+        }
         private void tsbBorrar_Click(object sender, EventArgs e)
         {
             if (treeAplicaciones.SelectedNode != null)
@@ -104,5 +140,7 @@ namespace Compiler.UI
             managerAplicacion.ModificarAplicacion(aplicacion);
             LoadData();
         }
+
+
     }
 }

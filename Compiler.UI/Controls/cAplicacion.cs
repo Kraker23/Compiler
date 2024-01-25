@@ -93,7 +93,12 @@ namespace Compiler.UI.Controls
 
         private void btCarpetaCompilado_Click(object sender, EventArgs e)
         {
-            string path = BuscarArchivos.SeleccionarCarpetaClassico();
+            string rutaBase = string.Empty;
+            if (!string.IsNullOrEmpty(propCarpetaCompilado.text) && Directory.Exists(propCarpetaCompilado.text))
+            {
+                rutaBase = propCarpetaCompilado.text;
+            }
+            string path = BuscarArchivos.SeleccionarCarpetaClassico(rutaBase);
             if (!string.IsNullOrEmpty(path))
             {
                 propCarpetaCompilado.text = path;
@@ -102,7 +107,12 @@ namespace Compiler.UI.Controls
 
         private void btCarpetaPublicacion_Click(object sender, EventArgs e)
         {
-            string path = BuscarArchivos.SeleccionarCarpetaClassico();
+            string rutaBase = string.Empty;
+            if (!string.IsNullOrEmpty(propCarpetaPublicacion.text) && Directory.Exists(propCarpetaPublicacion.text))
+            {
+                rutaBase = propCarpetaPublicacion.text;
+            }
+            string path = BuscarArchivos.SeleccionarCarpetaClassico(propCarpetaPublicacion.text);
             if (!string.IsNullOrEmpty(path))
             {
                 propCarpetaPublicacion.text = path;
@@ -120,6 +130,24 @@ namespace Compiler.UI.Controls
             else if (!aplicacion.archivosExcluidos.Contains(archivoExclusion.id) && nodo.Checked)
             {
                 aplicacion.archivosExcluidos.Add(archivoExclusion.id);
+            }
+        }
+
+        private void btValidarCarpetaPublicacion_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(propCarpetaCompilado.text) 
+                || !Directory.Exists(propCarpetaCompilado.text))
+            {
+                MessageBox.Show("No existe la ruta");
+            }
+        }
+
+        private void btValidarCarpetaCompilado_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(propCarpetaPublicacion.text) 
+                || !Directory.Exists(propCarpetaPublicacion.text))
+            {
+                MessageBox.Show("No existe la ruta");
             }
         }
     }

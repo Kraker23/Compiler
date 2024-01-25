@@ -15,6 +15,12 @@
     <PackageReference Include="MetroFramework.ControlsPersonalizados" Version="1.0.1" />
     <PackageReference Include="MetroFramework.Design" Version="1.0.0" />
     <PackageReference Include="MetroFramework.Fonts" Version="1.0.0" />
+    <PackageReference Include="Microsoft.PowerShell.Commands.Diagnostics" Version="7.2.18" />
+    <PackageReference Include="Microsoft.PowerShell.Commands.Management" Version="7.2.18" />
+    <PackageReference Include="Microsoft.PowerShell.Commands.Utility" Version="7.2.18" />
+    <PackageReference Include="Microsoft.PowerShell.ConsoleHost" Version="7.2.18" />
+    <PackageReference Include="Microsoft.WSMan.Management" Version="7.2.18" />
+    <PackageReference Include="System.Management.Automation" Version="7.2.18" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,13 +28,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Utilities.Clases">
-      <HintPath>..\..\Kraker23\Utilities\dllsComunes\Utilities.Clases.dll</HintPath>
+    <Reference Include="DevToolsNet.PowerShell">
+      <HintPath>..\..\DevToolsNet6\DevToolsNet6.PowerShell\bin\Debug\net6.0\DevToolsNet.PowerShell.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Utilities.Clases">
+      <HintPath>..\..\Kraker23\Utilities\Utilities.Test\bin\Debug\Utilities.Clases.dll</HintPath>
+    </Reference>
     <Reference Include="Utilities.Extensions">
-      <HintPath>..\..\Kraker23\Utilities\dllsComunes\Utilities.Extensions.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\Kraker23\Utilities\Utilities.Test\bin\Debug\Utilities.Extensions.dll</HintPath>
     </Reference>
   </ItemGroup>
 

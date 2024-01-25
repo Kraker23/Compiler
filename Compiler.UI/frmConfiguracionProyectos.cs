@@ -49,7 +49,7 @@ namespace Compiler.UI
         {
             ctrProyecto.Dock = DockStyle.Fill;
             ctrProyecto.Location = new Point(332, 30);
-            ctrProyecto.Name = "ctrAplicacion";
+            ctrProyecto.Name = "ctrProyecto";
             ctrProyecto.TabIndex = 4;
             ctrProyecto.UseSelectable = true;
             ctrProyecto.Guardar += ctrProyecto_Guardar;

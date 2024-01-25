@@ -40,6 +40,8 @@
             btCarpetaPublicacion = new Button();
             treeArchivos = new TreeView();
             lblArchivos = new MetroFramework.Controls.MetroLabel();
+            btValidarCarpetaCompilado = new Button();
+            btValidarCarpetaPublicacion = new Button();
             SuspendLayout();
             // 
             // propId
@@ -176,10 +178,34 @@
             lblArchivos.TabIndex = 12;
             lblArchivos.Text = "Archivos Excluidos";
             // 
+            // btValidarCarpetaCompilado
+            // 
+            btValidarCarpetaCompilado.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btValidarCarpetaCompilado.Image = Properties.Resources.check2;
+            btValidarCarpetaCompilado.Location = new Point(363, 172);
+            btValidarCarpetaCompilado.Name = "btValidarCarpetaCompilado";
+            btValidarCarpetaCompilado.Size = new Size(24, 24);
+            btValidarCarpetaCompilado.TabIndex = 13;
+            btValidarCarpetaCompilado.UseVisualStyleBackColor = true;
+            btValidarCarpetaCompilado.Click += btValidarCarpetaCompilado_Click;
+            // 
+            // btValidarCarpetaPublicacion
+            // 
+            btValidarCarpetaPublicacion.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btValidarCarpetaPublicacion.Image = Properties.Resources.check2;
+            btValidarCarpetaPublicacion.Location = new Point(363, 225);
+            btValidarCarpetaPublicacion.Name = "btValidarCarpetaPublicacion";
+            btValidarCarpetaPublicacion.Size = new Size(24, 24);
+            btValidarCarpetaPublicacion.TabIndex = 14;
+            btValidarCarpetaPublicacion.UseVisualStyleBackColor = true;
+            btValidarCarpetaPublicacion.Click += btValidarCarpetaPublicacion_Click;
+            // 
             // cAplicacion
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(btValidarCarpetaPublicacion);
+            Controls.Add(btValidarCarpetaCompilado);
             Controls.Add(lblArchivos);
             Controls.Add(treeArchivos);
             Controls.Add(btCarpetaPublicacion);
@@ -214,5 +240,7 @@
         private Button btCarpetaPublicacion;
         private TreeView treeArchivos;
         private MetroFramework.Controls.MetroLabel lblArchivos;
+        private Button btValidarCarpetaCompilado;
+        private Button btValidarCarpetaPublicacion;
     }
 }
