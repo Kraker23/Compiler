@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Compiler.Shared.DataObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using static Compiler.Shared.Enums.Enumeraciones;
 
 namespace Compiler.Shared.Extenders
 {
@@ -59,5 +61,23 @@ namespace Compiler.Shared.Extenders
             return Array.FindAll(array, match).ToList<T>();
         }
 
+        public static string getArchivosToString(this List<ArchivoExclusion> archivoExclusions)
+        {
+            string resultado = string.Empty;
+            archivoExclusions.ForEach(x =>
+            {
+                if (x.tipoExclusion == (int)TipoExclusion.Extension)
+                {
+                    resultado += $".{x.texto}{Environment.NewLine}";
+                }
+                else if (x.tipoExclusion == (int)TipoExclusion.NombreCompleto
+                || x.tipoExclusion == (int)TipoExclusion.NombreCompleto)
+                {
+                    resultado += $"{x.texto}{Environment.NewLine}";
+                }
+            });
+
+            return resultado;
+        }
     }
 }

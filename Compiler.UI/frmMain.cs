@@ -18,6 +18,10 @@ using System.Management.Automation.Runspaces;
 using static DevToolsNet.PowerShell.IPowerShellRunner;
 using System.Security;
 using Namotion.Reflection;
+using System.IO;
+using Compiler.UI.Controls;
+using System.Collections.Generic;
+using Compiler.Shared.Extenders;
 
 namespace Compiler.UI
 {
@@ -32,6 +36,8 @@ namespace Compiler.UI
         IAplicacion_BL managerAplicacion;
         IArchivoExclusion_BL managerExclusion;
         List<Proyecto> proyectos;
+        readonly string nombreArchivosExlcudes = "excludedfileslist.txt";
+        PowerShell ps;
         public frmMain()
         {
             InitializeComponent();
@@ -407,7 +413,11 @@ namespace Compiler.UI
         #region Copiar y Compilar
         private void Copiar(Proyecto proyecto)
         {
-
+            var aplicacionesAux = managerAplicacion.getAplicaciones(proyecto.aplicaciones);
+            foreach (Aplicacion aplicacion in aplicacionesAux)
+            {
+                EjecutarPS_Copiar(aplicacion);
+            }
         }
 
         private void Compilar(Proyecto proyecto)
@@ -442,12 +452,12 @@ namespace Compiler.UI
         {
             psBorrado();
 
+            psExcludeArchivos();
 
-            //string pathOrigen = @"C:\VSS-DB\Aplicaciones Sicer Testear\Training\SICER LineaTest";
             string pathOrigen = @"C:\VSS-DB\Aplicaciones Sicer Testear\Training\SICER Linea";
             string pathDestino = @"C:\VSS-DB\Aplicaciones Sicer Testear\Training\SICER Linea TEST";
 
-            string script = $"xcopy \"{pathOrigen}\" \"{pathDestino}\" /E /S /Y /D ";
+            string script = $"xcopy \"{pathOrigen}\" \"{pathDestino}\" /E /S /Y /D /exclude:{nombreArchivosExlcudes}";
             txtPS.Text += script + Environment.NewLine + Environment.NewLine;
 
             PSDataCollection<PSObject> output = new PSDataCollection<PSObject>();
@@ -455,71 +465,39 @@ namespace Compiler.UI
 
             PowerShell psinstance = PowerShell.Create();
             psinstance.AddScript(script);
-            //psinstance.Streams.Progress.DataAdded += Progress_DataAdded;
-
-            //var results = psinstance.Invoke();
-            //var res = psinstance.BeginInvoke<PSObject, PSObject>(null, output);
-            //res.AsyncWaitHandle.WaitOne();
 
 
             var r = await Task.Factory.StartNew<IAsyncResult>(() => psinstance.BeginInvoke<PSObject, PSObject>(null, output));
-            
-            //var r = await Task.Factory.StartNew<IPowerShellRunner>(() => new PowerShellRunner()).WaitAsync(CancellationToken.None);
-            //if (r != null)
-            //{
-            //    progressSpinner.Visible = progresBar.Visible = false;
-            //}
+        }
 
-            /*
-            using (PowerShell PowerShellInstance = PowerShell.Create())
-            {
-                //use "AddScript" to add the contents of a script file to the end of the execution pipeline.
-                //use "AddCommand" to add individual commands/ cmdlets to the end of the execution pipeline.
-                
-                PowerShellInstance.AddScript(script);
-                PowerShellInstance.Streams.Progress.DataAdded += Progress_DataAdded;
-                Collection<PSObject> PSOutput = PowerShellInstance.Invoke();
+        public async void EjecutarPS_Copiar(Aplicacion aplicacion)
+        {
+            crearArchivosExcluidos(aplicacion.archivosExcluidos);
 
+            string script = $"xcopy \"{aplicacion.carpetaCompilado}\" \"{aplicacion.carpetaPublicacion}\" /E /S /Y /D /exclude:{nombreArchivosExlcudes}";
 
+            txtPS.Text += $"-------------- COPIAR ------->>>> {aplicacion.nombre.ToUpper()}--------------  {Environment.NewLine} {Environment.NewLine}";
+            txtPS.Text += $"{script}{Environment.NewLine} {Environment.NewLine}";
 
-                foreach (PSObject outputItem in PSOutput)
-                {
-                    if (outputItem != null)
-                    {
-                        txtPS.Text += outputItem.ToString() + Environment.NewLine;
-                    }
-                }
-                if (PowerShellInstance.Streams.Error.Count > 0)
-                {
-                    foreach (var error in PowerShellInstance.Streams.Error)
-                    {
-                        txtError.Text += error.ToString() + Environment.NewLine;
+            PSDataCollection<PSObject> output = new PSDataCollection<PSObject>();
+            output.DataAdded += Progress_DataAdded;
 
-                    }
-                }
+            PowerShell psinstance = PowerShell.Create();
+            psinstance.AddScript(script);
 
 
-
-            }
-            */
+            var r = await Task.Factory.StartNew<IAsyncResult>(() => psinstance.BeginInvoke<PSObject, PSObject>(null, output));
         }
 
         private void Progress_DataAdded(object? sender, DataAddedEventArgs e)
         {
             PSObject newRecord = ((PSDataCollection<PSObject>)sender)[e.Index];
-            // ProgressRecord newRecord = ((PSDataCollection<ProgressRecord>)sender)[e.Index];
-
-            //txtPS.Text += $"[{e.Index}] {newRecord.BaseObject} {Environment.NewLine}";
 
             txtPS.BeginInvoke(new Action(() => { txtPS.AppendText($"[{e.Index}] {newRecord.BaseObject} {Environment.NewLine}"); }));
             progresBar.BeginInvoke(new Action(() => { progresBar.Value = e.Index; }));
             progressSpinner.BeginInvoke(new Action(() => { progressSpinner.Value = e.Index; }));
         }
 
-        public event MessageOutDelegate ErrorMessaje;
-        public event MessageOutDelegate WarningMessaje;
-        public event MessageOutDelegate InfoMessaje;
-        public event MessageOutDelegate TextMessaje;
 
         private async void toolStripButton1_Click(object sender, EventArgs e)
         {
@@ -527,15 +505,13 @@ namespace Compiler.UI
             progressSpinner.Maximum = progresBar.Maximum = 600;
 
             progressSpinner.Visible = progresBar.Visible = true;
-            EjecutarPS_Cristian();
 
-            //psBorrado();
+             EjecutarPS_Cristian();
+            //EjecutarPS();
 
-            //await createRunner("hola");
 
         }
 
-        PowerShell ps;
 
         public void psBorrado()
         {
@@ -545,59 +521,40 @@ namespace Compiler.UI
             psinstanceBorrado.AddScript(scriptBorrar);
             var resultsBorrado = psinstanceBorrado.Invoke();
         }
-
-        private async Task<bool> createRunner(string key)
+        public void psExcludeArchivos()
         {
-            try
+            var archivos = managerExclusion.getArchivoExclusiones();
+
+            string archivosExcluir = archivos.getArchivosToString();
+
+            if (File.Exists(nombreArchivosExlcudes))
             {
-                string pathOrigen = @"C:\VSS-DB\Aplicaciones Sicer Testear\Training\SICER LineaTest";
-                string pathDestino = @"C:\VSS-DB\Aplicaciones Sicer Testear\Training\SICER Linea TEST";
-
-                string script = $"xcopy \"{pathOrigen}\" \"{pathDestino}\" /E /S /Y /D ";
-
-                //PowerShellRunner ps = new PowerShellRunner();
-                //ps.Key = key; 
-                //ps.TextMessaje += runner_TextMessaje;
-                //ps.ErrorMessaje += runner_TextMessaje;
-                //ps.InfoMessaje += runner_TextMessaje;
-                //ps.WarningMessaje += runner_TextMessaje;
-                //ps.RunCommand(script);
-
-                var r = await Task.Factory.StartNew<IPowerShellRunner>(() => new PowerShellRunner()).WaitAsync(CancellationToken.None);
-                if (r != null)
-                {
-                    r.Key = key;
-                    r.TextMessaje += runner_TextMessaje;
-                    r.ErrorMessaje += runner_TextMessaje;
-                    r.InfoMessaje += runner_TextMessaje;
-                    r.WarningMessaje += runner_TextMessaje;
-                    r.RunCommand(script);
-                    return true;
-                }
+                File.Delete(nombreArchivosExlcudes);
             }
-            catch (Exception ex)
+            using (StreamWriter sw = File.CreateText(nombreArchivosExlcudes))
             {
-                MessageBox.Show($"ERROR: {ex.ToString()}");
+                sw.WriteLine(archivosExcluir);
             }
-
-            return false;
         }
-
-        private void runner_TextMessaje(IPowerShellRunner runner, string msg)
+        public void crearArchivosExcluidos(List<Guid> idsArchivos)
         {
-            try
-            {
-                //txtPS.Text += msg + Environment.NewLine;
-                txtPS.BeginInvoke(new Action(() => { txtPS.AppendText(msg + Environment.NewLine); }));
+            var archivos = managerExclusion.getArchivoExclusiones(idsArchivos);
 
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
+            string archivosExcluir = archivos.getArchivosToString();
 
+            if (File.Exists(nombreArchivosExlcudes))
+            {
+                File.Delete(nombreArchivosExlcudes);
+            }
+            using (StreamWriter sw = File.CreateText(nombreArchivosExlcudes))
+            {
+                sw.WriteLine(archivosExcluir);
+            }
         }
 
         #endregion
     }
+
+
+
 }
