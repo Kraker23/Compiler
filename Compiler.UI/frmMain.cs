@@ -413,6 +413,7 @@ namespace Compiler.UI
         #region Copiar y Compilar
         private void Copiar(Proyecto proyecto)
         {
+            txtPS.Clear();
             var aplicacionesAux = managerAplicacion.getAplicaciones(proyecto.aplicaciones);
             foreach (Aplicacion aplicacion in aplicacionesAux)
             {
@@ -506,7 +507,7 @@ namespace Compiler.UI
 
             progressSpinner.Visible = progresBar.Visible = true;
 
-             EjecutarPS_Cristian();
+            EjecutarPS_Cristian();
             //EjecutarPS();
 
 
