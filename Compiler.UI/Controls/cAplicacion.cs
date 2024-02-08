@@ -135,8 +135,8 @@ namespace Compiler.UI.Controls
 
         private void btValidarCarpetaPublicacion_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(propCarpetaCompilado.text) 
-                || !Directory.Exists(propCarpetaCompilado.text))
+            if (!string.IsNullOrEmpty(propCarpetaPublicacion.text)&& 
+                !Directory.Exists(propCarpetaPublicacion.text))
             {
                 MessageBox.Show("No existe la ruta");
             }
@@ -144,8 +144,8 @@ namespace Compiler.UI.Controls
 
         private void btValidarCarpetaCompilado_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(propCarpetaPublicacion.text) 
-                || !Directory.Exists(propCarpetaPublicacion.text))
+            if (!string.IsNullOrEmpty(propCarpetaCompilado.text) &&
+                !Directory.Exists(propCarpetaCompilado.text))
             {
                 MessageBox.Show("No existe la ruta");
             }

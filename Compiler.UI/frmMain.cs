@@ -54,8 +54,8 @@ namespace Compiler.UI
         }
         private void tsbRecargar_Click(object sender, EventArgs e)
         {
-            CargarMenuContextual();
             LoadData();
+            CargarMenuContextual();
         }
         private void LoadData()
         {
