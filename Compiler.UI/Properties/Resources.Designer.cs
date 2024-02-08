@@ -173,9 +173,39 @@ namespace Compiler.UI.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap folder_add1 {
+            get {
+                object obj = ResourceManager.GetObject("folder_add1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap folder_delete {
             get {
                 object obj = ResourceManager.GetObject("folder_delete", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap folder_delete1 {
+            get {
+                object obj = ResourceManager.GetObject("folder_delete1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap folder_edit {
+            get {
+                object obj = ResourceManager.GetObject("folder_edit", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -28,12 +28,14 @@ namespace Compiler.Starter
                 s.AddTransient<IProyecto_Data, Proyecto_EF>();
                 s.AddTransient<IAplicacion_Data, Aplicacion_EF>();
                 s.AddTransient<IArchivoExclusion_Data, ArchivoExclusion_EF>();
+                s.AddTransient<ICarpeta_Data, Carpeta_EF>();
                 //BL
                 s.AddTransient<IAplicacion_BL, Aplicacion_BL>();
                 s.AddTransient<IProyecto_BL, Proyecto_BL>();
                 s.AddTransient<IArchivoExclusion_BL, ArchivoExclusion_BL>();
+                s.AddTransient<ICarpeta_BL, Carpeta_BL>();
 
-               // s.AddTransient<frmCompilador>();
+                // s.AddTransient<frmCompilador>();
                 s.AddTransient<frmConfiguracionAplicaciones>();
                 s.AddTransient<frmConfiguracionArchivosExcluyentes>();
                 s.AddTransient<frmConfiguracionProyectos>();

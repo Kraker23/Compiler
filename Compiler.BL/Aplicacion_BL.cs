@@ -34,6 +34,11 @@ namespace Compiler.BL
             return data.GetAll().Any(x => x.archivosExcluidos != null &&  x.archivosExcluidos.Exists(y => y == idArchivoExclusion));
         }
 
+        public bool AnyAplicacionConCarpeta(Guid idCarpeta)
+        {
+            return data.GetAll().Any(x => x.fk_IdCarpeta == idCarpeta);
+        }
+
         public Aplicacion? CrearAplicacion(Aplicacion aplicacion)
         {
             try

@@ -62,7 +62,7 @@
             propNombre.Location = new Point(3, 66);
             propNombre.MinimumSize = new Size(110, 47);
             propNombre.Name = "propNombre";
-            propNombre.Size = new Size(385, 47);
+            propNombre.Size = new Size(617, 47);
             propNombre.TabIndex = 1;
             propNombre.text = "";
             propNombre.UseSelectable = true;
@@ -74,7 +74,7 @@
             propUbicacionAplicacion.Location = new Point(3, 119);
             propUbicacionAplicacion.MinimumSize = new Size(110, 47);
             propUbicacionAplicacion.Name = "propUbicacionAplicacion";
-            propUbicacionAplicacion.Size = new Size(385, 47);
+            propUbicacionAplicacion.Size = new Size(617, 47);
             propUbicacionAplicacion.TabIndex = 2;
             propUbicacionAplicacion.text = "";
             propUbicacionAplicacion.UseSelectable = true;
@@ -86,7 +86,7 @@
             propCarpetaCompilado.Location = new Point(3, 172);
             propCarpetaCompilado.MinimumSize = new Size(110, 47);
             propCarpetaCompilado.Name = "propCarpetaCompilado";
-            propCarpetaCompilado.Size = new Size(385, 47);
+            propCarpetaCompilado.Size = new Size(617, 47);
             propCarpetaCompilado.TabIndex = 3;
             propCarpetaCompilado.text = "";
             propCarpetaCompilado.UseSelectable = true;
@@ -98,7 +98,7 @@
             propCarpetaPublicacion.Location = new Point(3, 225);
             propCarpetaPublicacion.MinimumSize = new Size(110, 47);
             propCarpetaPublicacion.Name = "propCarpetaPublicacion";
-            propCarpetaPublicacion.Size = new Size(385, 47);
+            propCarpetaPublicacion.Size = new Size(617, 47);
             propCarpetaPublicacion.TabIndex = 4;
             propCarpetaPublicacion.text = "";
             propCarpetaPublicacion.UseSelectable = true;
@@ -110,7 +110,7 @@
             propComandoCompilado.Location = new Point(3, 278);
             propComandoCompilado.MinimumSize = new Size(110, 47);
             propComandoCompilado.Name = "propComandoCompilado";
-            propComandoCompilado.Size = new Size(385, 47);
+            propComandoCompilado.Size = new Size(617, 47);
             propComandoCompilado.TabIndex = 5;
             propComandoCompilado.text = "";
             propComandoCompilado.UseSelectable = true;
@@ -119,7 +119,7 @@
             // 
             btSave.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btSave.Image = Properties.Resources.disk_blue;
-            btSave.Location = new Point(371, 19);
+            btSave.Location = new Point(603, 19);
             btSave.Name = "btSave";
             btSave.Size = new Size(40, 41);
             btSave.TabIndex = 6;
@@ -130,7 +130,7 @@
             // 
             btUbicacionAplicacion.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btUbicacionAplicacion.Image = Properties.Resources.folder_view;
-            btUbicacionAplicacion.Location = new Point(393, 129);
+            btUbicacionAplicacion.Location = new Point(625, 129);
             btUbicacionAplicacion.Name = "btUbicacionAplicacion";
             btUbicacionAplicacion.Size = new Size(41, 37);
             btUbicacionAplicacion.TabIndex = 8;
@@ -141,7 +141,7 @@
             // 
             btCarpetaCompilado.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btCarpetaCompilado.Image = Properties.Resources.folder_view;
-            btCarpetaCompilado.Location = new Point(393, 182);
+            btCarpetaCompilado.Location = new Point(625, 182);
             btCarpetaCompilado.Name = "btCarpetaCompilado";
             btCarpetaCompilado.Size = new Size(41, 37);
             btCarpetaCompilado.TabIndex = 9;
@@ -152,7 +152,7 @@
             // 
             btCarpetaPublicacion.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btCarpetaPublicacion.Image = Properties.Resources.folder_view;
-            btCarpetaPublicacion.Location = new Point(393, 235);
+            btCarpetaPublicacion.Location = new Point(625, 235);
             btCarpetaPublicacion.Name = "btCarpetaPublicacion";
             btCarpetaPublicacion.Size = new Size(41, 37);
             btCarpetaPublicacion.TabIndex = 10;
@@ -165,7 +165,7 @@
             treeArchivos.CheckBoxes = true;
             treeArchivos.Location = new Point(18, 350);
             treeArchivos.Name = "treeArchivos";
-            treeArchivos.Size = new Size(404, 87);
+            treeArchivos.Size = new Size(636, 87);
             treeArchivos.TabIndex = 11;
             treeArchivos.AfterCheck += treeArchivos_AfterCheck;
             // 
@@ -182,7 +182,7 @@
             // 
             btValidarCarpetaCompilado.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btValidarCarpetaCompilado.Image = Properties.Resources.check2;
-            btValidarCarpetaCompilado.Location = new Point(363, 172);
+            btValidarCarpetaCompilado.Location = new Point(595, 172);
             btValidarCarpetaCompilado.Name = "btValidarCarpetaCompilado";
             btValidarCarpetaCompilado.Size = new Size(24, 24);
             btValidarCarpetaCompilado.TabIndex = 13;
@@ -193,7 +193,7 @@
             // 
             btValidarCarpetaPublicacion.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btValidarCarpetaPublicacion.Image = Properties.Resources.check2;
-            btValidarCarpetaPublicacion.Location = new Point(363, 225);
+            btValidarCarpetaPublicacion.Location = new Point(595, 225);
             btValidarCarpetaPublicacion.Name = "btValidarCarpetaPublicacion";
             btValidarCarpetaPublicacion.Size = new Size(24, 24);
             btValidarCarpetaPublicacion.TabIndex = 14;
@@ -220,7 +220,7 @@
             Controls.Add(propId);
             MinimumSize = new Size(438, 450);
             Name = "cAplicacion";
-            Size = new Size(438, 450);
+            Size = new Size(670, 450);
             Load += cAplicacion_Load;
             ResumeLayout(false);
             PerformLayout();

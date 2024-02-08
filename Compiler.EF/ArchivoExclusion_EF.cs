@@ -36,10 +36,6 @@ namespace Compiler.EF
             {
                 if (!archivoExclusions.Exists(x => x.id == dato.id))
                 {
-                    //if (dato.id == 0)
-                    //{
-                    //    dato.id = aplicaciones.Count() > 0 ? aplicaciones.Max(x => x.id) + 1 : 1;
-                    //}
                     archivoExclusions.Add(dato);
                     SaveData();
                 }

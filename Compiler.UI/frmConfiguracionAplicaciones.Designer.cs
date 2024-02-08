@@ -28,15 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmConfiguracionAplicaciones));
             splitter1 = new Splitter();
             metroPanel1 = new MetroFramework.Controls.MetroPanel();
             treeAplicaciones = new TreeView();
+            cmTree = new MetroFramework.Controls.MetroContextMenu(components);
+            tsmMoverCarpeta = new ToolStripMenuItem();
             toolStrip1 = new ToolStrip();
             tsbAdd = new ToolStripButton();
             tsbDuplicar = new ToolStripButton();
             tsbBorrar = new ToolStripButton();
+            tsbAddCarpeta = new ToolStripButton();
+            tsbEditCarpeta = new ToolStripButton();
+            tsbDeleteCarpeta = new ToolStripButton();
             pAplicacion = new MetroFramework.Controls.MetroPanel();
+            iListTree = new ImageList(components);
             metroPanel1.SuspendLayout();
+            cmTree.SuspendLayout();
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -66,16 +75,35 @@
             // 
             // treeAplicaciones
             // 
+            treeAplicaciones.ContextMenuStrip = cmTree;
             treeAplicaciones.Dock = DockStyle.Fill;
+            treeAplicaciones.ImageIndex = 0;
+            treeAplicaciones.ImageList = iListTree;
             treeAplicaciones.Location = new Point(0, 25);
             treeAplicaciones.Name = "treeAplicaciones";
+            treeAplicaciones.SelectedImageIndex = 0;
             treeAplicaciones.Size = new Size(328, 511);
             treeAplicaciones.TabIndex = 3;
             treeAplicaciones.AfterSelect += treeAplicaciones_AfterSelect;
             // 
+            // cmTree
+            // 
+            cmTree.Items.AddRange(new ToolStripItem[] { tsmMoverCarpeta });
+            cmTree.Name = "cmBarraIconos";
+            cmTree.Size = new Size(153, 26);
+            cmTree.Style = MetroFramework.MetroColorStyle.Orange;
+            cmTree.Theme = MetroFramework.MetroThemeStyle.Dark;
+            cmTree.Opening += cmTree_Opening;
+            // 
+            // tsmMoverCarpeta
+            // 
+            tsmMoverCarpeta.Name = "tsmMoverCarpeta";
+            tsmMoverCarpeta.Size = new Size(152, 22);
+            tsmMoverCarpeta.Text = "Mover Carpeta";
+            // 
             // toolStrip1
             // 
-            toolStrip1.Items.AddRange(new ToolStripItem[] { tsbAdd, tsbDuplicar, tsbBorrar });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { tsbAdd, tsbDuplicar, tsbBorrar, tsbAddCarpeta, tsbEditCarpeta, tsbDeleteCarpeta });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(328, 25);
@@ -112,6 +140,36 @@
             tsbBorrar.Text = "toolStripButton2";
             tsbBorrar.Click += tsbBorrar_Click;
             // 
+            // tsbAddCarpeta
+            // 
+            tsbAddCarpeta.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            tsbAddCarpeta.Image = Properties.Resources.folder_add1;
+            tsbAddCarpeta.ImageTransparentColor = Color.Magenta;
+            tsbAddCarpeta.Name = "tsbAddCarpeta";
+            tsbAddCarpeta.Size = new Size(23, 22);
+            tsbAddCarpeta.Text = "Añadir Carpeta";
+            tsbAddCarpeta.Click += tsbAddCarpeta_Click;
+            // 
+            // tsbEditCarpeta
+            // 
+            tsbEditCarpeta.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            tsbEditCarpeta.Image = Properties.Resources.folder_edit;
+            tsbEditCarpeta.ImageTransparentColor = Color.Magenta;
+            tsbEditCarpeta.Name = "tsbEditCarpeta";
+            tsbEditCarpeta.Size = new Size(23, 22);
+            tsbEditCarpeta.Text = "Editar Carpeta";
+            tsbEditCarpeta.Click += tsbEditCarpeta_Click;
+            // 
+            // tsbDeleteCarpeta
+            // 
+            tsbDeleteCarpeta.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            tsbDeleteCarpeta.Image = Properties.Resources.folder_delete1;
+            tsbDeleteCarpeta.ImageTransparentColor = Color.Magenta;
+            tsbDeleteCarpeta.Name = "tsbDeleteCarpeta";
+            tsbDeleteCarpeta.Size = new Size(23, 22);
+            tsbDeleteCarpeta.Text = "Borrar Carpeta";
+            tsbDeleteCarpeta.Click += tsbDeleteCarpeta_Click;
+            // 
             // pAplicacion
             // 
             pAplicacion.Dock = DockStyle.Fill;
@@ -125,6 +183,14 @@
             pAplicacion.VerticalScrollbarBarColor = true;
             pAplicacion.VerticalScrollbarHighlightOnWheel = false;
             pAplicacion.VerticalScrollbarSize = 10;
+            // 
+            // iListTree
+            // 
+            iListTree.ColorDepth = ColorDepth.Depth8Bit;
+            iListTree.ImageStream = (ImageListStreamer)resources.GetObject("iListTree.ImageStream");
+            iListTree.TransparentColor = Color.Transparent;
+            iListTree.Images.SetKeyName(0, "folder.png");
+            iListTree.Images.SetKeyName(1, "window.png");
             // 
             // frmConfiguracionAplicaciones
             // 
@@ -141,6 +207,7 @@
             Load += frmConfiguracionAplicaciones_Load;
             metroPanel1.ResumeLayout(false);
             metroPanel1.PerformLayout();
+            cmTree.ResumeLayout(false);
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             ResumeLayout(false);
@@ -155,5 +222,11 @@
         private ToolStripButton tsbBorrar;
         private ToolStripButton tsbDuplicar;
         private MetroFramework.Controls.MetroPanel pAplicacion;
+        private ToolStripButton tsbAddCarpeta;
+        private ToolStripButton tsbEditCarpeta;
+        private ToolStripButton tsbDeleteCarpeta;
+        private MetroFramework.Controls.MetroContextMenu cmTree;
+        private ToolStripMenuItem tsmMoverCarpeta;
+        private ImageList iListTree;
     }
 }

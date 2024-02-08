@@ -8,21 +8,20 @@ using System.Threading.Tasks;
 
 namespace Compiler.EF
 {
-
-    public partial class Proyecto_EF : IProyecto_Data
+    public partial class Carpeta_EF : ICarpeta_Data
     {
         private readonly IManagerJson managerJson;
-        public Proyecto_EF(IManagerJson managerJson)
+        public Carpeta_EF(IManagerJson managerJson)
         {
             this.managerJson = managerJson;
             CargarDatos();
         }
-        private List<Proyecto> proyectos { get; set; }
+        private List<Carpeta> Carpetas { get; set; }
         public void CargarDatos()
         {
             try
             {
-                proyectos = managerJson.cargarDatos<List<Proyecto>>();
+                Carpetas = managerJson.cargarDatos<List<Carpeta>>();
             }
             catch (Exception ex)
             {
@@ -30,13 +29,13 @@ namespace Compiler.EF
             }
         }
 
-        public Proyecto Add(Proyecto dato)
+        public Carpeta Add(Carpeta dato)
         {
             try
             {
-                if (!proyectos.Exists(x => x.id == dato.id))
+                if (!Carpetas.Exists(x => x.id == dato.id))
                 {
-                    proyectos.Add(dato);
+                    Carpetas.Add(dato);
                     SaveData();
                 }
                 return dato;
@@ -47,26 +46,26 @@ namespace Compiler.EF
                 return dato;
             }
         }
-        public List<Proyecto> GetAll()
+        public List<Carpeta> GetAll()
         {
             try
             {
-                return proyectos;
+                return Carpetas;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-                return new List<Proyecto>();
+                return new List<Carpeta>();
             }
         }
 
-        public Proyecto? GetById(Guid id)
+        public Carpeta? GetById(Guid id)
         {
             try
             {
-                if (proyectos.Exists(x => x.id == id))
+                if (Carpetas.Exists(x => x.id == id))
                 {
-                    return proyectos.First(x => x.id == id);
+                    return Carpetas.First(x => x.id == id);
                 }
                 return null;
             }
@@ -78,15 +77,14 @@ namespace Compiler.EF
         }
 
 
-        public Proyecto Update(Proyecto dato)
+        public Carpeta Update(Carpeta dato)
         {
             try
             {
-                proyectos.First(x => x.id == dato.id).id = dato.id;
-                proyectos.First(x => x.id == dato.id).nombre = dato.nombre;
-                proyectos.First(x => x.id == dato.id).aplicaciones = dato.aplicaciones;
+                Carpetas.First(x => x.id == dato.id).id = dato.id;
+                Carpetas.First(x => x.id == dato.id).nombre = dato.nombre;
 
-                Proyecto Aux = proyectos.First(x => x.id == dato.id);
+                Carpeta Aux = Carpetas.First(x => x.id == dato.id);
 
                 SaveData();
 
@@ -104,9 +102,9 @@ namespace Compiler.EF
         {
             try
             {
-                if (proyectos.Exists(x => x.id == id))
+                if (Carpetas.Exists(x => x.id == id))
                 {
-                    proyectos.Remove(proyectos.First(x => x.id == id));
+                    Carpetas.Remove(Carpetas.First(x => x.id == id));
                     SaveData();
                 }
             }
@@ -119,7 +117,7 @@ namespace Compiler.EF
         {
             try
             {
-                managerJson.GuardarDatos(proyectos);
+                managerJson.GuardarDatos(Carpetas);
             }
             catch (Exception ex)
             {

@@ -36,10 +36,6 @@ namespace Compiler.EF
             {
                 if (!aplicaciones.Exists(x => x.id == dato.id))
                 {
-                    //if (dato.id == 0)
-                    //{
-                    //    dato.id = aplicaciones.Count() > 0 ? aplicaciones.Max(x => x.id) + 1 : 1;
-                    //}
                     aplicaciones.Add(dato);
                     SaveData();
                 }
@@ -87,6 +83,7 @@ namespace Compiler.EF
             try
             {
                 aplicaciones.First(x => x.id == dato.id).id = dato.id;
+                aplicaciones.First(x => x.id == dato.id).fk_IdCarpeta = dato.fk_IdCarpeta;
                 aplicaciones.First(x => x.id == dato.id).nombre = dato.nombre;
                 aplicaciones.First(x => x.id == dato.id).ubicacionAplicacion = dato.ubicacionAplicacion;
                 aplicaciones.First(x => x.id == dato.id).carpetaCompilado = dato.carpetaCompilado;
