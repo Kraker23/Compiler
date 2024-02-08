@@ -50,6 +50,7 @@ namespace Compiler.EF
         {
             try
             {
+                CargarDatos();
                 return Carpetas;
             }
             catch (Exception ex)

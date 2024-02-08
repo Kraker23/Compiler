@@ -51,6 +51,7 @@ namespace Compiler.EF
         {
             try
             {
+                CargarDatos();
                 return proyectos;
             }
             catch (Exception ex)

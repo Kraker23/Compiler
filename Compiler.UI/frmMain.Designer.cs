@@ -45,6 +45,7 @@
             tsmCopiar = new ToolStripMenuItem();
             tsmCompilar = new ToolStripMenuItem();
             tsmCompilarCopiar = new ToolStripMenuItem();
+            iListTree = new ImageList(components);
             tsTree = new ToolStrip();
             tsbAdd = new ToolStripButton();
             tsbBorrar = new ToolStripButton();
@@ -121,7 +122,7 @@
             // toolStripButton1
             // 
             toolStripButton1.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton1.Image = (Image)resources.GetObject("toolStripButton1.Image");
+            toolStripButton1.Image = Properties.Resources.scroll_run;
             toolStripButton1.ImageTransparentColor = Color.Magenta;
             toolStripButton1.Name = "toolStripButton1";
             toolStripButton1.Size = new Size(23, 22);
@@ -164,8 +165,11 @@
             treeProyectos.CheckBoxes = true;
             treeProyectos.ContextMenuStrip = cmTree;
             treeProyectos.Dock = DockStyle.Fill;
+            treeProyectos.ImageIndex = 0;
+            treeProyectos.ImageList = iListTree;
             treeProyectos.Location = new Point(0, 25);
             treeProyectos.Name = "treeProyectos";
+            treeProyectos.SelectedImageIndex = 0;
             treeProyectos.Size = new Size(328, 612);
             treeProyectos.TabIndex = 3;
             treeProyectos.BeforeCheck += treeProyectos_BeforeCheck;
@@ -204,6 +208,15 @@
             tsmCompilarCopiar.Text = "Compilar y Copiar";
             tsmCompilarCopiar.Click += tsmCompilarCopiar_Click;
             // 
+            // iListTree
+            // 
+            iListTree.ColorDepth = ColorDepth.Depth8Bit;
+            iListTree.ImageStream = (ImageListStreamer)resources.GetObject("iListTree.ImageStream");
+            iListTree.TransparentColor = Color.Transparent;
+            iListTree.Images.SetKeyName(0, "folder_gear.png");
+            iListTree.Images.SetKeyName(1, "window.png");
+            iListTree.Images.SetKeyName(2, "scroll_run.png");
+            // 
             // tsTree
             // 
             tsTree.Items.AddRange(new ToolStripItem[] { tsbAdd, tsbBorrar });
@@ -241,7 +254,7 @@
             txtPS.PasswordChar = '\0';
             txtPS.ScrollBars = ScrollBars.Both;
             txtPS.SelectedText = "";
-            txtPS.Size = new Size(793, 218);
+            txtPS.Size = new Size(793, 400);
             txtPS.TabIndex = 6;
             txtPS.UseSelectable = true;
             // 
@@ -256,7 +269,7 @@
             txtError.PasswordChar = '\0';
             txtError.ScrollBars = ScrollBars.Both;
             txtError.SelectedText = "";
-            txtError.Size = new Size(793, 315);
+            txtError.Size = new Size(793, 133);
             txtError.TabIndex = 7;
             txtError.UseSelectable = true;
             // 
@@ -376,5 +389,6 @@
         private MetroFramework.Controls.MetroPanel pProgress;
         private MetroFramework.Controls.MetroProgressBar progresBar;
         private MetroFramework.Controls.MetroProgressSpinner progressSpinner;
+        private ImageList iListTree;
     }
 }

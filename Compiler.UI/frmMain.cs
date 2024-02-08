@@ -65,14 +65,16 @@ namespace Compiler.UI
             {
                 TreeNode node = new TreeNode(proyecto.nombre);
                 node.Tag = proyecto;
+                node.ImageIndex = iListTree.Images.IndexOfKey("folder_gear.png");
+                node.SelectedImageIndex = iListTree.Images.IndexOfKey("folder_gear.png");
                 //node.HideCheckBox();
                 foreach (Guid idAplicacion in proyecto.aplicaciones)
                 {
                     Aplicacion aplicacion = managerAplicacion.getAplicacion(idAplicacion);
-                    TreeNode subAplicacion = GenerarSubNodo(aplicacion, aplicacion.nombre);
-                    TreeNode subNodoCopiar = GenerarSubNodo(aplicacion, "Copiar");
-                    TreeNode subNodoCompilar = GenerarSubNodo(aplicacion, "Compilar", false);
-                    TreeNode subNodoCopiarCompilar = GenerarSubNodo(aplicacion, "Copiar y Compilar", false);
+                    TreeNode subAplicacion = GenerarSubNodo(aplicacion, aplicacion.nombre,true);
+                    TreeNode subNodoCopiar = GenerarSubNodo(aplicacion, "Copiar", false);
+                    TreeNode subNodoCompilar = GenerarSubNodo(aplicacion, "Compilar", false, false);
+                    TreeNode subNodoCopiarCompilar = GenerarSubNodo(aplicacion, "Copiar y Compilar", false, false);
                     subAplicacion.Nodes.Add(subNodoCopiar);
                     subAplicacion.Nodes.Add(subNodoCompilar);
                     subAplicacion.Nodes.Add(subNodoCopiarCompilar);
@@ -84,11 +86,22 @@ namespace Compiler.UI
             }
         }
 
-        private TreeNode GenerarSubNodo(object objeto, string Texto, bool enable = true)
+        private TreeNode GenerarSubNodo(object objeto, string Texto,bool esAplicacion, bool enable = true)
         {
             TreeNode node = new TreeNode(Texto);
             node.Checked = false;
             node.Tag = objeto;
+            if (esAplicacion)
+            {
+                node.ImageIndex = iListTree.Images.IndexOfKey("window.png");
+                node.SelectedImageIndex = iListTree.Images.IndexOfKey("window.png");
+            }
+            else 
+            {
+                node.ImageIndex = iListTree.Images.IndexOfKey("scroll_run.png");
+                node.SelectedImageIndex = iListTree.Images.IndexOfKey("scroll_run.png");
+            }
+
             if (!enable)
             {
                 node.ForeColor = SystemColors.GrayText;
@@ -219,7 +232,7 @@ namespace Compiler.UI
             this.cmBarraIconos.Items.Clear();
             ToolStripSeparator tsSeparatorAux = GenerarToolStripSeparator();
 
-            GenerarToolStripMenuItem();
+            GenerarToolStripMenuItemProyectos();
             tsSeparatorAux = GenerarToolStripSeparator();
             this.cmBarraIconos.Items.Add(tsSeparatorAux);
 
@@ -249,7 +262,7 @@ namespace Compiler.UI
             return tsSeparatorAux;
         }
 
-        private void GenerarToolStripMenuItem()
+        private void GenerarToolStripMenuItemProyectos()
         {
             foreach (Proyecto proyecto in proyectos)
             {
@@ -257,6 +270,7 @@ namespace Compiler.UI
                 mniAuxiliar.Name = "mniAuxiliar" + proyecto.nombre;
                 mniAuxiliar.Size = new Size(180, 22);
                 mniAuxiliar.Text = proyecto.nombre;
+                mniAuxiliar.Image = Properties.Resources.folder_gear;
                 mniAuxiliar.Tag = proyecto;
 
                 ToolStripMenuItem mniCopiar = GenerarToolStripMenuItemCopiar(proyecto);
@@ -278,6 +292,7 @@ namespace Compiler.UI
             mniCopiar.Size = new Size(180, 22);
             mniCopiar.Text = $"Copiar -> {proyecto.nombre}";
             mniCopiar.Tag = proyecto;
+            mniCopiar.Image = Properties.Resources.scroll_run;
             mniCopiar.Click += new EventHandler(this.mniCopiar_Click);
             return mniCopiar;
         }
@@ -289,6 +304,7 @@ namespace Compiler.UI
             mniCompilar.Size = new Size(180, 22);
             mniCompilar.Text = $"Compilar -> {proyecto.nombre}";
             mniCompilar.Tag = proyecto;
+            mniCompilar.Image = Properties.Resources.scroll_run;
             mniCompilar.Click += new EventHandler(this.mniCompilar_Click);
             return mniCompilar;
         }
@@ -301,6 +317,7 @@ namespace Compiler.UI
             mniCompilarCopiar.Size = new Size(180, 22);
             mniCompilarCopiar.Text = $"Compilar -> {proyecto.nombre}";
             mniCompilarCopiar.Tag = proyecto;
+            mniCompilarCopiar.Image = Properties.Resources.scroll_run;
             mniCompilarCopiar.Click += new EventHandler(this.mniCompilarCopiar_Click);
             return mniCompilarCopiar;
         }

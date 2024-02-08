@@ -143,7 +143,7 @@
             // tsbAddCarpeta
             // 
             tsbAddCarpeta.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            tsbAddCarpeta.Image = Properties.Resources.folder_add1;
+            tsbAddCarpeta.Image = Properties.Resources.folder_add;
             tsbAddCarpeta.ImageTransparentColor = Color.Magenta;
             tsbAddCarpeta.Name = "tsbAddCarpeta";
             tsbAddCarpeta.Size = new Size(23, 22);
@@ -163,7 +163,7 @@
             // tsbDeleteCarpeta
             // 
             tsbDeleteCarpeta.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            tsbDeleteCarpeta.Image = Properties.Resources.folder_delete1;
+            tsbDeleteCarpeta.Image = Properties.Resources.folder_delete;
             tsbDeleteCarpeta.ImageTransparentColor = Color.Magenta;
             tsbDeleteCarpeta.Name = "tsbDeleteCarpeta";
             tsbDeleteCarpeta.Size = new Size(23, 22);
