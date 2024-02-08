@@ -181,7 +181,7 @@
             // btValidarCarpetaCompilado
             // 
             btValidarCarpetaCompilado.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btValidarCarpetaCompilado.Image = Properties.Resources.check2;
+            btValidarCarpetaCompilado.Image = Properties.Resources.error;
             btValidarCarpetaCompilado.Location = new Point(595, 172);
             btValidarCarpetaCompilado.Name = "btValidarCarpetaCompilado";
             btValidarCarpetaCompilado.Size = new Size(24, 24);

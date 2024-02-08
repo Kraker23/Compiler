@@ -58,6 +58,10 @@ namespace Compiler.UI.Controls
                 propCarpetaCompilado.text = aplicacion.carpetaCompilado;
                 propCarpetaPublicacion.text = aplicacion.carpetaPublicacion;
                 propComandoCompilado.text = aplicacion.comandoCompilado;
+
+                btValidarCarpetaCompilado.Image = ValidarRuta(aplicacion.carpetaCompilado) ? Properties.Resources.check2 : Properties.Resources.error;
+                btValidarCarpetaPublicacion.Image = ValidarRuta(aplicacion.carpetaPublicacion) ? Properties.Resources.check2 : Properties.Resources.error;
+
             }
             foreach (ArchivoExclusion archivo in archivosExclusion)
             {
@@ -135,20 +139,38 @@ namespace Compiler.UI.Controls
 
         private void btValidarCarpetaPublicacion_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(propCarpetaPublicacion.text)&& 
-                !Directory.Exists(propCarpetaPublicacion.text))
+            if (!ValidarRuta(propCarpetaPublicacion.text))
             {
                 MessageBox.Show("No existe la ruta");
+                btValidarCarpetaPublicacion.Image = Properties.Resources.error;
+            }
+            else
+            {
+                btValidarCarpetaPublicacion.Image = Properties.Resources.check2;
             }
         }
 
         private void btValidarCarpetaCompilado_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(propCarpetaCompilado.text) &&
-                !Directory.Exists(propCarpetaCompilado.text))
+            if (!ValidarRuta(propCarpetaCompilado.text))
             {
                 MessageBox.Show("No existe la ruta");
+                btValidarCarpetaCompilado.Image = Properties.Resources.error;
             }
+            else
+            {
+                btValidarCarpetaCompilado.Image = Properties.Resources.check2;
+            }
+        }
+
+        public bool ValidarRuta(string ruta)
+        {
+            if (!string.IsNullOrEmpty(ruta) &&
+                !Directory.Exists(ruta))
+            {
+                return false;
+            }
+            return true;
         }
     }
 }
