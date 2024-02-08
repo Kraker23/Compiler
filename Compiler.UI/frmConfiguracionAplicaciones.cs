@@ -93,6 +93,8 @@ namespace Compiler.UI
         {
             Aplicacion aux = new Aplicacion();
 
+            bool esCarpeta = treeAplicaciones.SelectedNode.Tag.GetType() == typeof(Carpeta);
+            aux.fk_IdCarpeta = esCarpeta ? ((Carpeta)treeAplicaciones.SelectedNode.Tag).id : null;
             TreeNode node = new TreeNode(aux.nombre);
             node.Tag = aux;
             treeAplicaciones.Nodes.Add(node);
@@ -160,7 +162,7 @@ namespace Compiler.UI
                 bool esAplicacion = treeAplicaciones.SelectedNode.Tag.GetType() == typeof(Aplicacion);
 
                 tsbEditCarpeta.Enabled = tsbDeleteCarpeta.Enabled = !esAplicacion;
-                tsbAdd.Enabled = tsbDuplicar.Enabled = tsbBorrar.Enabled = esAplicacion;
+                tsbDuplicar.Enabled = tsbBorrar.Enabled = esAplicacion;
 
                 if (esAplicacion)
                 {
