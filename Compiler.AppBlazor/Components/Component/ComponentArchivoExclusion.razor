@@ -1,0 +1,66 @@
+﻿@using Compiler.Shared.DataObjects
+@using Compiler.Shared.Enums
+@using Compiler.Shared.Interface.IBL
+@using Utilities.Clases.BuscarFicheros
+@using Utilities.Extensions
+@using static Compiler.Shared.Enums.Enumeraciones
+
+<RadzenMenu>
+    <RadzenMenuItem Text="Save" Click="SaveClick" Icon="save" IconColor="@Colors.Info"></RadzenMenuItem>
+    <RadzenMenuItem Text="FindFile" Click="FindClick" Icon="find_in_page" IconColor="@Colors.Primary"></RadzenMenuItem>
+</RadzenMenu>
+
+<RadzenCard>
+    <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">ID</RadzenText>
+    <RadzenTextBox Value=@archivo.idString Style="width: 100%" aria-label="Default TextBox" Disabled="true" />
+</RadzenCard>
+
+<RadzenCard>
+    <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Contenido </RadzenText>
+    <RadzenTextBox @bind-Value=@archivo.texto Style="width: 100%" aria-label="Default TextBox" />
+</RadzenCard>
+
+<RadzenCard>
+    <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Tipo Exlusion </RadzenText>
+    <RadzenDropDown @bind-Value=@archivo.tipoExclusion Data=@estados TextProperty="@nameof(EnumBase.Descripcion)" ValueProperty="@nameof(EnumBase.Id)"
+                    AllowClear=true Style="width: 100%; max-width: 400px;" Name="TipoExlusion" />
+</RadzenCard>
+
+@code {
+    [Parameter]
+    public ArchivoExclusion archivo { get; set; } = new ArchivoExclusion();
+    private List<EnumBase> estados;
+    [Parameter]
+    public EventCallback<ArchivoExclusion> saveEvent { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        estados = getListTipoExclusion();
+    }
+
+    public static List<EnumBase> getListTipoExclusion()
+    {
+        List<EnumBase> estados = Enum.GetValues(typeof(TipoExclusion))
+                 .Cast<TipoExclusion>()
+                 .Select(d => new EnumBase { Id = (int)d, Descripcion = d.ToString() })
+                 .ToList();
+
+        return estados;
+    }
+    void SaveClick(MenuItemEventArgs args)
+    {
+        saveEvent.InvokeAsync(archivo);
+    }
+
+    void FindClick(MenuItemEventArgs args)
+    {
+        string[] path = BuscarArchivos.SeleccionarArchivo(false, multiSelect: false);
+        if (path.HasContent() && path.Length == 1)
+        {
+            archivo.texto = path[0];
+            archivo.tipoExclusion = (int)TipoExclusion.NombreCompleto;
+        }
+    }
+}

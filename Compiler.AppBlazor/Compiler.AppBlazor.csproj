@@ -10,6 +10,21 @@
 
   <ItemGroup>
     <PackageReference Include="BlazorDesktop" Version="8.0.0" />
+    <PackageReference Include="Radzen.Blazor" Version="5.7.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Compiler.BL\Compiler.BL.csproj" />
+    <ProjectReference Include="..\Compiler.EF\Compiler.EF.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Utilities.Clases">
+      <HintPath>..\..\Utilities\dllsComunes\Utilities.Clases.dll</HintPath>
+    </Reference>
+    <Reference Include="Utilities.Extensions">
+      <HintPath>..\..\Utilities\dllsComunes\Utilities.Extensions.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
