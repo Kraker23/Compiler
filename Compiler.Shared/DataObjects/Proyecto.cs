@@ -11,6 +11,8 @@ namespace Compiler.Shared.DataObjects
     {
         /// <summary>Id del proyecto</summary>
         public Guid id { get; set; }
+        [JsonIgnore]
+        public string idString { get { return id.ToString(); } }
         /// <summary>Nombre del proyecto</summary>
         public string nombre { get; set; }
         /// <summary>Listado de Aplicaciones que afectan  al proyecto</summary>

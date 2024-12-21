@@ -4,7 +4,7 @@
 @using System.Windows
 @inject IArchivoExclusion_BL managerExclusion;
 @inject IAplicacion_BL managerAplicacion;
-
+@using Compiler.AppBlazor.Components.Component
 
 <h3>Archivos Exclusion</h3>
 
@@ -27,7 +27,7 @@
         <RadzenCard>
             @if(archivoSeleccionado!=null)
             {
-                <Compiler.AppBlazor.Components.Component.ComponentArchivoExclusion archivo="archivoSeleccionado" saveEvent="Save"/>
+                <ComponentArchivoExclusion archivo="archivoSeleccionado" saveEvent="Save"/>
             }
         </RadzenCard>
     </RadzenColumn>

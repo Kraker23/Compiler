@@ -1,0 +1,177 @@
+﻿@using Compiler.Shared.DataObjects
+@using Compiler.Shared.Enums
+@using Compiler.Shared.Interface.IBL
+@using System.IO
+@using Utilities.Clases.BuscarFicheros
+@using Utilities.Extensions
+@using static Compiler.Shared.Enums.Enumeraciones
+@inject IArchivoExclusion_BL managerExclusion;
+
+<ComponentPropertyID id="@aplicacion.idString" saveEvent="SaveClick"></ComponentPropertyID>
+
+<RadzenCard>
+    <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Nombre </RadzenText>
+    <RadzenTextBox @bind-Value=@aplicacion.nombre Style="width: 100%" aria-label="Default TextBox" />
+</RadzenCard>
+
+<RadzenCard>
+    <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Ubicacion Aplicacion </RadzenText>
+    <RadzenRow>
+        <RadzenColumn Size="12" SizeLG="11">
+            <RadzenTextBox @bind-Value=@aplicacion.ubicacionAplicacion Style="width: 100%" aria-label="Default TextBox" />
+        </RadzenColumn>
+        <RadzenColumn Size="12" SizeLG="1">
+            <RadzenButton Click="@btUbicacionAplicacion_Click" Icon="find_in_page"></RadzenButton>
+        </RadzenColumn>
+    </RadzenRow>
+</RadzenCard>
+<RadzenCard>
+    <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Carpeta Compilado </RadzenText>
+    <RadzenRow>
+        <RadzenColumn Size="12" SizeLG="11">
+            <RadzenTextBox @bind-Value=@aplicacion.carpetaCompilado Style="width: 100%" aria-label="Default TextBox" />
+        </RadzenColumn>
+        <RadzenColumn Size="12" SizeLG="1">
+            <RadzenButton Click="@btCarpetaCompilado_Click" Icon="find_in_page"></RadzenButton>
+        </RadzenColumn>
+    </RadzenRow>
+</RadzenCard>
+<RadzenCard>
+    <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Carpeta Publicacion </RadzenText>
+    <RadzenRow>
+        <RadzenColumn Size="12" SizeLG="11">
+            <RadzenTextBox @bind-Value=@aplicacion.carpetaPublicacion Style="width: 100%" aria-label="Default TextBox" />
+        </RadzenColumn>
+        <RadzenColumn Size="12" SizeLG="1">
+            <RadzenButton Click="@btCarpetaPublicacion_Click" Icon="find_in_page"></RadzenButton>
+        </RadzenColumn>
+    </RadzenRow>
+</RadzenCard>
+
+<RadzenCard>
+    <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Comando Compilado </RadzenText>
+    <RadzenTextBox @bind-Value=@aplicacion.comandoCompilado Style="width: 100%" aria-label="Default TextBox" />
+</RadzenCard>
+
+
+<RadzenCard>
+    <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Arvhivos Exlusion </RadzenText>
+    <RadzenCheckBoxList Data="@archivosExclusion" @bind-Value=@values TValue="Guid" TextProperty="@nameof(ArchivoExclusion.texto)" ValueProperty="@nameof(ArchivoExclusion.id)"
+                        Orientation="Orientation.Vertical" Change=@OnChange />
+</RadzenCard>
+
+@code {
+    [Parameter]
+    public Aplicacion aplicacion { get; set; } = new Aplicacion();
+
+    public List<ArchivoExclusion> archivosExclusion { get; set; }
+    [Parameter]
+    public EventCallback<Aplicacion> saveEvent { get; set; }
+
+    public IEnumerable<Guid> values { get; set; } = new List<Guid>();
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        if (aplicacion.archivosExcluidos.HasContent())
+        {
+            values = aplicacion.archivosExcluidos;
+        }
+        else
+        {
+            values = new List<Guid>();
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        archivosExclusion = managerExclusion.getArchivoExclusiones();
+    }
+
+
+
+    public void OnChange()
+    {
+        aplicacion.archivosExcluidos = values.ToList();
+    }
+
+
+    void SaveClick()
+    {
+        saveEvent.InvokeAsync(aplicacion);
+    }
+
+    private void btUbicacionAplicacion_Click()
+    {
+        string[] path = BuscarArchivos.SeleccionarArchivo(true, multiSelect: false);
+        if (path.HasContent() && path.Length == 1)
+        {
+            aplicacion.ubicacionAplicacion = path[0];
+        }
+    }
+
+    private void btCarpetaCompilado_Click()
+    {
+        string rutaBase = string.Empty;
+        if (!string.IsNullOrEmpty(aplicacion.carpetaCompilado) && Directory.Exists(aplicacion.carpetaCompilado))
+        {
+            rutaBase = aplicacion.carpetaCompilado;
+        }
+        string[] path = BuscarArchivos.SeleccionarMultiCarpeta(rutaBase, false, true);
+        if (path.HasContent() && path.Length == 1)
+        {
+            aplicacion.carpetaCompilado = path[0];
+        }
+    }
+
+    private void btCarpetaPublicacion_Click()
+    {
+        string rutaBase = string.Empty;
+        if (!string.IsNullOrEmpty(aplicacion.carpetaPublicacion) && Directory.Exists(aplicacion.carpetaPublicacion))
+        {
+            rutaBase = aplicacion.carpetaPublicacion;
+        }
+        string[] path = BuscarArchivos.SeleccionarMultiCarpeta(rutaBase, false, true);
+        if (path.HasContent() && path.Length == 1)
+        {
+            aplicacion.carpetaPublicacion = path[0];
+        }
+    }
+
+    /* private void btValidarCarpetaPublicacion_Click()
+        {
+            if (!ValidarRuta(propCarpetaPublicacion.text))
+            {
+                MessageBox.Show("No existe la ruta");
+                btValidarCarpetaPublicacion.Image = Properties.Resources.error;
+            }
+            else
+            {
+                btValidarCarpetaPublicacion.Image = Properties.Resources.check2;
+            }
+        }
+
+        private void btValidarCarpetaCompilado_Click()
+        {
+            if (!ValidarRuta(propCarpetaCompilado.text))
+            {
+                MessageBox.Show("No existe la ruta");
+                btValidarCarpetaCompilado.Image = Properties.Resources.error;
+            }
+            else
+            {
+                btValidarCarpetaCompilado.Image = Properties.Resources.check2;
+            }
+        }
+        */
+
+    public bool ValidarRuta(string ruta)
+    {
+        if (!string.IsNullOrEmpty(ruta) && !Directory.Exists(ruta))
+        {
+            return false;
+        }
+        return true;
+    }
+}

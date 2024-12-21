@@ -1,0 +1,38 @@
+﻿@using Compiler.Shared.DataObjects
+@using Compiler.Shared.Enums
+@using Compiler.Shared.Interface.IBL
+@using System.IO
+@using Utilities.Clases.BuscarFicheros
+@using Utilities.Extensions
+@using static Compiler.Shared.Enums.Enumeraciones
+
+<ComponentPropertyID id="@carpeta.idString" saveEvent="SaveClick"></ComponentPropertyID>
+
+<RadzenCard>
+    <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Nombre </RadzenText>
+    <RadzenTextBox @bind-Value=@carpeta.nombre Style="width: 100%" aria-label="Default TextBox" />
+</RadzenCard>
+
+
+@code {
+    [Parameter]
+    public Carpeta carpeta { get; set; } = new Carpeta();
+
+    [Parameter]
+    public EventCallback<Carpeta> saveEvent { get; set; }
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+    }
+
+
+    void SaveClick()
+    {
+        saveEvent.InvokeAsync(carpeta);
+    }
+
+  
+}

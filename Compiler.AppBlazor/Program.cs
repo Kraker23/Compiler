@@ -34,5 +34,7 @@ if (builder.HostEnvironment.IsDevelopment())
 {
     builder.UseDeveloperTools();
 }
+builder.Services.AddRazorComponents(options =>
+    options.DetailedErrors = builder.HostEnvironment.IsDevelopment());
 
 await builder.Build().RunAsync();

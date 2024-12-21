@@ -5,19 +5,26 @@
 @using Utilities.Extensions
 @using static Compiler.Shared.Enums.Enumeraciones
 
-<RadzenMenu>
-    <RadzenMenuItem Text="Save" Click="SaveClick" Icon="save" IconColor="@Colors.Info"></RadzenMenuItem>
-    <RadzenMenuItem Text="FindFile" Click="FindClick" Icon="find_in_page" IconColor="@Colors.Primary"></RadzenMenuItem>
-</RadzenMenu>
 
-<RadzenCard>
-    <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">ID</RadzenText>
-    <RadzenTextBox Value=@archivo.idString Style="width: 100%" aria-label="Default TextBox" Disabled="true" />
-</RadzenCard>
+<ComponentPropertyID id="@archivo.idString" saveEvent="SaveClick"></ComponentPropertyID>
+
 
 <RadzenCard>
     <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Contenido </RadzenText>
     <RadzenTextBox @bind-Value=@archivo.texto Style="width: 100%" aria-label="Default TextBox" />
+</RadzenCard>
+
+
+<RadzenCard>
+    <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Contenido </RadzenText>
+    <RadzenRow>
+        <RadzenColumn Size="12" SizeLG="11">
+            <RadzenTextBox @bind-Value=@archivo.texto Style="width: 100%" aria-label="Default TextBox" />
+        </RadzenColumn>
+        <RadzenColumn Size="12" SizeLG="1">
+            <RadzenButton Click="@FindClick" Icon="find_in_page"></RadzenButton>
+        </RadzenColumn>
+    </RadzenRow>
 </RadzenCard>
 
 <RadzenCard>
@@ -49,12 +56,12 @@
 
         return estados;
     }
-    void SaveClick(MenuItemEventArgs args)
+    void SaveClick()
     {
         saveEvent.InvokeAsync(archivo);
     }
 
-    void FindClick(MenuItemEventArgs args)
+    void FindClick()
     {
         string[] path = BuscarArchivos.SeleccionarArchivo(false, multiSelect: false);
         if (path.HasContent() && path.Length == 1)
