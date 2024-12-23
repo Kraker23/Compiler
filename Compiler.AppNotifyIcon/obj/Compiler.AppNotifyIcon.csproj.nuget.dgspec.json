@@ -1,38 +1,51 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Code\\Compiler\\Compiler.AppNotifyIcon\\Compiler.AppNotifyIcon.csproj": {}
+    "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.AppNotifyIcon\\Compiler.AppNotifyIcon.csproj": {}
   },
   "projects": {
-    "E:\\Code\\Compiler\\Compiler.AppNotifyIcon\\Compiler.AppNotifyIcon.csproj": {
+    "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.AppNotifyIcon\\Compiler.AppNotifyIcon.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Code\\Compiler\\Compiler.AppNotifyIcon\\Compiler.AppNotifyIcon.csproj",
+        "projectUniqueName": "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.AppNotifyIcon\\Compiler.AppNotifyIcon.csproj",
         "projectName": "Compiler.AppNotifyIcon",
-        "projectPath": "E:\\Code\\Compiler\\Compiler.AppNotifyIcon\\Compiler.AppNotifyIcon.csproj",
-        "packagesPath": "C:\\Users\\Cristian\\.nuget\\packages\\",
-        "outputPath": "E:\\Code\\Compiler\\Compiler.AppNotifyIcon\\obj\\",
+        "projectPath": "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.AppNotifyIcon\\Compiler.AppNotifyIcon.csproj",
+        "packagesPath": "C:\\Users\\ramir-cr\\.nuget\\packages\\",
+        "outputPath": "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.AppNotifyIcon\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Cristian\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ramir-cr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 19.1.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net8.0-windows"
+          "net8.0-windows10.0.22000.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
+          "C:\\VSS-DB\\España\\Extras\\Nugets Local": {},
+          "http://de-hv1-sr-diws1/NuGetServer/nuget": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net8.0-windows7.0": {
-            "targetAlias": "net8.0-windows",
-            "projectReferences": {}
+          "net8.0-windows10.0.22000": {
+            "targetAlias": "net8.0-windows10.0.22000.0",
+            "projectReferences": {
+              "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.BL\\Compiler.BL.csproj": {
+                "projectPath": "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.BL\\Compiler.BL.csproj"
+              },
+              "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.EF\\Compiler.EF.csproj": {
+                "projectPath": "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.EF\\Compiler.EF.csproj"
+              },
+              "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.Shared\\Compiler.Shared.csproj": {
+                "projectPath": "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.Shared\\Compiler.Shared.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -43,13 +56,30 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.100"
+          "auditMode": "all"
+        }
       },
       "frameworks": {
-        "net8.0-windows7.0": {
-          "targetAlias": "net8.0-windows",
+        "net8.0-windows10.0.22000": {
+          "targetAlias": "net8.0-windows10.0.22000.0",
+          "dependencies": {
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Microsoft.PowerShell.Commands.Diagnostics": {
+              "target": "Package",
+              "version": "[7.4.6, )"
+            },
+            "Microsoft.PowerShell.SDK": {
+              "target": "Package",
+              "version": "[7.4.6, )"
+            },
+            "System.Management.Automation": {
+              "target": "Package",
+              "version": "[7.4.6, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -61,15 +91,282 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.Net.Sdk.Compilers.Toolset",
+              "version": "[9.0.100, 9.0.100]"
+            },
+            {
+              "name": "Microsoft.Windows.SDK.NET.Ref",
+              "version": "[10.0.22000.54, 10.0.22000.54]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.Windows.SDK.NET.Ref.Windows": {
               "privateAssets": "all"
             },
             "Microsoft.WindowsDesktop.App.WindowsForms": {
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.BL\\Compiler.BL.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.BL\\Compiler.BL.csproj",
+        "projectName": "Compiler.BL",
+        "projectPath": "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.BL\\Compiler.BL.csproj",
+        "packagesPath": "C:\\Users\\ramir-cr\\.nuget\\packages\\",
+        "outputPath": "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.BL\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\ramir-cr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 19.1.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "C:\\VSS-DB\\España\\Extras\\Nugets Local": {},
+          "http://de-hv1-sr-diws1/NuGetServer/nuget": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.Shared\\Compiler.Shared.csproj": {
+                "projectPath": "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.Shared\\Compiler.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "all"
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.Net.Sdk.Compilers.Toolset",
+              "version": "[9.0.100, 9.0.100]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.EF\\Compiler.EF.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.EF\\Compiler.EF.csproj",
+        "projectName": "Compiler.EF",
+        "projectPath": "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.EF\\Compiler.EF.csproj",
+        "packagesPath": "C:\\Users\\ramir-cr\\.nuget\\packages\\",
+        "outputPath": "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.EF\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\ramir-cr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 19.1.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "C:\\VSS-DB\\España\\Extras\\Nugets Local": {},
+          "http://de-hv1-sr-diws1/NuGetServer/nuget": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.Shared\\Compiler.Shared.csproj": {
+                "projectPath": "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.Shared\\Compiler.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "all"
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.Net.Sdk.Compilers.Toolset",
+              "version": "[9.0.100, 9.0.100]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.Shared\\Compiler.Shared.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.Shared\\Compiler.Shared.csproj",
+        "projectName": "Compiler.Shared",
+        "projectPath": "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.Shared\\Compiler.Shared.csproj",
+        "packagesPath": "C:\\Users\\ramir-cr\\.nuget\\packages\\",
+        "outputPath": "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.Shared\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\ramir-cr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 19.1.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "C:\\VSS-DB\\España\\Extras\\Nugets Local": {},
+          "http://de-hv1-sr-diws1/NuGetServer/nuget": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "all"
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.Extensions.Configuration.Abstractions": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.Net.Sdk.Compilers.Toolset",
+              "version": "[9.0.100, 9.0.100]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
