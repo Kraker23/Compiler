@@ -21,7 +21,7 @@
 </RadzenCard>
 
 <RadzenCard>
-    <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Tipo Exlusion </RadzenText>
+    <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Tipo Exlusion </RadzenText>  
     <RadzenDropDown @bind-Value=@archivo.tipoExclusion Data=@estados TextProperty="@nameof(EnumBase.Descripcion)" ValueProperty="@nameof(EnumBase.Id)"
                     AllowClear=true Style="width: 100%; max-width: 400px;" Name="TipoExlusion" />
 </RadzenCard>
@@ -63,4 +63,5 @@
             archivo.tipoExclusion = (int)TipoExclusion.NombreCompleto;
         }
     }
+
 }

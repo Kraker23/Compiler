@@ -62,8 +62,15 @@
 
 <RadzenCard>
     <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Arvhivos Exlusion </RadzenText>
-    <RadzenCheckBoxList Data="@archivosExclusion" @bind-Value=@values TValue="Guid" TextProperty="@nameof(ArchivoExclusion.texto)" ValueProperty="@nameof(ArchivoExclusion.id)"
-                        Orientation="Orientation.Vertical" Change=@OnChange />
+    <RadzenRow>
+        <RadzenColumn Size="12" SizeLG="11">
+            <RadzenCheckBoxList Data="@archivosExclusion" @bind-Value=@values TValue="Guid" TextProperty="@nameof(ArchivoExclusion.texto)" ValueProperty="@nameof(ArchivoExclusion.id)"
+                                Orientation="Orientation.Vertical" Change=@OnChange />
+        </RadzenColumn>
+        <RadzenColumn Size="12" SizeLG="1">
+            <RadzenButton Click="@SelectAll" Icon="select_check_box"></RadzenButton>
+        </RadzenColumn>
+    </RadzenRow>
 </RadzenCard>
 
 @code {
@@ -147,32 +154,6 @@
         }
     }
 
-    /* private void btValidarCarpetaPublicacion_Click()
-        {
-            if (!ValidarRuta(propCarpetaPublicacion.text))
-            {
-                MessageBox.Show("No existe la ruta");
-                btValidarCarpetaPublicacion.Image = Properties.Resources.error;
-            }
-            else
-            {
-                btValidarCarpetaPublicacion.Image = Properties.Resources.check2;
-            }
-        }
-
-        private void btValidarCarpetaCompilado_Click()
-        {
-            if (!ValidarRuta(propCarpetaCompilado.text))
-            {
-                MessageBox.Show("No existe la ruta");
-                btValidarCarpetaCompilado.Image = Properties.Resources.error;
-            }
-            else
-            {
-                btValidarCarpetaCompilado.Image = Properties.Resources.check2;
-            }
-        }
-        */
 
     public bool ValidarRuta(string ruta)
     {
@@ -182,4 +163,38 @@
         }
         return true;
     }
+
+    void SelectAll()
+    {
+        values = archivosExclusion.Select(x => x.id).ToList();
+        OnChange();
+    }
+
+    /* private void btValidarCarpetaPublicacion_Click()
+            {
+            if (!ValidarRuta(propCarpetaPublicacion.text))
+                {
+                MessageBox.Show("No existe la ruta");
+                btValidarCarpetaPublicacion.Image = Properties.Resources.error;
+            }
+                else
+                {
+                btValidarCarpetaPublicacion.Image = Properties.Resources.check2;
+                    }
+        }
+
+        private void btValidarCarpetaCompilado_Click()
+            {
+            if (!ValidarRuta(propCarpetaCompilado.text))
+                {
+                MessageBox.Show("No existe la ruta");
+                btValidarCarpetaCompilado.Image = Properties.Resources.error;
+            }
+                else
+                {
+                btValidarCarpetaCompilado.Image = Properties.Resources.check2;
+    }
+            }
+    */
+
 }

@@ -1,0 +1,62 @@
+﻿@using Compiler.Shared.DataObjects
+@using Compiler.Shared.Enums
+@using Compiler.Shared.Interface.IBL
+@using Utilities.Clases.BuscarFicheros
+@using Utilities.Extensions
+@inject IAplicacion_BL managerAplicacion;
+@inject IProyecto_BL managerProyecto;
+
+
+<ComponentPropertyID id="@proyecto.idString" saveEvent="SaveClick"></ComponentPropertyID>
+
+<RadzenCard>
+    <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Contenido </RadzenText>
+    <RadzenTextBox @bind-Value=@proyecto.nombre Style="width: 100%" aria-label="Default TextBox" />
+</RadzenCard>
+
+<RadzenCard>
+    <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Aplicaciones </RadzenText>
+    <RadzenCheckBoxList Data="@aplicaciones" @bind-Value=@values TValue="Guid" TextProperty="@nameof(Aplicacion.nombre)" ValueProperty="@nameof(Aplicacion.id)"
+                        Orientation="Orientation.Vertical" Change=@OnChange />
+</RadzenCard>
+
+@code {
+    [Parameter]
+    public Proyecto proyecto { get; set; } = new Proyecto();
+    private List<Aplicacion> aplicaciones;
+    [Parameter]
+    public EventCallback<Proyecto> saveEvent { get; set; }
+    public IEnumerable<Guid> values { get; set; } = new List<Guid>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        aplicaciones = managerAplicacion.getAplicaciones();
+    }
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        if (proyecto.aplicaciones.HasContent())
+        {
+            values = proyecto.aplicaciones;
+        }
+        else
+        {
+            values = new List<Guid>();
+        }
+    }
+
+    void SaveClick()
+    {
+        saveEvent.InvokeAsync(proyecto);
+    }
+
+    public void OnChange()
+    {
+        proyecto.aplicaciones = values.ToList();
+    }
+
+
+   
+}
