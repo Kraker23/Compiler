@@ -6,7 +6,6 @@
     <UseWPF>true</UseWPF>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-	<BaseOutputPath>C:\VSS-DB\vss-db-Cristian\Compiler\Aplicacion</BaseOutputPath>
   </PropertyGroup>
 
 
