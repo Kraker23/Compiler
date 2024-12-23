@@ -6,6 +6,7 @@
 @using Utilities.Extensions
 @using static Compiler.Shared.Enums.Enumeraciones
 @inject IArchivoExclusion_BL managerExclusion;
+@inject ICarpeta_BL managerCarpeta;
 
 <ComponentPropertyID id="@aplicacion.idString" saveEvent="SaveClick"></ComponentPropertyID>
 
@@ -53,6 +54,11 @@
     <RadzenTextBox @bind-Value=@aplicacion.comandoCompilado Style="width: 100%" aria-label="Default TextBox" />
 </RadzenCard>
 
+<RadzenCard>
+    <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Carpeta </RadzenText>
+    <RadzenDropDown @bind-Value=@aplicacion.fk_IdCarpeta Data=@carpetas TValue="Nullable<Guid>" TextProperty="@nameof(Carpeta.nombre)" ValueProperty="@nameof(Carpeta.id)"
+                    AllowClear=true Style="width: 100%; max-width: 400px;" Name="Carpeta" />
+</RadzenCard>
 
 <RadzenCard>
     <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Arvhivos Exlusion </RadzenText>
@@ -65,6 +71,7 @@
     public Aplicacion aplicacion { get; set; } = new Aplicacion();
 
     public List<ArchivoExclusion> archivosExclusion { get; set; }
+    public List<Carpeta> carpetas { get; set; }
     [Parameter]
     public EventCallback<Aplicacion> saveEvent { get; set; }
 
@@ -87,6 +94,7 @@
     {
         await base.OnInitializedAsync();
         archivosExclusion = managerExclusion.getArchivoExclusiones();
+        carpetas = managerCarpeta.getCarpetas();
     }
 
 

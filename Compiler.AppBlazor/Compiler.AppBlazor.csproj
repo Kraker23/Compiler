@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0-windows10.0.22000.0</TargetFramework>
@@ -6,9 +6,11 @@
     <UseWPF>true</UseWPF>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+	<BaseOutputPath>C:\VSS-DB\vss-db-Cristian\Compiler\Aplicacion</BaseOutputPath>
   </PropertyGroup>
 
-  <ItemGroup>
+
+	<ItemGroup>
     <PackageReference Include="BlazorDesktop" Version="8.0.0" />
     <PackageReference Include="Radzen.Blazor" Version="5.7.1" />
   </ItemGroup>
@@ -20,10 +22,16 @@
 
   <ItemGroup>
     <Reference Include="Utilities.Clases">
-      <HintPath>..\..\Utilities\dllsComunes\Utilities.Clases.dll</HintPath>
+      <HintPath>..\..\Kraker23\Utilities\dllsComunes\Utilities.Clases.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Utilities.Controls">
+      <HintPath>..\..\Kraker23\Utilities\dllsComunes\Utilities.Controls.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Utilities.Extensions">
-      <HintPath>..\..\Utilities\dllsComunes\Utilities.Extensions.dll</HintPath>
+      <HintPath>..\..\Kraker23\Utilities\dllsComunes\Utilities.Extensions.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
 

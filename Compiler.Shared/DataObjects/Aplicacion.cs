@@ -35,6 +35,19 @@ namespace Compiler.Shared.DataObjects
             id = Guid.NewGuid();
             archivosExcluidos = new List<Guid>();
         }
+        public Aplicacion(Aplicacion aplicacionAux)
+        {            
+            id = Guid.NewGuid();
+            archivosExcluidos = new List<Guid>();
+            fk_IdCarpeta = aplicacionAux.fk_IdCarpeta;
+            nombre = aplicacionAux.nombre;
+            ubicacionAplicacion = aplicacionAux.ubicacionAplicacion;
+            carpetaCompilado = aplicacionAux.carpetaCompilado;
+            carpetaPublicacion = aplicacionAux.carpetaPublicacion;
+            comandoCompilado = aplicacionAux.comandoCompilado;
+            archivosExcluidos = aplicacionAux.archivosExcluidos;
+        }
+
 
         public override string ToString()
         {

@@ -3,9 +3,11 @@
 @using Compiler.Shared.DataObjects
 @using Compiler.Shared.Interface.IBL
 @using System.Windows
+@using Compiler.Shared.Objects
 @inject IArchivoExclusion_BL managerExclusion;
 @inject IAplicacion_BL managerAplicacion;
 @inject ICarpeta_BL managerCarpeta;
+@inject IProyecto_BL managerProyecto;
 
 <h1>Aplicaciones</h1>
 
@@ -22,28 +24,14 @@
 
 <RadzenRow Style="margin-top:10px">
     <RadzenColumn Size="12" SizeLG="4">
-        <RadzenCard>
-            <RadzenTree Style="width: 100%; height: 300px" Change=@OnChange Data=@aplicaciones @bind-Value=@selection>
-                <RadzenTreeLevel TextProperty="@nameof(Aplicacion.nombre)" />
+        <RadzenCard>       
+            <RadzenTree @bind-Value=@selection
+                        Data=@tree
+                        Expand=@LoadTree
+                        Change=@OnChange
+                        Style="width: 100%; height: 100%">
+                <RadzenTreeLevel Text=@GetTextForNode Template=@FolderTemplate Expanded="@(data => true)" />
             </RadzenTree>
-
-            <RadzenTree Style="width: 100%; height: 300px" Change=@OnChange Data=@carpetas Expand=@OnExpand>
-                <RadzenTreeLevel TextProperty="@nameof(Carpeta.nombre)" >
-                    <Template>
-                        @if (context != null)
-                        {
-                            <img alt="BMW" src="https://upload.wikimedia.org/wikipedia/commons/4/44/BMW.svg" style="width: 20px;" class="rz-me-2" />
-                            <b>@context.Text</b>
-                        }
-                    </Template>
-                </RadzenTreeLevel>
-
-            </RadzenTree>
-
-            @* <RadzenTree Style="height: 300px" Data=@categories>
-                <RadzenTreeLevel TextProperty="@nameof(Category.CategoryName)" Template="insert_drive_file" />
-                <RadzenTreeLevel TextProperty="@nameof(Product.ProductName)" HasChildren=@(product => false) />
-            </RadzenTree> *@
         </RadzenCard>
     </RadzenColumn>
     <RadzenColumn Size="12" SizeLG="8">
@@ -68,19 +56,123 @@
     private Aplicacion aplicacionSelect { get; set; }
     private Carpeta carpetaSelect { get; set; }
 
+    object selectionTree { get; set; }
+
+    private List<TreeNode> tree { get; set; }
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
         LoadData();
     }
+
     private void LoadData()
     {
         aplicaciones = managerAplicacion.getAplicaciones();
         carpetas = managerCarpeta.getCarpetas();
+        CargarTree();
         aplicacionSelect = null;
         selection = null;
     }
+
+    #region Tree
+
+    void CargarTree()
+    {
+        tree = new List<TreeNode>();
+        foreach (Carpeta carpetaAux in carpetas)
+        {
+            TreeNode aux = new TreeNode();
+            aux.Id = carpetaAux.id;
+            aux.Text = carpetaAux.nombre;
+            aux.value = carpetaAux;
+            // aux.Template = "folder";
+            aux.Children = CargarAplicacionesByCarpeta(carpetaAux.id);
+            tree.Add(aux);
+
+        }
+        foreach (Aplicacion aplicacionAux in aplicaciones.Where(x => x.fk_IdCarpeta == null))
+        {
+            TreeNode aux = new TreeNode();
+            aux.Id = aplicacionAux.id;
+            aux.Text = aplicacionAux.nombre;
+            aux.value = aplicacionAux;
+            tree.Add(aux);
+        }
+    }
+
+    List<TreeNode> CargarAplicacionesByCarpeta(Guid guid)
+    {
+        if (aplicaciones.Any(x => x.fk_IdCarpeta == guid))
+        {
+            List<TreeNode> treeApps = new List<TreeNode>();
+            foreach (Aplicacion aplicacionAux in aplicaciones.Where(x => x.fk_IdCarpeta == guid).ToList())
+            {
+                TreeNode aux = new TreeNode();
+                aux.Id = aplicacionAux.id;
+                aux.ParentId = guid;
+                aux.Text = aplicacionAux.nombre;
+                aux.value = aplicacionAux;
+                treeApps.Add(aux);
+            }
+            return treeApps;
+        }
+        return null;
+    }
+
+    RenderFragment<RadzenTreeItem> FolderTemplate = (context) => builder =>
+       {
+           TreeNode objTreeNode = context.Value as TreeNode;
+           builder.OpenComponent<RadzenIcon>(0);
+           if (objTreeNode.value is Carpeta)
+           {
+               builder.AddAttribute(1, "Icon", "folder");
+               builder.AddAttribute(1, "IconColor", "#FFBA01");
+           }
+           else
+           {
+               builder.AddAttribute(1, "Icon", "inbox_customize");
+               builder.AddAttribute(1, "IconColor", "#01A6F0");
+           }
+           builder.CloseComponent();
+           builder.AddContent(2, context.Text);
+       };
+
+    void LoadTree(TreeExpandEventArgs args)
+    {
+        var objTreeNode = args.Value as TreeNode;
+        if (objTreeNode != null)
+        {
+            args.Children.Data = objTreeNode.Children;
+            args.Children.Text = GetTextForNode;
+            args.Children.HasChildren = e => ((TreeNode)e).Children?.Any() ?? false;
+            args.Children.Template = FolderTemplate;
+        }
+    }
+
+    string GetTextForNode(object data)
+    {
+        return ((TreeNode)data).Text;
+    }
+
+    void OnChange()
+    {
+        aplicacionSelect = null;
+        if (((TreeNode)selection).value is Aplicacion)
+        {
+            aplicacionSelect = (Aplicacion)((TreeNode)selection).value;
+            carpetaSelect = null;
+        }
+        if (((TreeNode)selection).value is Carpeta)
+        {
+            carpetaSelect = (Carpeta)((TreeNode)selection).value;
+            aplicacionSelect = null;
+        }
+    }   
+
+    #endregion
+
+
     void RefreshClick(MenuItemEventArgs args)
     {
         LoadData();
@@ -89,53 +181,90 @@
     void AddClick(MenuItemEventArgs args)
     {
         aplicacionSelect = new();
+        if (((TreeNode)selection).value is Carpeta)
+        {
+            aplicacionSelect.fk_IdCarpeta = ((Carpeta)((TreeNode)selection).value).id;
+        }
         carpetaSelect = null;
 
     }
     void DuplicateClick(MenuItemEventArgs args)
     {
-
+        if (((TreeNode)selection).value is Aplicacion && aplicacionSelect!=null)
+        {
+            Aplicacion appAux = new Aplicacion(aplicacionSelect);
+            aplicacionSelect = appAux;
+            carpetaSelect = null;
+        }
     }
 
     void AddFolderClick(MenuItemEventArgs args)
     {
         aplicacionSelect = null;
         carpetaSelect = new();
-
     }
+
     void RemoveFolderClick(MenuItemEventArgs args)
     {
+        if (((TreeNode)selection).value is Carpeta && carpetaSelect!=null)
+        {
+            if (managerCarpeta.ExisteCarpeta(carpetaSelect.id))
+            {
+                var result = MessageBox.Show($"Estas seguro que quiere borrar esta Carpeta '{carpetaSelect.nombre}'?",
+               "Borrar Carpeta", MessageBoxButton.OKCancel, MessageBoxImage.Information);
+
+                if (result == MessageBoxResult.OK)
+                {
+                    if (!managerAplicacion.AnyAplicacionConCarpeta(carpetaSelect.id))
+                    {
+                        managerCarpeta.BorrarCarpeta(carpetaSelect.id);
+                        LoadData();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No puedes borrar una Carpeta que este en alguna Aplicacion", "Borrar Carpeta",
+                                MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("No Existe la Carpeta", "Borrar Carpeta", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
 
     }
+
     void RemoveClick(MenuItemEventArgs args)
     {
-        // if (aplicacionSelect != null)
-        // {
-        //     if (managerExclusion.ExisteArchivoExclusion(aplicacionSelect.id))
-        //     {
-        //         var result = MessageBox.Show($"Estas seguro que quiere borrar esta Archivo '{aplicacionSelect.texto}'?",
-        //         "Borrar Archivo Exclusion", MessageBoxButton.OKCancel, MessageBoxImage.Information);
+        if (((TreeNode)selection).value is Aplicacion && aplicacionSelect != null)
+        {
+            if (managerAplicacion.ExisteAplicacion(aplicacionSelect.id))
+            {
+                var result = MessageBox.Show($"Estas seguro que quiere borrar esta Aplicacion '{aplicacionSelect.nombre}'?",
+                "Borrar Aplicacion", MessageBoxButton.OKCancel, MessageBoxImage.Information);
 
-        //         if (result == MessageBoxResult.OK)
-        //         {
-        //             if (!managerAplicacion.AnyAplicacionConArchivoExclusion(aplicacionSelect.id))
-        //             {
-        //                 managerExclusion.BorrarArchivoExclusion(aplicacionSelect.id);
-        //                 LoadData();
-        //             }
-        //             else
-        //             {
-        //                 MessageBox.Show("No puedes borrar un Archivo que este en alguna Aplicacion", "Borrar Archivo Exclusion",
-        //                         MessageBoxButton.OK, MessageBoxImage.Error);
-        //             }
-        //         }
-        //     }
-        //     else
-        //     {
-        //         MessageBox.Show("No Existe el Archivo Exclusion", "Borrar Archivo Exclusion", MessageBoxButton.OK, MessageBoxImage.Error);
-        //     }
-        // }
+                if (result == MessageBoxResult.OK)
+                {
+                    if (!managerProyecto.AnyProyectoConAplicacion(aplicacionSelect.id))
+                    {
+                        managerAplicacion.BorrarAplicacion(aplicacionSelect.id);
+                        LoadData();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No puedes borrar una Aplicacion que este en algun Proyecto", "Borrar Aplicacion",
+                                MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("No Existe la Aplicacion", "Borrar Aplicacion", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
+
     void Save(Aplicacion aplicacion)
     {
         managerAplicacion.ModificarAplicacion(aplicacion);
@@ -147,100 +276,8 @@
         LoadData();
     }
 
-    void OnChange()
-    {
-        aplicacionSelect = null;
-        if (selection is Aplicacion)
-        {
-            aplicacionSelect = (Aplicacion)selection;
-            carpetaSelect = null;
-        }
-        if (selection is Carpeta)
-        {
-            carpetaSelect = (Carpeta)selection;
-            aplicacionSelect = null;
-        }
-    }
+    
+   
 
-    void OnExpand(TreeExpandEventArgs args)
-    {
-        var carpeta = args.Value as Carpeta;
-
-        var aplicacionesCarpeta = aplicaciones.Where(x => x.fk_IdCarpeta == carpeta.id);
-
-        args.Children.Data = aplicacionesCarpeta;
-        args.Children.TextProperty = "nombre";
-        args.Children.HasChildren = (product) => false;
-    }
-
-    /*
-
-    private void tsbAddCarpeta_Click(object sender, EventArgs e)
-        {
-        frmCrearNombre frmCrearNombre = new frmCrearNombre();
-        if (frmCrearNombre.ShowDialog() == DialogResult.OK)
-            {
-            if (!string.IsNullOrEmpty(frmCrearNombre.resultado))
-                {
-                Carpeta carpetaNew = new Carpeta();
-                carpetaNew.nombre = frmCrearNombre.resultado;
-                managerCarpeta.CrearCarpeta(carpetaNew);
-    LoadData();
-    }
-    }
-    }
-
-    private void tsbEditCarpeta_Click(object sender, EventArgs e)
-        {
-        if (treeAplicaciones.SelectedNode != null && treeAplicaciones.SelectedNode.Tag.GetType() == typeof(Carpeta))
-            {
-            Carpeta carpetaSeleccionada = (Carpeta)treeAplicaciones.SelectedNode.Tag;
-
-            frmCrearNombre frmCrearNombre = new frmCrearNombre(string.Empty, carpetaSeleccionada.nombre);
-            if (frmCrearNombre.ShowDialog() == DialogResult.OK)
-                {
-                if (!string.IsNullOrEmpty(frmCrearNombre.resultado))
-                    {
-                    carpetaSeleccionada.nombre = frmCrearNombre.resultado;
-                    managerCarpeta.ModificarCarpeta(carpetaSeleccionada);
-    LoadData();
-    }
-    }
-    }
-    }
-
-    private void tsbDeleteCarpeta_Click(object sender, EventArgs e)
-        {
-        if (treeAplicaciones.SelectedNode != null && treeAplicaciones.SelectedNode.Tag.GetType() == typeof(Carpeta))
-            {
-            Carpeta carpetaSeleccionada = (Carpeta)treeAplicaciones.SelectedNode.Tag;
-
-            if (managerCarpeta.ExisteCarpeta(carpetaSeleccionada.id))
-                {
-                frmConfirmacion frmConfir = new frmConfirmacion("Borrar Carpeta", "Estas seguro que quiere borrar esta Carpeta '"
-                    + carpetaSeleccionada.nombre + "' ?");
-                frmConfir.ShowDialog();
-                if (frmConfir.DialogResult == System.Windows.Forms.DialogResult.OK)
-                    {
-                    if (!managerAplicacion.AnyAplicacionConCarpeta(carpetaSeleccionada.id))
-                        {
-                        managerCarpeta.BorrarCarpeta(carpetaSeleccionada.id);
-                    LoadData();
-                        }
-                        else
-                        {
-                        MessageBox.Show("No puedes borrar una Carpeta que este en alguna Aplicacion", "Borrar Carpeta",
-                                MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            }
-                }
-                else
-                {
-                MessageBox.Show("No Existe la Carpeta", "Borrar Carpeta" + ((Aplicacion)treeAplicaciones.SelectedNode.Tag).nombre,
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            }
-                }
-
-    */
+   
 }
