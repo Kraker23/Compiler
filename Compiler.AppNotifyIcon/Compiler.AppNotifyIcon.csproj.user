@@ -4,7 +4,7 @@
     <_LastSelectedProfileId>C:\VSS-DB\vss-db-Cristian\Compiler\Compiler.AppNotifyIcon\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Update="Form1.cs">
+    <Compile Update="frmNotify.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

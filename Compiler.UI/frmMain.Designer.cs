@@ -55,6 +55,7 @@
             pProgress = new MetroFramework.Controls.MetroPanel();
             progresBar = new MetroFramework.Controls.MetroProgressBar();
             progressSpinner = new MetroFramework.Controls.MetroProgressSpinner();
+            notifyIcon1 = new NotifyIcon(components);
             tsMain.SuspendLayout();
             pTree.SuspendLayout();
             cmTree.SuspendLayout();
@@ -331,6 +332,11 @@
             progressSpinner.Value = -1;
             progressSpinner.Visible = false;
             // 
+            // notifyIcon1
+            // 
+            notifyIcon1.Text = "notifyIcon1";
+            notifyIcon1.Visible = true;
+            // 
             // frmMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -390,5 +396,6 @@
         private MetroFramework.Controls.MetroProgressBar progresBar;
         private MetroFramework.Controls.MetroProgressSpinner progressSpinner;
         private ImageList iListTree;
+        private NotifyIcon notifyIcon1;
     }
 }

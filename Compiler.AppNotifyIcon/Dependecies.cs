@@ -1,28 +1,28 @@
-﻿using Compiler.BL;
-using Compiler.EF;
-using Compiler.Shared.Interface.IBL;
-using Compiler.Shared.Interface.IData;
-using Compiler.UI;
-using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 using Compiler.Shared;
+using Microsoft.Extensions.DependencyInjection;
+using Compiler.EF;
+using Compiler.Shared.Interface.IData;
+using Compiler.Shared.Interface.IBL;
+using Compiler.BL;
 
-namespace Compiler.Starter
+namespace Compiler.AppNotifyIcon
 {
     static class Dependecies
     {
         public static void FillDependencies()
         {
             // load configs            
-            var tj = Inject.Instance;            
+            var tj = Inject.Instance;
 
             tj.AddServices = (s) =>
             {
-                
+
                 s.AddTransient<IManagerJson, ManagerJson>();
                 //Data
                 s.AddTransient<IProyecto_Data, Proyecto_EF>();
@@ -36,14 +36,11 @@ namespace Compiler.Starter
                 s.AddTransient<ICarpeta_BL, Carpeta_BL>();
 
                 // s.AddTransient<frmCompilador>();
-                s.AddTransient<frmConfiguracionAplicaciones>();
-                s.AddTransient<frmConfiguracionArchivosExcluyentes>();
-                s.AddTransient<frmConfiguracionProyectos>();
-                s.AddTransient<frmMain>();
+                s.AddTransient<frmNotify>();
             };
 
             tj.Build();
-            
+
         }
     }
 }

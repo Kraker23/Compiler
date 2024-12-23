@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Compiler.Starter
+namespace Compiler.Shared
 {
     public class Inject
     {
