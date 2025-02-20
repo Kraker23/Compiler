@@ -180,7 +180,8 @@
 
     void AddClick(MenuItemEventArgs args)
     {
-        aplicacionSelect = new();
+        aplicacionSelect = new(true);
+
         if (((TreeNode)selection).value is Carpeta)
         {
             aplicacionSelect.fk_IdCarpeta = ((Carpeta)((TreeNode)selection).value).id;
@@ -190,9 +191,10 @@
     }
     void DuplicateClick(MenuItemEventArgs args)
     {
-        if (((TreeNode)selection).value is Aplicacion && aplicacionSelect!=null)
+        if (selection !=null && ((TreeNode)selection).value is Aplicacion && aplicacionSelect!=null)
         {
             Aplicacion appAux = new Aplicacion(aplicacionSelect);
+            appAux.isNew = true;
             aplicacionSelect = appAux;
             carpetaSelect = null;
         }

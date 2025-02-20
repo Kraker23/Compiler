@@ -1,19 +1,17 @@
 ﻿
-
-<RadzenCard>
-    <RadzenRow>
-        <RadzenColumn Size="12" SizeLG="1">
-            <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">ID</RadzenText>
-        </RadzenColumn>
-        <RadzenColumn Size="12" SizeLG="9">
-            <RadzenTextBox Value=@id Style="width: 100%" aria-label="Default TextBox" Disabled="true" />
-        </RadzenColumn>
-        <RadzenColumn Size="12" SizeLG="1">
-            <RadzenButton Click="@SaveClick" Text="Save" Icon="save" IconColor="@Colors.Info"></RadzenButton>
-        </RadzenColumn>
-    </RadzenRow>
-</RadzenCard>
-
+    <RadzenCard style="@($"background-color: {background};")" >
+        <RadzenRow>
+            <RadzenColumn Size="12" SizeLG="1">
+                <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">ID</RadzenText>
+            </RadzenColumn>            
+            <RadzenColumn Size="12" SizeLG="9">
+                <RadzenTextBox Value=@id Style="width: 100%" aria-label="Default TextBox" Disabled="true" />
+            </RadzenColumn>
+            <RadzenColumn Size="12" SizeLG="1">
+                <RadzenButton Click="@SaveClick" Text="Save" Icon="save" IconColor="@Colors.Info"></RadzenButton>
+            </RadzenColumn>
+        </RadzenRow>
+    </RadzenCard>
 
 @code {
     [Parameter]
@@ -21,10 +19,13 @@
 
     [Parameter]
     public EventCallback saveEvent { get; set; }
+    [Parameter]
+    public bool IsNew { get; set; }
+    string background { get { return IsNew ? "#7AC74C" : "White"; } }     
 
     protected override void OnParametersSet()
     {
-        base.OnParametersSet();       
+        base.OnParametersSet();
     }
 
     void SaveClick()

@@ -8,7 +8,7 @@
 @inject IArchivoExclusion_BL managerExclusion;
 @inject ICarpeta_BL managerCarpeta;
 
-<ComponentPropertyID id="@aplicacion.idString" saveEvent="SaveClick"></ComponentPropertyID>
+<ComponentPropertyID id="@aplicacion.idString" IsNew="@aplicacion.isNew" saveEvent="SaveClick"></ComponentPropertyID>
 
 <RadzenCard>
     <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Nombre </RadzenText>
@@ -20,7 +20,7 @@
     <RadzenRow>
         <RadzenColumn Size="12" SizeLG="11">
             <RadzenTextBox @bind-Value=@aplicacion.ubicacionAplicacion Style="width: 100%" aria-label="Default TextBox" />
-        </RadzenColumn>
+        </RadzenColumn>       
         <RadzenColumn Size="12" SizeLG="1">
             <RadzenButton Click="@btUbicacionAplicacion_Click" Icon="find_in_page"></RadzenButton>
         </RadzenColumn>

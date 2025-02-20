@@ -25,18 +25,26 @@ namespace Compiler.Shared.DataObjects
         public string carpetaPublicacion { get; set; }
         /// <summary> el comando que se usara para compilar </summary>
         public string comandoCompilado { get; set; }
-        
+
         /// <summary>Listado de Reglas para copiar</summary>
         public List<Guid> archivosExcluidos { get; set; }
         [JsonIgnore]
         public List<ArchivoExclusion> _archivosExcluidos { get; set; }
+        [JsonIgnore]
+        public bool isNew { get; set; } = false;
         public Aplicacion()
         {
             id = Guid.NewGuid();
             archivosExcluidos = new List<Guid>();
         }
+        public Aplicacion(bool isNew = false)
+        {
+            id = Guid.NewGuid();
+            archivosExcluidos = new List<Guid>();
+            this.isNew = isNew;
+        }
         public Aplicacion(Aplicacion aplicacionAux)
-        {            
+        {
             id = Guid.NewGuid();
             archivosExcluidos = new List<Guid>();
             fk_IdCarpeta = aplicacionAux.fk_IdCarpeta;
