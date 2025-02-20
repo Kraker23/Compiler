@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Compiler.BL
 {
-    public class ArchivoExclusion_BL : IArchivoExclusion_BL
+    public class ArchivoAdmitido_BL : IArchivosAdmitido_BL
     {
-        private readonly IArchivoExclusion_Data data;
+        private readonly IArchivoAdmitido_Data data;
 
-        public ArchivoExclusion_BL(IArchivoExclusion_Data data)
+        public ArchivoAdmitido_BL(IArchivoAdmitido_Data data)
         {
             this.data = data;
         }
@@ -21,11 +21,11 @@ namespace Compiler.BL
         
 
 
-        public void BorrarArchivoExclusion(Guid IdArchivoExclusion)
+        public void BorrarArchivoAdmitido(Guid IdArchivoAdmitido)
         {
             try
             {
-                data.Delete(IdArchivoExclusion);
+                data.Delete(IdArchivoAdmitido);
             }
             catch (Exception ex)
             {
@@ -33,11 +33,11 @@ namespace Compiler.BL
             }
         }
 
-        public ArchivoExclusion? CrearArchivoExclusion(ArchivoExclusion ArchivoExclusion)
+        public ArchivoAdmitido? CrearArchivoAdmitido(ArchivoAdmitido ArchivoAdmitido)
         {
             try
             {
-                ArchivoExclusion aux = data.Add(ArchivoExclusion);
+                ArchivoAdmitido aux = data.Add(ArchivoAdmitido);
                 return aux;
             }
             catch (Exception ex)
@@ -47,9 +47,9 @@ namespace Compiler.BL
             }
         }
 
-        public bool ExisteArchivoExclusion(Guid IdArchivoExclusion)
+        public bool ExisteArchivoAdmitido(Guid IdArchivoAdmitido)
         {
-            if (data.GetById(IdArchivoExclusion) != null)
+            if (data.GetById(IdArchivoAdmitido) != null)
             {
                 return true;
             }
@@ -59,33 +59,33 @@ namespace Compiler.BL
             }
         }
 
-        public ArchivoExclusion getArchivoExclusion(Guid IdArchivoExclusion)
+        public ArchivoAdmitido getArchivoAdmitido(Guid IdArchivoAdmitido)
         {
-            return data.GetById(IdArchivoExclusion);
+            return data.GetById(IdArchivoAdmitido);
         }
 
-        public List<ArchivoExclusion> getArchivoExclusiones()
+        public List<ArchivoAdmitido> getArchivoAdmitidos()
         {
             return data.GetAll().OrderBy(x => x.texto).ToList();
         }
 
-        public List<ArchivoExclusion> getArchivoExclusiones(List<Guid> idsArchivoExclusiones)
+        public List<ArchivoAdmitido> getArchivoAdmitidos(List<Guid> idsArchivoAdmitidoes)
         {
-            return data.GetAll().Where(x => idsArchivoExclusiones.Contains(x.id)).ToList().OrderBy(x => x.texto).ToList();
+            return data.GetAll().Where(x => idsArchivoAdmitidoes.Contains(x.id)).OrderBy(x => x.texto).ToList();
         }
-
-        public void ModificarArchivoExclusion(ArchivoExclusion ArchivoExclusion)
+               
+        public void ModificarArchivoAdmitido(ArchivoAdmitido ArchivoAdmitido)
         {
             try
             {
-                ArchivoExclusion Aux = data.GetById(ArchivoExclusion.id);
+                ArchivoAdmitido Aux = data.GetById(ArchivoAdmitido.id);
                 if (Aux != null)
                 {
-                    data.Update(ArchivoExclusion);
+                    data.Update(ArchivoAdmitido);
                 }
                 else
                 {
-                    CrearArchivoExclusion(ArchivoExclusion);
+                    CrearArchivoAdmitido(ArchivoAdmitido);
                 }
             }
             catch (Exception ex)

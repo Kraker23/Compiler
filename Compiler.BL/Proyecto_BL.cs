@@ -69,12 +69,12 @@ namespace Compiler.BL
 
         public List<Proyecto> getProyectoes(List<Guid> idsProyectoes)
         {
-            return data.GetAll().Where(x => idsProyectoes.Contains(x.id)).ToList();
+            return data.GetAll().Where(x => idsProyectoes.Contains(x.id)).OrderBy(x => x.nombre).ToList();
         }
 
         public List<Proyecto> getProyectos()
         {
-            return data.GetAll();
+            return data.GetAll().OrderBy(x => x.nombre).ToList();
         }
 
         public void ModificarProyecto(Proyecto Proyecto)

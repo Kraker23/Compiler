@@ -30,23 +30,38 @@ namespace Compiler.Shared.DataObjects
         public List<Guid> archivosExcluidos { get; set; }
         [JsonIgnore]
         public List<ArchivoExclusion> _archivosExcluidos { get; set; }
+
+
+        /// <summary>Listado de Reglas para copiar</summary>
+        public List<Guid> archivosAdmitidos { get; set; }
+        [JsonIgnore]
+        public List<ArchivoAdmitido> _archivosAdmitidos { get; set; }
         [JsonIgnore]
         public bool isNew { get; set; } = false;
+
         public Aplicacion()
         {
-            id = Guid.NewGuid();
-            archivosExcluidos = new List<Guid>();
+            InicializarListas();
         }
+
         public Aplicacion(bool isNew = false)
         {
-            id = Guid.NewGuid();
-            archivosExcluidos = new List<Guid>();
+            InicializarListas();
             this.isNew = isNew;
         }
-        public Aplicacion(Aplicacion aplicacionAux)
+
+        private void InicializarListas()
         {
             id = Guid.NewGuid();
-            archivosExcluidos = new List<Guid>();
+            if (archivosExcluidos == null)
+                archivosExcluidos = new List<Guid>();
+            if (archivosAdmitidos == null)
+                archivosAdmitidos = new List<Guid>();
+        }
+
+        public Aplicacion(Aplicacion aplicacionAux)
+        {
+            InicializarListas();
             fk_IdCarpeta = aplicacionAux.fk_IdCarpeta;
             nombre = aplicacionAux.nombre;
             ubicacionAplicacion = aplicacionAux.ubicacionAplicacion;
@@ -54,6 +69,7 @@ namespace Compiler.Shared.DataObjects
             carpetaPublicacion = aplicacionAux.carpetaPublicacion;
             comandoCompilado = aplicacionAux.comandoCompilado;
             archivosExcluidos = aplicacionAux.archivosExcluidos;
+            archivosAdmitidos = aplicacionAux.archivosAdmitidos;
         }
 
 

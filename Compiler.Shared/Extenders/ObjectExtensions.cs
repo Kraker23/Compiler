@@ -66,12 +66,12 @@ namespace Compiler.Shared.Extenders
             string resultado = string.Empty;
             archivoExclusions.ForEach(x =>
             {
-                if (x.tipoExclusion == (int)TipoExclusion.Extension)
+                if (x.tipoExclusion == (int)TipoExclusionAdmision.Extension)
                 {
                     resultado += $".{x.texto}{Environment.NewLine}";
                 }
-                else if (x.tipoExclusion == (int)TipoExclusion.NombreCompleto
-                || x.tipoExclusion == (int)TipoExclusion.NombreCompleto)
+                else if (x.tipoExclusion == (int)TipoExclusionAdmision.NombreCompleto
+                || x.tipoExclusion == (int)TipoExclusionAdmision.NombreCompleto)
                 {
                     resultado += $"{x.texto}{Environment.NewLine}";
                 }

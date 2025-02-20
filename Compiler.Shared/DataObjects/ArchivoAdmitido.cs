@@ -9,7 +9,7 @@ using static Compiler.Shared.Enums.Enumeraciones;
 
 namespace Compiler.Shared.DataObjects
 {
-    public class ArchivoExclusion
+    public class ArchivoAdmitido
     {
         /// <summary>Id de la Regla</summary>
         public Guid id { get; set; }
@@ -18,15 +18,15 @@ namespace Compiler.Shared.DataObjects
         /// <summary>Nombre de la Regla</summary>
         public string texto { get; set; }
         /// <summary>de que tipo es la regla</summary>
-        public int tipoExclusion { get; set; }
-        public ArchivoExclusion()
+        public int tipoAdmision { get; set; }
+        public ArchivoAdmitido()
         {
             id = Guid.NewGuid();
-            tipoExclusion = (int)TipoExclusionAdmision.Extension;
+            tipoAdmision = (int)TipoExclusionAdmision.Extension;
         }
         public override string ToString()
         {
-            return $"[{Extenders.EnumExtensions.GetDescription((Enums.Enumeraciones.TipoExclusionAdmision)tipoExclusion)}] {texto}";
+            return $"[{Extenders.EnumExtensions.GetDescription((Enums.Enumeraciones.TipoExclusionAdmision)tipoAdmision)}] {texto}";
         }
     }
 }

@@ -30,7 +30,7 @@
                         Expand=@LoadTree
                         Change=@OnChange
                         Style="width: 100%; height: 100%">
-                <RadzenTreeLevel Text=@GetTextForNode Template=@FolderTemplate Expanded="@(data => true)" />
+                <RadzenTreeLevel Text=@GetTextForNode Template=@FolderTemplate />@* Expanded="@(data => true)" *@
             </RadzenTree>
         </RadzenCard>
     </RadzenColumn>
@@ -69,7 +69,7 @@
     private void LoadData()
     {
         aplicaciones = managerAplicacion.getAplicaciones();
-        carpetas = managerCarpeta.getCarpetas();
+        carpetas = managerCarpeta.getCarpetas().OrderBy(x=>x.nombre).ToList();
         CargarTree();
         aplicacionSelect = null;
         selection = null;
@@ -106,7 +106,7 @@
         if (aplicaciones.Any(x => x.fk_IdCarpeta == guid))
         {
             List<TreeNode> treeApps = new List<TreeNode>();
-            foreach (Aplicacion aplicacionAux in aplicaciones.Where(x => x.fk_IdCarpeta == guid).ToList())
+            foreach (Aplicacion aplicacionAux in aplicaciones.Where(x => x.fk_IdCarpeta == guid).OrderBy(x => x.nombre).ToList())
             {
                 TreeNode aux = new TreeNode();
                 aux.Id = aplicacionAux.id;

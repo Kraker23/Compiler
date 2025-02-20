@@ -28,11 +28,13 @@ namespace Compiler.AppNotifyIcon
                 s.AddTransient<IProyecto_Data, Proyecto_EF>();
                 s.AddTransient<IAplicacion_Data, Aplicacion_EF>();
                 s.AddTransient<IArchivoExclusion_Data, ArchivoExclusion_EF>();
+                s.AddTransient<IArchivoAdmitido_Data, ArchivoAdmitido_EF>();
                 s.AddTransient<ICarpeta_Data, Carpeta_EF>();
                 //BL
                 s.AddTransient<IAplicacion_BL, Aplicacion_BL>();
                 s.AddTransient<IProyecto_BL, Proyecto_BL>();
                 s.AddTransient<IArchivoExclusion_BL, ArchivoExclusion_BL>();
+                s.AddTransient<IArchivosAdmitido_BL, ArchivoAdmitido_BL>();
                 s.AddTransient<ICarpeta_BL, Carpeta_BL>();
 
                 // s.AddTransient<frmCompilador>();

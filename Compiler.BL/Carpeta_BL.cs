@@ -66,12 +66,12 @@ namespace Compiler.BL
 
         public List<Carpeta> getCarpetas()
         {
-            return data.GetAll();
+            return data.GetAll().OrderBy(x => x.nombre).ToList();
         }
 
         public List<Carpeta> getCarpetas(List<Guid> idsCarpetas)
         {
-            return data.GetAll().Where(x => idsCarpetas.Contains(x.id)).ToList();
+            return data.GetAll().Where(x => idsCarpetas.Contains(x.id)).OrderBy(x => x.nombre).ToList();
         }
 
         public void ModificarCarpeta(Carpeta Carpeta)

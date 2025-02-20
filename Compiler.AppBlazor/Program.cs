@@ -22,11 +22,13 @@ builder.Services.AddTransient<IManagerJson, ManagerJson>();
 builder.Services.AddTransient<IProyecto_Data, Proyecto_EF>();
 builder.Services.AddTransient<IAplicacion_Data, Aplicacion_EF>();
 builder.Services.AddTransient<IArchivoExclusion_Data, ArchivoExclusion_EF>();
+builder.Services.AddTransient<IArchivoAdmitido_Data, ArchivoAdmitido_EF>();
 builder.Services.AddTransient<ICarpeta_Data, Carpeta_EF>();
 //BL
 builder.Services.AddTransient<IAplicacion_BL, Aplicacion_BL>();
 builder.Services.AddTransient<IProyecto_BL, Proyecto_BL>();
 builder.Services.AddTransient<IArchivoExclusion_BL, ArchivoExclusion_BL>();
+builder.Services.AddTransient<IArchivosAdmitido_BL, ArchivoAdmitido_BL>();
 builder.Services.AddTransient<ICarpeta_BL, Carpeta_BL>();
 
 

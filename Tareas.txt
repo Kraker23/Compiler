@@ -1,0 +1,31 @@
+Tareas
+
+Añadir archivos admitidos en el control de Aplicacion
+
+
+
+poner niveles en los proyectos 
+	- a nivel de proyecto, tener carpetas
+	- a nivel de aplicaciones también tener la agrupación de carpetas
+
+
+ventana de aplicaciones, la botonera, que se quede fija
+ventana de aplicaciones, el árbol tiene que tener su propio scroll
+
+
+
+
+COMPLETADAS
+
+New, que no se guarde el valor
+orden carpetas en aplicaciones
+carpetas cerradas en aplicaciones
+
+orden de Archivos en ventana archivos
+orden de Archivos en ventana aplicaciones dentro aplicación
+
+orden de proyectos en proyectos
+orden de carpetas en la aplicación selector
+orden de aplicaciones dentro de la carpeta de aplicaciones
+
+

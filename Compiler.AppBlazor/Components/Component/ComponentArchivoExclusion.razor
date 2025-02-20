@@ -42,8 +42,8 @@
 
     public static List<EnumBase> getListTipoExclusion()
     {
-        List<EnumBase> estados = Enum.GetValues(typeof(TipoExclusion))
-                 .Cast<TipoExclusion>()
+        List<EnumBase> estados = Enum.GetValues(typeof(TipoExclusionAdmision))
+                 .Cast<TipoExclusionAdmision>()
                  .Select(d => new EnumBase { Id = (int)d, Descripcion = d.ToString() })
                  .ToList();
 
@@ -60,7 +60,7 @@
         if (path.HasContent() && path.Length == 1)
         {
             archivo.texto = path[0];
-            archivo.tipoExclusion = (int)TipoExclusion.NombreCompleto;
+            archivo.tipoExclusion = (int)TipoExclusionAdmision.NombreCompleto;
         }
     }
 

@@ -61,7 +61,7 @@ namespace Compiler.UI.Controls
         {
             cboTipoExclusion.Items.Clear();
 
-            estados = getListTipoExclusion();
+            estados = getListTipoExclusionAdmision();
             cboTipoExclusion.DisplayMember = "Text";
             cboTipoExclusion.ValueMember = "Value";
             foreach (EnumBase estado in estados)
@@ -87,7 +87,7 @@ namespace Compiler.UI.Controls
             {
                 propContenido.text = path[0];
                 cboTipoExclusion.SelectedIndex = cboTipoExclusion.Items.IndexOf(
-                    estados.First(x => x.Id == (int)TipoExclusion.NombreCompleto));
+                    estados.First(x => x.Id == (int)TipoExclusionAdmision.NombreCompleto));
             }
         }
 

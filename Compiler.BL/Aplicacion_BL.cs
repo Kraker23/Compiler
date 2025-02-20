@@ -33,6 +33,10 @@ namespace Compiler.BL
         {
             return data.GetAll().Any(x => x.archivosExcluidos != null &&  x.archivosExcluidos.Exists(y => y == idArchivoExclusion));
         }
+        public bool AnyAplicacionConArchivoAdmitido(Guid idArchivoAdmitido)
+        {
+            return data.GetAll().Any(x => x.archivosAdmitidos != null && x.archivosAdmitidos.Exists(y => y == idArchivoAdmitido));
+        }
 
         public bool AnyAplicacionConCarpeta(Guid idCarpeta)
         {
@@ -72,18 +76,19 @@ namespace Compiler.BL
 
         public List<Aplicacion> getAplicaciones()
         {
-            return data.GetAll();
+            return data.GetAll().OrderBy(x => x.nombre).ToList();
         }
 
         public List<Aplicacion> getAplicaciones(List<Guid> idsAplicaciones)
         {
-            return data.GetAll().Where(x => idsAplicaciones.Contains(x.id)).ToList();
+            return data.GetAll().Where(x => idsAplicaciones.Contains(x.id)).OrderBy(x => x.nombre).ToList();
         }
 
         public void ModificarAplicacion(Aplicacion aplicacion)
         {
             try
             {
+                aplicacion.isNew = false;//Se fuerza que no se guarde este campo en la BBDD
                 Aplicacion Aux = data.GetById(aplicacion.id);
                 if (Aux != null)
                 {
@@ -99,5 +104,7 @@ namespace Compiler.BL
                 //MessageBox.Show(ex.Message);
             }
         }
+
+        
     }
 }

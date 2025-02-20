@@ -13,6 +13,7 @@ namespace Compiler.AppNotifyIcon
         IProyecto_BL managerProyecto;
         IAplicacion_BL managerAplicacion;
         IArchivoExclusion_BL managerExclusion;
+        IArchivosAdmitido_BL managerAdmitido;
         List<Proyecto> proyectos;
         readonly string nombreArchivosExlcudes = "excludedfileslist.txt";
         PowerShell ps;
@@ -23,6 +24,7 @@ namespace Compiler.AppNotifyIcon
             managerProyecto = Inject.Instance.ServiceProvider.GetService<IProyecto_BL>();
             managerAplicacion = Inject.Instance.ServiceProvider.GetService<IAplicacion_BL>();
             managerExclusion = Inject.Instance.ServiceProvider.GetService<IArchivoExclusion_BL>();
+            managerAdmitido = Inject.Instance.ServiceProvider.GetService<IArchivosAdmitido_BL>();
         }
 
         private void frmNotify_Load(object sender, EventArgs e)

@@ -44,7 +44,7 @@ namespace Compiler.Shared.Enums
 
         };
 
-        public enum TipoExclusion
+        public enum TipoExclusionAdmision
         {
             [Description("Extension del Archivo")]
             Extension = 0,
@@ -69,10 +69,10 @@ namespace Compiler.Shared.Enums
             return imagenNodo.ToString();
         }
 
-        public static List<EnumBase> getListTipoExclusion()
+        public static List<EnumBase> getListTipoExclusionAdmision()
         {
-            List<EnumBase> estados = Enum.GetValues(typeof(TipoExclusion))
-                     .Cast<TipoExclusion>()
+            List<EnumBase> estados = Enum.GetValues(typeof(TipoExclusionAdmision))
+                     .Cast<TipoExclusionAdmision>()
                      .Select(d => new EnumBase { Id = (int)d, Descripcion = d.ToString() })
                      .ToList();
 
