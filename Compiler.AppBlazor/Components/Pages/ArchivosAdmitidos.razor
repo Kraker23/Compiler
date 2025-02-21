@@ -1,0 +1,112 @@
+@page "/ArchivosAdmitidos"
+@using Compiler.Shared.DataObjects
+@using Compiler.Shared.Interface.IBL
+@using System.Windows
+@inject IArchivosAdmitido_BL managerAdmitido;
+@inject IAplicacion_BL managerAplicacion;
+@using Compiler.AppBlazor.Components.Component
+
+<h3>Archivos Admitidos</h3>
+
+<RadzenMenu>
+    <RadzenMenuItem Click="RefreshClick" Text="Refresh" Icon="sync" IconColor="@Colors.Info"></RadzenMenuItem>
+    <RadzenMenuItem Click="AddClick" Text="Add" Icon="add" IconColor="@Colors.Success"></RadzenMenuItem>
+    <RadzenMenuItem Click="RemoveClick" Text="Remove" Icon="delete" IconColor="@Colors.Danger"></RadzenMenuItem>
+</RadzenMenu>
+
+
+<RadzenRow Style="margin-top:10px"  >
+    <RadzenColumn Size="12" SizeLG="4">
+        <RadzenCard>
+            <RadzenTree Style="width: 100%; height: 300px" Change=@OnChange Data=@archivos @bind-Value=@selection>
+                <RadzenTreeLevel TextProperty="@nameof(ArchivoAdmitido.texto)" />
+            </RadzenTree>
+        </RadzenCard>
+    </RadzenColumn>
+    <RadzenColumn Size="12" SizeLG="8">
+        <RadzenCard>
+            @if(archivoSeleccionado!=null)
+            {
+                <ComponentArchivoAdmitido archivo="archivoSeleccionado" saveEvent="Save" />
+            }
+        </RadzenCard>
+    </RadzenColumn>
+
+</RadzenRow>
+
+@code {
+    private List<ArchivoAdmitido> archivos
+    {
+        get; set;
+    }
+    object selection { get; set; }
+
+    private ArchivoAdmitido archivoSeleccionado { get; set; }
+
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized(); 
+        LoadData();
+    }
+    private void LoadData()
+    {
+        archivos = managerAdmitido.getArchivoAdmitidos();
+        archivoSeleccionado = null;
+        selection = null;
+    }
+    void RefreshClick(MenuItemEventArgs args)
+    {
+        LoadData();
+    }
+
+    void AddClick(MenuItemEventArgs args)
+    {
+        archivoSeleccionado = new ();
+
+    }
+
+    void RemoveClick(MenuItemEventArgs args)
+    {
+        if (archivoSeleccionado != null)
+        {
+            if (managerAdmitido.ExisteArchivoAdmitido(archivoSeleccionado.id))
+            {
+                var result = MessageBox.Show($"Estas seguro que quiere borrar esta Archivo '{archivoSeleccionado.texto}'?",
+                "Borrar Archivo Admitido", MessageBoxButton.OKCancel, MessageBoxImage.Information);
+                
+                if (result == MessageBoxResult.OK)
+                {
+                    if (!managerAplicacion.AnyAplicacionConArchivoAdmitido(archivoSeleccionado.id))
+                    {
+                        managerAdmitido.BorrarArchivoAdmitido(archivoSeleccionado.id);
+                        LoadData();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No puedes borrar un Archivo que este en alguna Aplicacion", "Borrar Archivo Admitido",
+                                MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("No Existe el Archivo Admitido", "Borrar Archivo Admitido", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+    }
+    void Save(ArchivoAdmitido archivo)
+    {
+        managerAdmitido.ModificarArchivoAdmitido(archivo);
+        LoadData();
+    }
+
+    void OnChange()
+    {
+        archivoSeleccionado = null;
+        if (selection is ArchivoAdmitido archivo)
+        {
+            archivoSeleccionado = (ArchivoAdmitido)selection;
+        }
+    }
+}

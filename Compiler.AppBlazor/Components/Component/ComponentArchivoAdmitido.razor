@@ -1,0 +1,67 @@
+﻿@using Compiler.Shared.DataObjects
+@using Compiler.Shared.Enums
+@using Compiler.Shared.Interface.IBL
+@using Utilities.Clases.BuscarFicheros
+@using Utilities.Extensions
+@using static Compiler.Shared.Enums.Enumeraciones
+
+
+<ComponentPropertyID id="@archivo.idString" saveEvent="SaveClick"></ComponentPropertyID>
+
+<RadzenCard>
+    <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Contenido </RadzenText>
+    <RadzenRow>
+        <RadzenColumn Size="12" SizeLG="11">
+            <RadzenTextBox @bind-Value=@archivo.texto Style="width: 100%" aria-label="Default TextBox" />
+        </RadzenColumn>
+        <RadzenColumn Size="12" SizeLG="1">
+            <RadzenButton Click="@FindClick" Icon="find_in_page"></RadzenButton>
+        </RadzenColumn>
+    </RadzenRow>
+</RadzenCard>
+
+<RadzenCard>
+    <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Tipo Admitido </RadzenText>  
+    <RadzenDropDown @bind-Value=@archivo.tipoAdmision Data=@estados TextProperty="@nameof(EnumBase.Descripcion)" ValueProperty="@nameof(EnumBase.Id)"
+                    AllowClear=true Style="width: 100%; max-width: 400px;" Name="TipoAdmitido" />
+</RadzenCard>
+
+@code {
+    [Parameter]
+    public ArchivoAdmitido archivo { get; set; } = new ArchivoAdmitido();
+    private List<EnumBase> estados;
+    [Parameter]
+    public EventCallback<ArchivoAdmitido> saveEvent { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        estados = getListTipoExclusion();
+    }
+
+    public static List<EnumBase> getListTipoExclusion()
+    {
+        List<EnumBase> estados = Enum.GetValues(typeof(TipoExclusionAdmision))
+                 .Cast<TipoExclusionAdmision>()
+                 .Select(d => new EnumBase { Id = (int)d, Descripcion = d.ToString() })
+                 .ToList();
+
+        return estados;
+    }
+    void SaveClick()
+    {
+        saveEvent.InvokeAsync(archivo);
+    }
+
+    void FindClick()
+    {
+        string[] path = BuscarArchivos.SeleccionarArchivo(false, multiSelect: false);
+        if (path.HasContent() && path.Length == 1)
+        {
+            archivo.texto = path[0];
+            archivo.tipoAdmision = (int)TipoExclusionAdmision.NombreCompleto;
+        }
+    }
+
+}

@@ -6,6 +6,7 @@
 @using Utilities.Extensions
 @using static Compiler.Shared.Enums.Enumeraciones
 @inject IArchivoExclusion_BL managerExclusion;
+@inject IArchivosAdmitido_BL managerAdmitidos;
 @inject ICarpeta_BL managerCarpeta;
 
 <ComponentPropertyID id="@aplicacion.idString" IsNew="@aplicacion.isNew" saveEvent="SaveClick"></ComponentPropertyID>
@@ -20,7 +21,7 @@
     <RadzenRow>
         <RadzenColumn Size="12" SizeLG="11">
             <RadzenTextBox @bind-Value=@aplicacion.ubicacionAplicacion Style="width: 100%" aria-label="Default TextBox" />
-        </RadzenColumn>       
+        </RadzenColumn>
         <RadzenColumn Size="12" SizeLG="1">
             <RadzenButton Click="@btUbicacionAplicacion_Click" Icon="find_in_page"></RadzenButton>
         </RadzenColumn>
@@ -61,14 +62,25 @@
 </RadzenCard>
 
 <RadzenCard>
-    <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Arvhivos Exlusion </RadzenText>
     <RadzenRow>
-        <RadzenColumn Size="12" SizeLG="11">
-            <RadzenCheckBoxList Data="@archivosExclusion" @bind-Value=@values TValue="Guid" TextProperty="@nameof(ArchivoExclusion.texto)" ValueProperty="@nameof(ArchivoExclusion.id)"
-                                Orientation="Orientation.Vertical" Change=@OnChange />
+        <RadzenColumn Size="12" SizeLG="5">
+            <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Archivos Exlusion </RadzenText>
+            <RadzenCheckBoxList Data="@archivosExclusion" @bind-Value=@valuesArchivosExclusion TValue="Guid"
+                                TextProperty="@nameof(ArchivoExclusion.texto)" ValueProperty="@nameof(ArchivoExclusion.id)"
+                                Orientation="Orientation.Vertical" Change=@OnChangeArchivosExclusion />
         </RadzenColumn>
         <RadzenColumn Size="12" SizeLG="1">
-            <RadzenButton Click="@SelectAll" Icon="select_check_box"></RadzenButton>
+            <RadzenButton Click="@SelectAllArchivosExclusion" Icon="select_check_box"></RadzenButton>
+        </RadzenColumn>
+
+        <RadzenColumn Size="12" SizeLG="5">
+            <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Archivos Admitidos </RadzenText>
+            <RadzenCheckBoxList Data="@archivosAdmitidos" @bind-Value=@valuesArchivosAdmitidos TValue="Guid"
+                                TextProperty="@nameof(ArchivoAdmitido.texto)" ValueProperty="@nameof(ArchivoAdmitido.id)"
+                                Orientation="Orientation.Vertical" Change=@OnChangeArchivosAdmitidos />
+        </RadzenColumn>
+        <RadzenColumn Size="12" SizeLG="1">
+            <RadzenButton Click="@SelectAllArchivosAdmitidos" Icon="select_check_box"></RadzenButton>
         </RadzenColumn>
     </RadzenRow>
 </RadzenCard>
@@ -78,22 +90,33 @@
     public Aplicacion aplicacion { get; set; } = new Aplicacion();
 
     public List<ArchivoExclusion> archivosExclusion { get; set; }
+    public List<ArchivoAdmitido> archivosAdmitidos { get; set; }
     public List<Carpeta> carpetas { get; set; }
     [Parameter]
     public EventCallback<Aplicacion> saveEvent { get; set; }
 
-    public IEnumerable<Guid> values { get; set; } = new List<Guid>();
+    public IEnumerable<Guid> valuesArchivosExclusion { get; set; } = new List<Guid>();
+    public IEnumerable<Guid> valuesArchivosAdmitidos { get; set; } = new List<Guid>();
 
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
         if (aplicacion.archivosExcluidos.HasContent())
         {
-            values = aplicacion.archivosExcluidos;
+            valuesArchivosExclusion = aplicacion.archivosExcluidos;
         }
         else
         {
-            values = new List<Guid>();
+            valuesArchivosExclusion = new List<Guid>();
+        }
+
+        if (aplicacion.archivosAdmitidos.HasContent())
+        {
+            valuesArchivosAdmitidos = aplicacion.archivosAdmitidos;
+        }
+        else
+        {
+            valuesArchivosAdmitidos = new List<Guid>();
         }
     }
 
@@ -101,14 +124,8 @@
     {
         await base.OnInitializedAsync();
         archivosExclusion = managerExclusion.getArchivoExclusiones();
+        archivosAdmitidos = managerAdmitidos.getArchivoAdmitidos();
         carpetas = managerCarpeta.getCarpetas();
-    }
-
-
-
-    public void OnChange()
-    {
-        aplicacion.archivosExcluidos = values.ToList();
     }
 
 
@@ -164,37 +181,40 @@
         return true;
     }
 
-    void SelectAll()
+    void SelectAllArchivosExclusion()
     {
-        values = archivosExclusion.Select(x => x.id).ToList();
-        OnChange();
-    }
-
-    /* private void btValidarCarpetaPublicacion_Click()
-            {
-            if (!ValidarRuta(propCarpetaPublicacion.text))
-                {
-                MessageBox.Show("No existe la ruta");
-                btValidarCarpetaPublicacion.Image = Properties.Resources.error;
-            }
-                else
-                {
-                btValidarCarpetaPublicacion.Image = Properties.Resources.check2;
-                    }
+        if (valuesArchivosExclusion.Count() == archivosExclusion.Count())
+        {//desmarcar todos
+            valuesArchivosExclusion = new List<Guid>();
         }
-
-        private void btValidarCarpetaCompilado_Click()
-            {
-            if (!ValidarRuta(propCarpetaCompilado.text))
-                {
-                MessageBox.Show("No existe la ruta");
-                btValidarCarpetaCompilado.Image = Properties.Resources.error;
-            }
-                else
-                {
-                btValidarCarpetaCompilado.Image = Properties.Resources.check2;
+        else
+        {//marcar todos
+            valuesArchivosExclusion = archivosExclusion.Select(x => x.id).ToList();
+        }
+        OnChangeArchivosExclusion();
     }
-            }
-    */
+    void SelectAllArchivosAdmitidos()
+    {
+        if (valuesArchivosAdmitidos.Count() == archivosAdmitidos.Count())
+        {//desmarcar todos
+            valuesArchivosAdmitidos = new List<Guid>();
+        }
+        else
+        {//marcar todos
+            valuesArchivosAdmitidos = archivosAdmitidos.Select(x => x.id).ToList();
+        }
+        OnChangeArchivosAdmitidos();
+    }
+
+    public void OnChangeArchivosExclusion()
+    {
+        aplicacion.archivosExcluidos = valuesArchivosExclusion.ToList();
+    }
+    public void OnChangeArchivosAdmitidos()
+    {
+        aplicacion.archivosAdmitidos = valuesArchivosAdmitidos.ToList();
+    }
+
+
 
 }

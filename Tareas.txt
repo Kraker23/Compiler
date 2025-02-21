@@ -1,9 +1,5 @@
 Tareas
 
-Añadir archivos admitidos en el control de Aplicacion
-
-
-
 poner niveles en los proyectos 
 	- a nivel de proyecto, tener carpetas
 	- a nivel de aplicaciones también tener la agrupación de carpetas
@@ -28,4 +24,4 @@ orden de proyectos en proyectos
 orden de carpetas en la aplicación selector
 orden de aplicaciones dentro de la carpeta de aplicaciones
 
-
+Añadir archivos admitidos en el control de Aplicacion
