@@ -1,0 +1,203 @@
+@page "/usaraplicacion/{IdAplicacion:guid}"
+@using Compiler.AppBlazor.Components.Component
+@using Compiler.Shared
+@using Compiler.Shared.DataObjects
+@using Compiler.Shared.Interface.IBL
+@using System.Windows
+@using Compiler.Shared.Objects
+@inject IArchivoExclusion_BL managerExclusion;
+@inject IArchivosAdmitido_BL maangerAdmitido;
+@inject IAplicacion_BL managerAplicacion;
+@inject ICarpeta_BL managerCarpeta;
+@inject IProyecto_BL managerProyecto;
+
+<h1>Aplicacione</h1>
+
+@if (aplicacion != null)
+{
+
+    <RadzenMenu>
+        <RadzenMenuItem Click="RefreshClick" Text="Refresh" Icon="sync" IconColor="@Colors.Info"></RadzenMenuItem>
+        <RadzenMenuItem Click="CopiarClick" Text="file_copy" Icon="add" IconColor="@Colors.Success"></RadzenMenuItem>
+        <RadzenMenuItem Click="CompilarClick" Text="Duplicate" Icon="bolt" IconColor="@Colors.Danger" Disabled=true></RadzenMenuItem>
+    </RadzenMenu>
+
+
+    <RadzenRow Style="margin-top:10px">
+        <RadzenColumn Size="12" SizeLG="4">
+            <RadzenCard>       
+                <RadzenTree 
+                Data=@tree
+                Expand=@LoadTree
+                Style="width: 100%; height: 100%">
+                    <RadzenTreeLevel Text=@GetTextForNode Template=@FolderTemplate Expanded="@(data => true)"/>
+                </RadzenTree>
+            </RadzenCard>
+        </RadzenColumn>
+        <RadzenColumn Size="12" SizeLG="8">
+            <RadzenCard>
+                @*   @if (aplicacionSelect != null)
+                {
+                    <ComponentAplicacion aplicacion="aplicacionSelect" saveEvent="Save" />
+                }
+                @if (carpetaSelect != null)
+                {
+                    <ComponentCarpeta carpeta="carpetaSelect" saveEvent="SaveCarpeta" />
+                }  *@
+            </RadzenCard>
+        </RadzenColumn>
+    </RadzenRow>
+}
+
+@code {
+    [Parameter]
+    public Guid IdAplicacion { get; set; }
+
+    private Aplicacion aplicacion { get; set; }
+    object selectionTree { get; set; }
+
+    private List<TreeNode> tree { get; set; }
+    private List<string> carpetas { get; set; }
+    private List<string> archivos { get; set; }
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        LoadData();
+    }
+
+    private void LoadData()
+    {
+        aplicacion = managerAplicacion.getAplicacion(IdAplicacion);
+
+        if (aplicacion != null)
+        {
+            var exclusion = managerExclusion.getArchivoExclusiones(aplicacion.archivosExcluidos);
+            var admitidos = maangerAdmitido.getArchivoAdmitidos(aplicacion.archivosAdmitidos);
+
+            string pattern = Functions.GetPattern(admitidos, exclusion);
+
+
+
+            //  var searchPattern = new System.Text.RegularExpressions.Regex(@"$(?<=\.(dll|exe))", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+            var searchPattern = new System.Text.RegularExpressions.Regex(pattern, System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+
+            var files = System.IO.Directory.EnumerateFiles(aplicacion.carpetaCompilado, "*", System.IO.SearchOption.AllDirectories)
+                .Where(f => searchPattern.IsMatch(f))
+                .ToList();
+
+
+   
+            carpetas= System.IO.Directory.GetDirectories(aplicacion.carpetaCompilado, "*", System.IO.SearchOption.AllDirectories).ToList();
+            archivos = System.IO.Directory.GetFiles(aplicacion.carpetaCompilado, "*.dll", System.IO.SearchOption.AllDirectories).ToList();
+
+            CargarTree();
+        }
+        else
+        {
+            tree = new List<TreeNode>();
+        }
+    }
+
+    #region Tree
+
+    void CargarTree()
+    {
+        tree = new List<TreeNode>();
+       /* foreach (Carpeta carpetaAux in carpetas)
+        {
+            TreeNode aux = new TreeNode();
+            aux.Id = carpetaAux.id;
+            aux.Text = carpetaAux.nombre;
+            aux.value = carpetaAux;
+            // aux.Template = "folder";
+            aux.Children = CargarAplicacionesByCarpeta(carpetaAux.id);
+            tree.Add(aux);
+
+        }
+        foreach (Aplicacion aplicacionAux in aplicaciones.Where(x => x.fk_IdCarpeta == null))
+        {
+            TreeNode aux = new TreeNode();
+            aux.Id = aplicacionAux.id;
+            aux.Text = aplicacionAux.nombre;
+            aux.value = aplicacionAux;
+            tree.Add(aux);
+        }*/
+    }
+
+    List<TreeNode> CargarAplicacionesByCarpeta(Guid guid)
+    {
+        /*if (aplicaciones.Any(x => x.fk_IdCarpeta == guid))
+        {
+            List<TreeNode> treeApps = new List<TreeNode>();
+            foreach (Aplicacion aplicacionAux in aplicaciones.Where(x => x.fk_IdCarpeta == guid).OrderBy(x => x.nombre).ToList())
+            {
+                TreeNode aux = new TreeNode();
+                aux.Id = aplicacionAux.id;
+                aux.ParentId = guid;
+                aux.Text = aplicacionAux.nombre;
+                aux.value = aplicacionAux;
+                treeApps.Add(aux);
+            }
+            return treeApps;
+        }*/
+        return null;
+    }
+
+    RenderFragment<RadzenTreeItem> FolderTemplate = (context) => builder =>
+       {
+           TreeNode objTreeNode = context.Value as TreeNode;
+           builder.OpenComponent<RadzenIcon>(0);
+           if (objTreeNode.value is Carpeta)
+           {
+               builder.AddAttribute(1, "Icon", "folder");
+               builder.AddAttribute(1, "IconColor", "#FFBA01");
+           }
+           else
+           {
+               builder.AddAttribute(1, "Icon", "inbox_customize");
+               builder.AddAttribute(1, "IconColor", "#01A6F0");
+           }
+           builder.CloseComponent();
+           builder.AddContent(2, context.Text);
+       };
+
+    void LoadTree(TreeExpandEventArgs args)
+    {
+        var objTreeNode = args.Value as TreeNode;
+        if (objTreeNode != null)
+        {
+            args.Children.Data = objTreeNode.Children;
+            args.Children.Text = GetTextForNode;
+            args.Children.HasChildren = e => ((TreeNode)e).Children?.Any() ?? false;
+            args.Children.Template = FolderTemplate;
+        }
+    }
+
+    string GetTextForNode(object data)
+    {
+        return ((TreeNode)data).Text;
+    }
+
+
+   
+
+    #endregion
+
+
+    void RefreshClick(MenuItemEventArgs args)
+    {
+        LoadData();
+    }
+    void CopiarClick(MenuItemEventArgs args)
+    {
+    }
+    void CompilarClick(MenuItemEventArgs args)
+    {
+        
+    }
+
+    
+   
+
+   
+}

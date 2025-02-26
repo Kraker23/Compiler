@@ -8,6 +8,7 @@
 @inject IAplicacion_BL managerAplicacion;
 @inject ICarpeta_BL managerCarpeta;
 @inject IProyecto_BL managerProyecto;
+@inject NavigationManager navigationManager;
 
 <h1>Aplicaciones</h1>
 
@@ -19,12 +20,14 @@
 
     <RadzenMenuItem Click="AddFolderClick" Text="AddFolder" Icon="folder_open" IconColor="@Colors.Success"></RadzenMenuItem>
     <RadzenMenuItem Click="RemoveFolderClick" Text="RemoveFolder" Icon="folder_delete" IconColor="@Colors.Danger"></RadzenMenuItem>
+
+    <RadzenMenuItem Click="Usar" Text="Usar" Icon="upload_file" IconColor="@Colors.Warning"></RadzenMenuItem>
 </RadzenMenu>
 
 
 <RadzenRow Style="margin-top:10px">
     <RadzenColumn Size="12" SizeLG="4">
-        <RadzenCard>       
+        <RadzenCard>
             <RadzenTree @bind-Value=@selection
                         Data=@tree
                         Expand=@LoadTree
@@ -69,7 +72,7 @@
     private void LoadData()
     {
         aplicaciones = managerAplicacion.getAplicaciones();
-        carpetas = managerCarpeta.getCarpetas().OrderBy(x=>x.nombre).ToList();
+        carpetas = managerCarpeta.getCarpetas().OrderBy(x => x.nombre).ToList();
         CargarTree();
         aplicacionSelect = null;
         selection = null;
@@ -168,7 +171,7 @@
             carpetaSelect = (Carpeta)((TreeNode)selection).value;
             aplicacionSelect = null;
         }
-    }   
+    }
 
     #endregion
 
@@ -191,7 +194,7 @@
     }
     void DuplicateClick(MenuItemEventArgs args)
     {
-        if (selection !=null && ((TreeNode)selection).value is Aplicacion && aplicacionSelect!=null)
+        if (selection != null && ((TreeNode)selection).value is Aplicacion && aplicacionSelect != null)
         {
             Aplicacion appAux = new Aplicacion(aplicacionSelect);
             appAux.isNew = true;
@@ -208,7 +211,7 @@
 
     void RemoveFolderClick(MenuItemEventArgs args)
     {
-        if (((TreeNode)selection).value is Carpeta && carpetaSelect!=null)
+        if (((TreeNode)selection).value is Carpeta && carpetaSelect != null)
         {
             if (managerCarpeta.ExisteCarpeta(carpetaSelect.id))
             {
@@ -278,8 +281,15 @@
         LoadData();
     }
 
-    
-   
 
-   
+    void Usar()
+    {
+        if (aplicacionSelect != null)
+        {
+            navigationManager.NavigateTo($"/usaraplicacion/{aplicacionSelect.id}");
+        }
+
+    }
+
+
 }
