@@ -1,0 +1,101 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\Code\\Compiler\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{9743968A-42C0-4CE2-B98B-240536C95640}|Compiler.Shared\\Compiler.Shared.csproj|e:\\code\\compiler\\compiler.shared\\dataobjects\\carpeta.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9743968A-42C0-4CE2-B98B-240536C95640}|Compiler.Shared\\Compiler.Shared.csproj|solutionrelative:compiler.shared\\dataobjects\\carpeta.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7EDEB067-BB75-4D53-910E-6C73AA2B65CD}|Compiler.AppBlazor\\Compiler.AppBlazor.csproj|e:\\code\\compiler\\compiler.appblazor\\components\\pages\\aplicaciones.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7EDEB067-BB75-4D53-910E-6C73AA2B65CD}|Compiler.AppBlazor\\Compiler.AppBlazor.csproj|solutionrelative:compiler.appblazor\\components\\pages\\aplicaciones.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9743968A-42C0-4CE2-B98B-240536C95640}|Compiler.Shared\\Compiler.Shared.csproj|e:\\code\\compiler\\compiler.shared\\dataobjects\\aplicacion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9743968A-42C0-4CE2-B98B-240536C95640}|Compiler.Shared\\Compiler.Shared.csproj|solutionrelative:compiler.shared\\dataobjects\\aplicacion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7EDEB067-BB75-4D53-910E-6C73AA2B65CD}|Compiler.AppBlazor\\Compiler.AppBlazor.csproj|e:\\code\\compiler\\compiler.appblazor\\components\\component\\componentcarpeta.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7EDEB067-BB75-4D53-910E-6C73AA2B65CD}|Compiler.AppBlazor\\Compiler.AppBlazor.csproj|solutionrelative:compiler.appblazor\\components\\component\\componentcarpeta.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7EDEB067-BB75-4D53-910E-6C73AA2B65CD}|Compiler.AppBlazor\\Compiler.AppBlazor.csproj|e:\\code\\compiler\\compiler.appblazor\\components\\component\\componentaplicacion.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7EDEB067-BB75-4D53-910E-6C73AA2B65CD}|Compiler.AppBlazor\\Compiler.AppBlazor.csproj|solutionrelative:compiler.appblazor\\components\\component\\componentaplicacion.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Aplicacion.cs",
+              "DocumentMoniker": "E:\\Code\\Compiler\\Compiler.Shared\\DataObjects\\Aplicacion.cs",
+              "RelativeDocumentMoniker": "Compiler.Shared\\DataObjects\\Aplicacion.cs",
+              "ToolTip": "E:\\Code\\Compiler\\Compiler.Shared\\DataObjects\\Aplicacion.cs",
+              "RelativeToolTip": "Compiler.Shared\\DataObjects\\Aplicacion.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAkAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-21T02:38:57.446Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Carpeta.cs",
+              "DocumentMoniker": "E:\\Code\\Compiler\\Compiler.Shared\\DataObjects\\Carpeta.cs",
+              "RelativeDocumentMoniker": "Compiler.Shared\\DataObjects\\Carpeta.cs",
+              "ToolTip": "E:\\Code\\Compiler\\Compiler.Shared\\DataObjects\\Carpeta.cs",
+              "RelativeToolTip": "Compiler.Shared\\DataObjects\\Carpeta.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-21T02:32:51.337Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ComponentCarpeta.razor",
+              "DocumentMoniker": "E:\\Code\\Compiler\\Compiler.AppBlazor\\Components\\Component\\ComponentCarpeta.razor",
+              "RelativeDocumentMoniker": "Compiler.AppBlazor\\Components\\Component\\ComponentCarpeta.razor",
+              "ToolTip": "E:\\Code\\Compiler\\Compiler.AppBlazor\\Components\\Component\\ComponentCarpeta.razor",
+              "RelativeToolTip": "Compiler.AppBlazor\\Components\\Component\\ComponentCarpeta.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-21T02:17:01.443Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ComponentAplicacion.razor",
+              "DocumentMoniker": "E:\\Code\\Compiler\\Compiler.AppBlazor\\Components\\Component\\ComponentAplicacion.razor",
+              "RelativeDocumentMoniker": "Compiler.AppBlazor\\Components\\Component\\ComponentAplicacion.razor",
+              "ToolTip": "E:\\Code\\Compiler\\Compiler.AppBlazor\\Components\\Component\\ComponentAplicacion.razor",
+              "RelativeToolTip": "Compiler.AppBlazor\\Components\\Component\\ComponentAplicacion.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAABnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-21T02:14:47.664Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Aplicaciones.razor",
+              "DocumentMoniker": "E:\\Code\\Compiler\\Compiler.AppBlazor\\Components\\Pages\\Aplicaciones.razor",
+              "RelativeDocumentMoniker": "Compiler.AppBlazor\\Components\\Pages\\Aplicaciones.razor",
+              "ToolTip": "E:\\Code\\Compiler\\Compiler.AppBlazor\\Components\\Pages\\Aplicaciones.razor",
+              "RelativeToolTip": "Compiler.AppBlazor\\Components\\Pages\\Aplicaciones.razor",
+              "ViewState": "AgIAABIAAAAAAAAAAAAlwCgAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-21T02:07:58.913Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

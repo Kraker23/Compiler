@@ -1,7 +1,7 @@
 {
-  "version": 3,
+  "version": 4,
   "targets": {
-    "net8.0-windows10.0.22000": {
+    "net8.0-windows10.0.22000.0": {
       "Humanizer.Core/2.14.1": {
         "type": "package",
         "compile": {
@@ -7064,7 +7064,7 @@
     }
   },
   "projectFileDependencyGroups": {
-    "net8.0-windows10.0.22000": [
+    "net8.0-windows10.0.22000.0": [
       "Compiler.BL >= 1.0.0",
       "Compiler.EF >= 1.0.0",
       "Compiler.Shared >= 1.0.0",
@@ -7075,24 +7075,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ramir-cr\\.nuget\\packages\\": {},
+    "C:\\Users\\Cristian\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.AppNotifyIcon\\Compiler.AppNotifyIcon.csproj",
+      "projectUniqueName": "E:\\Code\\Compiler\\Aplicacion Vieja\\Compiler.AppNotifyIcon\\Compiler.AppNotifyIcon.csproj",
       "projectName": "Compiler.AppNotifyIcon",
-      "projectPath": "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.AppNotifyIcon\\Compiler.AppNotifyIcon.csproj",
-      "packagesPath": "C:\\Users\\ramir-cr\\.nuget\\packages\\",
-      "outputPath": "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.AppNotifyIcon\\obj\\",
+      "projectPath": "E:\\Code\\Compiler\\Aplicacion Vieja\\Compiler.AppNotifyIcon\\Compiler.AppNotifyIcon.csproj",
+      "packagesPath": "C:\\Users\\Cristian\\.nuget\\packages\\",
+      "outputPath": "E:\\Code\\Compiler\\Aplicacion Vieja\\Compiler.AppNotifyIcon\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\ramir-cr\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 19.1.config",
+        "C:\\Users\\Cristian\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -7102,22 +7101,22 @@
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "C:\\Program Files\\dotnet\\library-packs": {},
-        "C:\\VSS-DB\\España\\Extras\\Nugets Local": {},
-        "http://de-hv1-sr-diws1/NuGetServer/nuget": {},
+        "E:\\Code\\NugetLocales": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net8.0-windows10.0.22000": {
+        "net8.0-windows10.0.22000.0": {
+          "framework": "net8.0-windows10.0.22000",
           "targetAlias": "net8.0-windows10.0.22000.0",
           "projectReferences": {
-            "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.BL\\Compiler.BL.csproj": {
-              "projectPath": "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.BL\\Compiler.BL.csproj"
+            "E:\\Code\\Compiler\\Aplicacion Vieja\\Compiler.BL\\Compiler.BL.csproj": {
+              "projectPath": "E:\\Code\\Compiler\\Aplicacion Vieja\\Compiler.BL\\Compiler.BL.csproj"
             },
-            "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.EF\\Compiler.EF.csproj": {
-              "projectPath": "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.EF\\Compiler.EF.csproj"
+            "E:\\Code\\Compiler\\Aplicacion Vieja\\Compiler.EF\\Compiler.EF.csproj": {
+              "projectPath": "E:\\Code\\Compiler\\Aplicacion Vieja\\Compiler.EF\\Compiler.EF.csproj"
             },
-            "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.Shared\\Compiler.Shared.csproj": {
-              "projectPath": "C:\\VSS-DB\\vss-db-Cristian\\Compiler\\Compiler.Shared\\Compiler.Shared.csproj"
+            "E:\\Code\\Compiler\\Aplicacion Vieja\\Compiler.Shared\\Compiler.Shared.csproj": {
+              "projectPath": "E:\\Code\\Compiler\\Aplicacion Vieja\\Compiler.Shared\\Compiler.Shared.csproj"
             }
           }
         }
@@ -7130,11 +7129,13 @@
       "restoreAuditProperties": {
         "enableAudit": "true",
         "auditLevel": "low",
-        "auditMode": "all"
-      }
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "10.0.300"
     },
     "frameworks": {
-      "net8.0-windows10.0.22000": {
+      "net8.0-windows10.0.22000.0": {
+        "framework": "net8.0-windows10.0.22000",
         "targetAlias": "net8.0-windows10.0.22000.0",
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection": {
@@ -7167,12 +7168,8 @@
         "warn": true,
         "downloadDependencies": [
           {
-            "name": "Microsoft.Net.Sdk.Compilers.Toolset",
-            "version": "[9.0.100, 9.0.100]"
-          },
-          {
             "name": "Microsoft.Windows.SDK.NET.Ref",
-            "version": "[10.0.22000.54, 10.0.22000.54]"
+            "version": "[10.0.22000.57, 10.0.22000.57]"
           }
         ],
         "frameworkReferences": {
@@ -7186,36 +7183,8 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300/PortableRuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1803",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Está ejecutando la operación \"restore\" con un origen \"HTTP\", \"http://de-hv1-sr-diws1/NuGetServer/nuget\". El acceso que no sea HTTPS se quitará en una versión futura. Considere la posibilidad de migrar a un origen \"HTTPS\"."
-    },
-    {
-      "code": "NU1903",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "El paquete \"System.Text.Json\" 8.0.0 tiene una vulnerabilidad de gravedad alta conocida, https://github.com/advisories/GHSA-8g4q-xg66-9fp4",
-      "libraryId": "System.Text.Json",
-      "targetGraphs": [
-        "net8.0-windows10.0.22000"
-      ]
-    },
-    {
-      "code": "NU1903",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "El paquete \"System.Text.Json\" 8.0.0 tiene una vulnerabilidad de gravedad alta conocida, https://github.com/advisories/GHSA-hh2w-p6rv-4g7w",
-      "libraryId": "System.Text.Json",
-      "targetGraphs": [
-        "net8.0-windows10.0.22000"
-      ]
-    }
-  ]
+  }
 }
