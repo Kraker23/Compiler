@@ -1,0 +1,134 @@
+@page "/reglas-admitidos"
+@using static Compiler.Domain.Enums.Enumeraciones
+
+<PageTitle>Reglas Admitidos</PageTitle>
+
+<h1>Reglas de admitidos</h1>
+
+<div class="row g-3 mb-3">
+    <div class="col-md-8">
+        <label class="form-label" for="textoAdmitido">Texto</label>
+        <input id="textoAdmitido" class="form-control" @bind="nuevoTexto" placeholder="Extension, nombre o nombre completo" />
+    </div>
+    <div class="col-md-4">
+        <label class="form-label" for="tipoAdmitido">Tipo</label>
+        <select id="tipoAdmitido" class="form-select" @bind="nuevoTipo">
+            @foreach (var tipo in tipos)
+            {
+                <option value="@tipo.Id">@tipo.Descripcion</option>
+            }
+        </select>
+    </div>
+</div>
+
+<div class="d-flex gap-2 mb-3">
+    <button class="btn btn-primary" @onclick="CrearRegla" disabled="@string.IsNullOrWhiteSpace(nuevoTexto)">Crear regla</button>
+    <button class="btn btn-outline-secondary" @onclick="Limpiar">Limpiar</button>
+</div>
+
+@if (!string.IsNullOrWhiteSpace(mensaje))
+{
+    <div class="alert @(error ? "alert-danger" : "alert-info")" role="alert">@mensaje</div>
+}
+
+@if (reglas.Count == 0)
+{
+    <p>No hay reglas de admitidos cargadas.</p>
+}
+else
+{
+    <table class="table table-striped align-middle">
+        <thead>
+            <tr>
+                <th>Texto</th>
+                <th>Tipo</th>
+                <th style="width: 120px;">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var regla in reglas)
+            {
+                <tr>
+                    <td>@regla.texto</td>
+                    <td>@regla.tipoAdmision</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-danger" @onclick="() => BorrarRegla(regla.id)">Borrar</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    [Inject] private IArchivoAdmitidoService AdmitidoService { get; set; } = default!;
+    [Inject] private IAplicacionService AplicacionService { get; set; } = default!;
+
+    private List<ArchivoAdmitido> reglas = [];
+    private List<Compiler.Domain.Enums.EnumBase> tipos = getListTipoExclusionAdmision();
+    private string nuevoTexto = string.Empty;
+    private int nuevoTipo;
+    private string mensaje = string.Empty;
+    private bool error;
+
+    protected override void OnInitialized()
+    {
+        Cargar();
+    }
+
+    private void Cargar()
+    {
+        reglas = AdmitidoService.GetArchivoAdmitidos();
+    }
+
+    private void CrearRegla()
+    {
+        var texto = nuevoTexto.Trim();
+        if (string.IsNullOrWhiteSpace(texto))
+        {
+            mensaje = "El texto es obligatorio.";
+            error = true;
+            return;
+        }
+
+        AdmitidoService.ModificarArchivoAdmitido(new ArchivoAdmitido
+        {
+            texto = texto,
+            tipoAdmision = nuevoTipo
+        });
+
+        mensaje = "Regla de admitidos creada.";
+        error = false;
+        Limpiar();
+        Cargar();
+    }
+
+    private void BorrarRegla(Guid id)
+    {
+        if (!AdmitidoService.ExisteArchivoAdmitido(id))
+        {
+            mensaje = "La regla ya no existe.";
+            error = true;
+            Cargar();
+            return;
+        }
+
+        if (AplicacionService.AnyAplicacionConArchivoAdmitido(id))
+        {
+            mensaje = "No se puede borrar la regla porque está asociada a una aplicación.";
+            error = true;
+            return;
+        }
+
+        AdmitidoService.BorrarArchivoAdmitido(id);
+        mensaje = "Regla eliminada.";
+        error = false;
+        Cargar();
+    }
+
+    private void Limpiar()
+    {
+        nuevoTexto = string.Empty;
+        nuevoTipo = 0;
+    }
+}

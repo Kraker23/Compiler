@@ -1,0 +1,262 @@
+@page "/aplicaciones"
+
+<PageTitle>Aplicaciones</PageTitle>
+
+<h1>Aplicaciones</h1>
+
+<div class="row g-3 mb-3">
+    <div class="col-md-4">
+        <label class="form-label" for="nombreAplicacion">Nombre</label>
+        <input id="nombreAplicacion" class="form-control" @bind="nuevoNombre" placeholder="Nombre de la aplicacion" />
+    </div>
+    <div class="col-md-4">
+        <label class="form-label" for="carpetaAplicacion">Carpeta</label>
+        <select id="carpetaAplicacion" class="form-select" @bind="nuevaCarpetaId">
+            <option value="">Sin carpeta</option>
+            @foreach (var carpeta in carpetas)
+            {
+                <option value="@carpeta.id">@carpeta.nombre</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-4">
+        <label class="form-label" for="ubicacionAplicacion">Ubicacion</label>
+        <input id="ubicacionAplicacion" class="form-control" @bind="nuevaUbicacion" placeholder="Ruta .sln o .csproj" />
+    </div>
+    <div class="col-md-4">
+        <label class="form-label" for="carpetaCompilado">Carpeta compilado</label>
+        <input id="carpetaCompilado" class="form-control" @bind="nuevaCarpetaCompilado" placeholder="Ruta de salida compilada" />
+    </div>
+    <div class="col-md-8">
+        <label class="form-label" for="carpetaPublicacion">Carpeta publicacion</label>
+        <input id="carpetaPublicacion" class="form-control" @bind="nuevaCarpetaPublicacion" placeholder="Ruta destino de copiado" />
+    </div>
+    <div class="col-md-4">
+        <label class="form-label" for="comandoCompilado">Comando compilado</label>
+        <input id="comandoCompilado" class="form-control" @bind="nuevoComandoCompilado" placeholder="Opcional, override de compilacion" />
+    </div>
+</div>
+
+<div class="row g-3 mb-3">
+    <div class="col-lg-6">
+        <label class="form-label">Reglas de exclusión</label>
+        <div class="border rounded p-2" style="max-height: 220px; overflow:auto;">
+            @if (reglasExclusion.Count == 0)
+            {
+                <p class="mb-0">No hay reglas de exclusión.</p>
+            }
+            else
+            {
+                @foreach (var regla in reglasExclusion)
+                {
+                    <div class="form-check">
+                        <input class="form-check-input"
+                               type="checkbox"
+                               id="ex-@regla.id"
+                               checked="@selectedExclusionIds.Contains(regla.id)"
+                               @onchange="args => CambiarExclusion(regla.id, args.Value)" />
+                        <label class="form-check-label" for="ex-@regla.id">@regla.ToString()</label>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <label class="form-label">Reglas de admitidos</label>
+        <div class="border rounded p-2" style="max-height: 220px; overflow:auto;">
+            @if (reglasAdmitidos.Count == 0)
+            {
+                <p class="mb-0">No hay reglas de admitidos.</p>
+            }
+            else
+            {
+                @foreach (var regla in reglasAdmitidos)
+                {
+                    <div class="form-check">
+                        <input class="form-check-input"
+                               type="checkbox"
+                               id="ad-@regla.id"
+                               checked="@selectedAdmitidoIds.Contains(regla.id)"
+                               @onchange="args => CambiarAdmitido(regla.id, args.Value)" />
+                        <label class="form-check-label" for="ad-@regla.id">@regla.ToString()</label>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+<div class="d-flex gap-2 mb-3">
+    <button class="btn btn-primary" @onclick="CrearAplicacion" disabled="@string.IsNullOrWhiteSpace(nuevoNombre)">Crear aplicacion</button>
+    <button class="btn btn-outline-secondary" @onclick="LimpiarFormulario">Limpiar</button>
+</div>
+
+@if (!string.IsNullOrWhiteSpace(mensaje))
+{
+    <div class="alert @(error ? "alert-danger" : "alert-info")" role="alert">@mensaje</div>
+}
+
+@if (aplicaciones.Count == 0)
+{
+    <p>No hay aplicaciones cargadas.</p>
+}
+else
+{
+    <table class="table table-striped align-middle">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Carpeta</th>
+                <th>Ubicacion</th>
+                <th>Compilado</th>
+                <th>Publicacion</th>
+                <th>Reglas</th>
+                <th style="width: 120px;">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var aplicacion in aplicaciones)
+            {
+                <tr>
+                    <td>@aplicacion.nombre</td>
+                    <td>@GetCarpetaNombre(aplicacion.fk_IdCarpeta)</td>
+                    <td>@aplicacion.ubicacionAplicacion</td>
+                    <td>@aplicacion.carpetaCompilado</td>
+                    <td>@aplicacion.carpetaPublicacion</td>
+                    <td>E:@(aplicacion.archivosExcluidos?.Count ?? 0) / A:@(aplicacion.archivosAdmitidos?.Count ?? 0)</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-danger" @onclick="() => BorrarAplicacion(aplicacion.id)">Borrar</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    [Inject] private IAplicacionService AplicacionService { get; set; } = default!;
+    [Inject] private ICarpetaService CarpetaService { get; set; } = default!;
+    [Inject] private IArchivoExclusionService ArchivoExclusionService { get; set; } = default!;
+    [Inject] private IArchivoAdmitidoService ArchivoAdmitidoService { get; set; } = default!;
+
+    private List<Aplicacion> aplicaciones = [];
+    private List<Carpeta> carpetas = [];
+    private List<ArchivoExclusion> reglasExclusion = [];
+    private List<ArchivoAdmitido> reglasAdmitidos = [];
+    private string nuevoNombre = string.Empty;
+    private Guid? nuevaCarpetaId;
+    private string nuevaUbicacion = string.Empty;
+    private string nuevaCarpetaCompilado = string.Empty;
+    private string nuevaCarpetaPublicacion = string.Empty;
+    private string nuevoComandoCompilado = string.Empty;
+    private HashSet<Guid> selectedExclusionIds = [];
+    private HashSet<Guid> selectedAdmitidoIds = [];
+    private string mensaje = string.Empty;
+    private bool error;
+
+    protected override void OnInitialized()
+    {
+        CargarAplicaciones();
+    }
+
+    private void CargarAplicaciones()
+    {
+        aplicaciones = AplicacionService.GetAplicaciones();
+        carpetas = CarpetaService.GetCarpetas();
+        reglasExclusion = ArchivoExclusionService.GetArchivoExclusiones();
+        reglasAdmitidos = ArchivoAdmitidoService.GetArchivoAdmitidos();
+    }
+
+    private void CrearAplicacion()
+    {
+        var nombre = nuevoNombre.Trim();
+        if (string.IsNullOrWhiteSpace(nombre))
+        {
+            mensaje = "El nombre es obligatorio.";
+            error = true;
+            return;
+        }
+
+        var aplicacion = new Aplicacion
+        {
+            fk_IdCarpeta = nuevaCarpetaId,
+            nombre = nombre,
+            ubicacionAplicacion = nuevaUbicacion.Trim(),
+            carpetaCompilado = nuevaCarpetaCompilado.Trim(),
+            carpetaPublicacion = nuevaCarpetaPublicacion.Trim(),
+            comandoCompilado = nuevoComandoCompilado.Trim(),
+            archivosExcluidos = [.. selectedExclusionIds],
+            archivosAdmitidos = [.. selectedAdmitidoIds]
+        };
+
+        AplicacionService.ModificarAplicacion(aplicacion);
+        mensaje = $"Aplicacion '{nombre}' creada.";
+        error = false;
+        LimpiarFormulario();
+        CargarAplicaciones();
+    }
+
+    private void BorrarAplicacion(Guid idAplicacion)
+    {
+        if (!AplicacionService.ExisteAplicacion(idAplicacion))
+        {
+            mensaje = "La aplicacion ya no existe.";
+            error = true;
+            CargarAplicaciones();
+            return;
+        }
+
+        AplicacionService.BorrarAplicacion(idAplicacion);
+        mensaje = "Aplicacion eliminada.";
+        error = false;
+        CargarAplicaciones();
+    }
+
+    private void LimpiarFormulario()
+    {
+        nuevoNombre = string.Empty;
+        nuevaCarpetaId = null;
+        nuevaUbicacion = string.Empty;
+        nuevaCarpetaCompilado = string.Empty;
+        nuevaCarpetaPublicacion = string.Empty;
+        nuevoComandoCompilado = string.Empty;
+        selectedExclusionIds.Clear();
+        selectedAdmitidoIds.Clear();
+    }
+
+    private void CambiarExclusion(Guid id, object? value)
+    {
+        var isChecked = value as bool? == true;
+        if (isChecked)
+        {
+            selectedExclusionIds.Add(id);
+        }
+        else
+        {
+            selectedExclusionIds.Remove(id);
+        }
+    }
+
+    private void CambiarAdmitido(Guid id, object? value)
+    {
+        var isChecked = value as bool? == true;
+        if (isChecked)
+        {
+            selectedAdmitidoIds.Add(id);
+        }
+        else
+        {
+            selectedAdmitidoIds.Remove(id);
+        }
+    }
+
+    private string GetCarpetaNombre(Guid? idCarpeta)
+    {
+        if (!idCarpeta.HasValue)
+        {
+            return "-";
+        }
+
+        return carpetas.FirstOrDefault(x => x.id == idCarpeta.Value)?.nombre ?? "-";
+    }
+}

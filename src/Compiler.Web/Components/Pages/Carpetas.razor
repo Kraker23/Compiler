@@ -1,0 +1,110 @@
+@page "/carpetas"
+
+<PageTitle>Carpetas</PageTitle>
+
+<h1>Carpetas</h1>
+
+<div class="mb-3">
+    <label for="nombreCarpeta" class="form-label">Nueva carpeta</label>
+    <div class="d-flex gap-2">
+        <input id="nombreCarpeta" class="form-control" @bind="nuevoNombre" placeholder="Nombre de la carpeta" />
+        <button class="btn btn-primary" @onclick="CrearCarpeta" disabled="@string.IsNullOrWhiteSpace(nuevoNombre)">Crear</button>
+    </div>
+</div>
+
+@if (!string.IsNullOrWhiteSpace(mensaje))
+{
+    <div class="alert @(error ? "alert-danger" : "alert-info")" role="alert">@mensaje</div>
+}
+
+@if (carpetas.Count == 0)
+{
+    <p>No hay carpetas cargadas.</p>
+}
+else
+{
+    <table class="table table-striped align-middle">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th style="width: 120px;">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var carpeta in carpetas)
+            {
+                <tr>
+                    <td>@carpeta.nombre</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-danger" @onclick="() => BorrarCarpeta(carpeta.id)">Borrar</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    [Inject] private ICarpetaService CarpetaService { get; set; } = default!;
+    [Inject] private IAplicacionService AplicacionService { get; set; } = default!;
+
+    private List<Carpeta> carpetas = [];
+    private string nuevoNombre = string.Empty;
+    private string mensaje = string.Empty;
+    private bool error;
+
+    protected override void OnInitialized()
+    {
+        CargarCarpetas();
+    }
+
+    private void CargarCarpetas()
+    {
+        carpetas = CarpetaService.GetCarpetas();
+    }
+
+    private void CrearCarpeta()
+    {
+        var nombre = nuevoNombre.Trim();
+        if (string.IsNullOrWhiteSpace(nombre))
+        {
+            mensaje = "El nombre es obligatorio.";
+            error = true;
+            return;
+        }
+
+        var carpeta = new Carpeta
+        {
+            nombre = nombre
+        };
+
+        CarpetaService.ModificarCarpeta(carpeta);
+        mensaje = $"Carpeta '{nombre}' creada.";
+        error = false;
+        nuevoNombre = string.Empty;
+        CargarCarpetas();
+    }
+
+    private void BorrarCarpeta(Guid idCarpeta)
+    {
+        if (!CarpetaService.ExisteCarpeta(idCarpeta))
+        {
+            mensaje = "La carpeta ya no existe.";
+            error = true;
+            CargarCarpetas();
+            return;
+        }
+
+        if (AplicacionService.AnyAplicacionConCarpeta(idCarpeta))
+        {
+            mensaje = "No se puede borrar la carpeta porque esta asociada a una aplicacion.";
+            error = true;
+            return;
+        }
+
+        CarpetaService.BorrarCarpeta(idCarpeta);
+        mensaje = "Carpeta eliminada.";
+        error = false;
+        CargarCarpetas();
+    }
+}

@@ -1,0 +1,238 @@
+@page "/proyectos"
+
+<PageTitle>Proyectos</PageTitle>
+
+<h1>Proyectos</h1>
+
+<div class="mb-3">
+    <label for="nombreProyecto" class="form-label">Nuevo proyecto</label>
+    <div class="d-flex gap-2">
+        <input id="nombreProyecto" class="form-control" @bind="nuevoNombre" placeholder="Nombre del proyecto" />
+        <button class="btn btn-primary" @onclick="CrearProyecto" disabled="@string.IsNullOrWhiteSpace(nuevoNombre)">Crear</button>
+    </div>
+</div>
+
+@if (!string.IsNullOrWhiteSpace(mensaje))
+{
+    <div class="alert @(error ? "alert-danger" : "alert-info")" role="alert">@mensaje</div>
+}
+
+<div class="row g-4">
+    <div class="col-lg-6">
+        @if (proyectos.Count == 0)
+        {
+            <p>No hay proyectos cargados.</p>
+        }
+        else
+        {
+            <table class="table table-striped align-middle">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apps</th>
+                        <th style="width: 180px;">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var proyecto in proyectos)
+                    {
+                        <tr>
+                            <td>@proyecto.nombre</td>
+                            <td>@(proyecto.aplicaciones?.Count ?? 0)</td>
+                            <td>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-sm btn-outline-primary" @onclick="() => EditarProyecto(proyecto.id)">Editar</button>
+                                    <button class="btn btn-sm btn-outline-danger" @onclick="() => BorrarProyecto(proyecto.id)">Borrar</button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+
+    <div class="col-lg-6">
+        @if (proyectoEdicion is null)
+        {
+            <div class="border rounded p-3 bg-light-subtle">
+                <h2 class="h5">Editor</h2>
+                <p class="mb-0">Selecciona un proyecto para editar sus aplicaciones asociadas.</p>
+            </div>
+        }
+        else
+        {
+            <div class="border rounded p-3">
+                <h2 class="h5">Editar proyecto</h2>
+
+                <div class="mb-3">
+                    <label class="form-label" for="nombreEditarProyecto">Nombre</label>
+                    <input id="nombreEditarProyecto" class="form-control" @bind="proyectoEdicion.nombre" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Aplicaciones asociadas</label>
+                    @if (aplicaciones.Count == 0)
+                    {
+                        <p class="mb-0">No hay aplicaciones disponibles todavía.</p>
+                    }
+                    else
+                    {
+                        <div class="border rounded p-2" style="max-height: 260px; overflow:auto;">
+                            @foreach (var aplicacion in aplicaciones)
+                            {
+                                <div class="form-check">
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           id="app-@aplicacion.id"
+                                           checked="@selectedAplicacionIds.Contains(aplicacion.id)"
+                                           @onchange="args => CambiarAplicacion(aplicacion.id, args.Value)" />
+                                    <label class="form-check-label" for="app-@aplicacion.id">
+                                        @aplicacion.nombre
+                                    </label>
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+
+                <div class="d-flex gap-2">
+                    <button class="btn btn-primary" @onclick="GuardarProyecto" disabled="@string.IsNullOrWhiteSpace(proyectoEdicion.nombre)">Guardar</button>
+                    <button class="btn btn-outline-secondary" @onclick="CancelarEdicion">Cancelar</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    [Inject] private IProyectoService ProyectoService { get; set; } = default!;
+    [Inject] private IAplicacionService AplicacionService { get; set; } = default!;
+
+    private List<Proyecto> proyectos = [];
+    private List<Aplicacion> aplicaciones = [];
+    private string nuevoNombre = string.Empty;
+    private string mensaje = string.Empty;
+    private bool error;
+    private Proyecto? proyectoEdicion;
+    private HashSet<Guid> selectedAplicacionIds = [];
+
+    protected override void OnInitialized()
+    {
+        CargarDatos();
+    }
+
+    private void CargarDatos()
+    {
+        proyectos = ProyectoService.GetProyectos();
+        aplicaciones = AplicacionService.GetAplicaciones();
+    }
+
+    private void CrearProyecto()
+    {
+        var nombre = nuevoNombre.Trim();
+        if (string.IsNullOrWhiteSpace(nombre))
+        {
+            mensaje = "El nombre es obligatorio.";
+            error = true;
+            return;
+        }
+
+        var proyecto = new Proyecto
+        {
+            nombre = nombre
+        };
+
+        ProyectoService.ModificarProyecto(proyecto);
+        nuevoNombre = string.Empty;
+        mensaje = $"Proyecto '{nombre}' creado.";
+        error = false;
+        CargarDatos();
+    }
+
+    private void BorrarProyecto(Guid idProyecto)
+    {
+        if (!ProyectoService.ExisteProyecto(idProyecto))
+        {
+            mensaje = "El proyecto ya no existe.";
+            error = true;
+            CargarDatos();
+            return;
+        }
+
+        ProyectoService.BorrarProyecto(idProyecto);
+        mensaje = "Proyecto eliminado.";
+        error = false;
+
+        if (proyectoEdicion?.id == idProyecto)
+        {
+            CancelarEdicion();
+        }
+
+        CargarDatos();
+    }
+
+    private void EditarProyecto(Guid idProyecto)
+    {
+        var proyecto = ProyectoService.GetProyecto(idProyecto);
+        if (proyecto == null)
+        {
+            mensaje = "No se pudo cargar el proyecto seleccionado.";
+            error = true;
+            return;
+        }
+
+        proyectoEdicion = new Proyecto
+        {
+            id = proyecto.id,
+            nombre = proyecto.nombre,
+            aplicaciones = [.. (proyecto.aplicaciones ?? [])]
+        };
+
+        selectedAplicacionIds = [.. proyectoEdicion.aplicaciones];
+        mensaje = string.Empty;
+        error = false;
+    }
+
+    private void CambiarAplicacion(Guid idAplicacion, object? value)
+    {
+        var isChecked = value as bool? == true;
+        if (isChecked)
+        {
+            selectedAplicacionIds.Add(idAplicacion);
+        }
+        else
+        {
+            selectedAplicacionIds.Remove(idAplicacion);
+        }
+    }
+
+    private void GuardarProyecto()
+    {
+        if (proyectoEdicion == null)
+        {
+            return;
+        }
+
+        proyectoEdicion.nombre = proyectoEdicion.nombre?.Trim() ?? string.Empty;
+        if (string.IsNullOrWhiteSpace(proyectoEdicion.nombre))
+        {
+            mensaje = "El nombre del proyecto es obligatorio.";
+            error = true;
+            return;
+        }
+
+        proyectoEdicion.aplicaciones = [.. selectedAplicacionIds];
+        ProyectoService.ModificarProyecto(proyectoEdicion);
+        mensaje = $"Proyecto '{proyectoEdicion.nombre}' guardado.";
+        error = false;
+        CancelarEdicion();
+        CargarDatos();
+    }
+
+    private void CancelarEdicion()
+    {
+        proyectoEdicion = null;
+        selectedAplicacionIds.Clear();
+    }
+}

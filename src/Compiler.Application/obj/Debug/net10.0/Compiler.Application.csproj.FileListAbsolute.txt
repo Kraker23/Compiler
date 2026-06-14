@@ -1,0 +1,16 @@
+e:\Code\Compiler\src\Compiler.Application\bin\Debug\net10.0\Compiler.Application.deps.json
+e:\Code\Compiler\src\Compiler.Application\bin\Debug\net10.0\Compiler.Application.dll
+e:\Code\Compiler\src\Compiler.Application\bin\Debug\net10.0\Compiler.Application.pdb
+e:\Code\Compiler\src\Compiler.Application\bin\Debug\net10.0\Compiler.Domain.dll
+e:\Code\Compiler\src\Compiler.Application\bin\Debug\net10.0\Compiler.Domain.pdb
+e:\Code\Compiler\src\Compiler.Application\obj\Debug\net10.0\Compiler.Application.csproj.AssemblyReference.cache
+e:\Code\Compiler\src\Compiler.Application\obj\Debug\net10.0\Compiler.Application.GeneratedMSBuildEditorConfig.editorconfig
+e:\Code\Compiler\src\Compiler.Application\obj\Debug\net10.0\Compiler.Application.AssemblyInfoInputs.cache
+e:\Code\Compiler\src\Compiler.Application\obj\Debug\net10.0\Compiler.Application.AssemblyInfo.cs
+e:\Code\Compiler\src\Compiler.Application\obj\Debug\net10.0\Compiler.Application.csproj.CoreCompileInputs.cache
+e:\Code\Compiler\src\Compiler.Application\obj\Debug\net10.0\Compiler.Application.sourcelink.json
+e:\Code\Compiler\src\Compiler.Application\obj\Debug\net10.0\Compiler.4DCD5DC8.Up2Date
+e:\Code\Compiler\src\Compiler.Application\obj\Debug\net10.0\Compiler.Application.dll
+e:\Code\Compiler\src\Compiler.Application\obj\Debug\net10.0\refint\Compiler.Application.dll
+e:\Code\Compiler\src\Compiler.Application\obj\Debug\net10.0\Compiler.Application.pdb
+e:\Code\Compiler\src\Compiler.Application\obj\Debug\net10.0\ref\Compiler.Application.dll

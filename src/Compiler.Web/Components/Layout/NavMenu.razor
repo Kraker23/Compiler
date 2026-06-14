@@ -1,0 +1,54 @@
+﻿<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">Compiler.Web</a>
+    </div>
+</div>
+
+<input type="checkbox" title="Navigation menu" class="navbar-toggler" />
+
+<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
+    <nav class="nav flex-column">
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="proyectos">
+                <span class="bi bi-folder-fill-nav-menu" aria-hidden="true"></span> Proyectos
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="aplicaciones">
+                <span class="bi bi-window-stack" aria-hidden="true"></span> Aplicaciones
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="carpetas">
+                <span class="bi bi-folder2-open" aria-hidden="true"></span> Carpetas
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="reglas-exclusion">
+                <span class="bi bi-file-earmark-x" aria-hidden="true"></span> Reglas Exclusion
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="reglas-admitidos">
+                <span class="bi bi-file-earmark-check" aria-hidden="true"></span> Reglas Admitidos
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="ejecucion">
+                <span class="bi bi-play-circle-fill-nav-menu" aria-hidden="true"></span> Ejecucion
+            </NavLink>
+        </div>
+    </nav>
+</div>
+

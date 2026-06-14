@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Compiler.Application/Compiler.Application.csproj" />
+    <Project Path="src/Compiler.Domain/Compiler.Domain.csproj" />
+    <Project Path="src/Compiler.Infrastructure/Compiler.Infrastructure.csproj" />
+    <Project Path="src/Compiler.Tray/Compiler.Tray.csproj" />
+    <Project Path="src/Compiler.Web/Compiler.Web.csproj" />
+  </Folder>
+</Solution>
