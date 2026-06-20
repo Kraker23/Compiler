@@ -1,9 +1,124 @@
+ :root {
+    --app-bg: #f6f8fb;
+    --app-text: #18202a;
+    --app-surface: #ffffff;
+    --app-surface-2: #f2f5f8;
+    --app-border: #d6dce4;
+    --app-link: #005ba8;
+    --app-toprow: #f7f7f7;
+    --app-sidebar-grad-start: rgb(5, 39, 103);
+    --app-sidebar-grad-end: #3a0647;
+    --bs-body-bg: var(--app-bg);
+    --bs-body-color: var(--app-text);
+    --bs-border-color: var(--app-border);
+}
+
+[data-theme="dark"] {
+    --app-bg: #10151d;
+    --app-text: #e5ecf5;
+    --app-surface: #1a2330;
+    --app-surface-2: #222d3b;
+    --app-border: #3b4655;
+    --app-link: #7fc3ff;
+    --app-toprow: #17202c;
+    --app-sidebar-grad-start: #17223b;
+    --app-sidebar-grad-end: #0d1624;
+    --bs-body-bg: var(--app-bg);
+    --bs-body-color: var(--app-text);
+    --bs-border-color: var(--app-border);
+    color-scheme: dark;
+}
+
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: var(--app-bg);
+    color: var(--app-text);
 }
 
 a, .btn-link {
-    color: #006bb7;
+    color: var(--app-link);
+}
+
+article,
+.table,
+.alert,
+.form-control,
+.form-select,
+.form-check-label,
+.form-text,
+label,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+th,
+td {
+    color: var(--app-text);
+}
+
+.table {
+    --bs-table-bg: var(--app-surface);
+    --bs-table-striped-bg: var(--app-surface-2);
+    --bs-table-striped-color: var(--app-text);
+    --bs-table-color: var(--app-text);
+    --bs-table-border-color: var(--app-border);
+}
+
+.form-control,
+.form-select {
+    background-color: var(--app-surface);
+    border-color: var(--app-border);
+}
+
+.form-control::placeholder,
+.form-select::placeholder {
+    color: color-mix(in srgb, var(--app-text) 55%, transparent);
+}
+
+.form-control:focus,
+.form-select:focus {
+    background-color: var(--app-surface);
+    color: var(--app-text);
+}
+
+.alert-info {
+    background-color: color-mix(in srgb, var(--app-surface) 85%, #5fa8ff 15%);
+    border-color: var(--app-border);
+}
+
+.alert-danger {
+    background-color: color-mix(in srgb, var(--app-surface) 85%, #ff6b6b 15%);
+    border-color: var(--app-border);
+}
+
+[data-theme="dark"] .bg-light-subtle,
+[data-theme="dark"] .text-bg-light {
+    background-color: var(--app-surface-2) !important;
+    color: var(--app-text) !important;
+}
+
+[data-theme="dark"] .border {
+    border-color: var(--app-border) !important;
+}
+
+[data-theme="dark"] .form-check-input {
+    background-color: var(--app-surface);
+    border-color: var(--app-border);
+}
+
+[data-theme="dark"] .btn-outline-secondary {
+    color: var(--app-text);
+    border-color: var(--app-border);
+}
+
+[data-theme="dark"] .btn-outline-secondary:hover,
+[data-theme="dark"] .btn-outline-secondary:focus {
+    color: #0f1620;
+    background-color: #c7d0dc;
+    border-color: #c7d0dc;
 }
 
 .btn-primary {

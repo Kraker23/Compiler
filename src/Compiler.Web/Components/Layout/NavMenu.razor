@@ -1,4 +1,6 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+﻿@inject IJSRuntime JS
+
+<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="">Compiler.Web</a>
     </div>
@@ -49,6 +51,35 @@
                 <span class="bi bi-play-circle-fill-nav-menu" aria-hidden="true"></span> Ejecucion
             </NavLink>
         </div>
+
+        <div class="nav-item px-3">
+            <button class="nav-link theme-toggle" @onclick="ToggleThemeAsync">
+                <span class="bi bi-theme-toggle-nav-menu" aria-hidden="true"></span>
+                @(isDarkMode ? "Modo claro" : "Modo oscuro")
+            </button>
+        </div>
     </nav>
 </div>
+
+@code {
+    private bool isDarkMode;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender)
+        {
+            return;
+        }
+
+        var activeTheme = await JS.InvokeAsync<string>("compilerTheme.getTheme");
+        isDarkMode = string.Equals(activeTheme, "dark", StringComparison.OrdinalIgnoreCase);
+        StateHasChanged();
+    }
+
+    private async Task ToggleThemeAsync()
+    {
+        var activeTheme = await JS.InvokeAsync<string>("compilerTheme.toggleTheme");
+        isDarkMode = string.Equals(activeTheme, "dark", StringComparison.OrdinalIgnoreCase);
+    }
+}
 
