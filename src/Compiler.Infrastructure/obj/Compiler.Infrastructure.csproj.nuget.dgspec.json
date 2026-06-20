@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "e:\\Code\\Compiler\\src\\Compiler.Infrastructure\\Compiler.Infrastructure.csproj": {}
+    "E:\\Code\\Compiler\\src\\Compiler.Infrastructure\\Compiler.Infrastructure.csproj": {}
   },
   "projects": {
-    "e:\\Code\\Compiler\\src\\Compiler.Application\\Compiler.Application.csproj": {
+    "E:\\Code\\Compiler\\src\\Compiler.Application\\Compiler.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "e:\\Code\\Compiler\\src\\Compiler.Application\\Compiler.Application.csproj",
+        "projectUniqueName": "E:\\Code\\Compiler\\src\\Compiler.Application\\Compiler.Application.csproj",
         "projectName": "Compiler.Application",
-        "projectPath": "e:\\Code\\Compiler\\src\\Compiler.Application\\Compiler.Application.csproj",
+        "projectPath": "E:\\Code\\Compiler\\src\\Compiler.Application\\Compiler.Application.csproj",
         "packagesPath": "C:\\Users\\Cristian\\.nuget\\packages\\",
-        "outputPath": "e:\\Code\\Compiler\\src\\Compiler.Application\\obj\\",
+        "outputPath": "E:\\Code\\Compiler\\src\\Compiler.Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -35,8 +35,8 @@
             "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {
-              "e:\\Code\\Compiler\\src\\Compiler.Domain\\Compiler.Domain.csproj": {
-                "projectPath": "e:\\Code\\Compiler\\src\\Compiler.Domain\\Compiler.Domain.csproj"
+              "E:\\Code\\Compiler\\src\\Compiler.Domain\\Compiler.Domain.csproj": {
+                "projectPath": "E:\\Code\\Compiler\\src\\Compiler.Domain\\Compiler.Domain.csproj"
               }
             }
           }
@@ -357,14 +357,14 @@
         }
       }
     },
-    "e:\\Code\\Compiler\\src\\Compiler.Domain\\Compiler.Domain.csproj": {
+    "E:\\Code\\Compiler\\src\\Compiler.Domain\\Compiler.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "e:\\Code\\Compiler\\src\\Compiler.Domain\\Compiler.Domain.csproj",
+        "projectUniqueName": "E:\\Code\\Compiler\\src\\Compiler.Domain\\Compiler.Domain.csproj",
         "projectName": "Compiler.Domain",
-        "projectPath": "e:\\Code\\Compiler\\src\\Compiler.Domain\\Compiler.Domain.csproj",
+        "projectPath": "E:\\Code\\Compiler\\src\\Compiler.Domain\\Compiler.Domain.csproj",
         "packagesPath": "C:\\Users\\Cristian\\.nuget\\packages\\",
-        "outputPath": "e:\\Code\\Compiler\\src\\Compiler.Domain\\obj\\",
+        "outputPath": "E:\\Code\\Compiler\\src\\Compiler.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -700,14 +700,14 @@
         }
       }
     },
-    "e:\\Code\\Compiler\\src\\Compiler.Infrastructure\\Compiler.Infrastructure.csproj": {
+    "E:\\Code\\Compiler\\src\\Compiler.Infrastructure\\Compiler.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "e:\\Code\\Compiler\\src\\Compiler.Infrastructure\\Compiler.Infrastructure.csproj",
+        "projectUniqueName": "E:\\Code\\Compiler\\src\\Compiler.Infrastructure\\Compiler.Infrastructure.csproj",
         "projectName": "Compiler.Infrastructure",
-        "projectPath": "e:\\Code\\Compiler\\src\\Compiler.Infrastructure\\Compiler.Infrastructure.csproj",
+        "projectPath": "E:\\Code\\Compiler\\src\\Compiler.Infrastructure\\Compiler.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\Cristian\\.nuget\\packages\\",
-        "outputPath": "e:\\Code\\Compiler\\src\\Compiler.Infrastructure\\obj\\",
+        "outputPath": "E:\\Code\\Compiler\\src\\Compiler.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -731,11 +731,11 @@
             "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {
-              "e:\\Code\\Compiler\\src\\Compiler.Application\\Compiler.Application.csproj": {
-                "projectPath": "e:\\Code\\Compiler\\src\\Compiler.Application\\Compiler.Application.csproj"
+              "E:\\Code\\Compiler\\src\\Compiler.Application\\Compiler.Application.csproj": {
+                "projectPath": "E:\\Code\\Compiler\\src\\Compiler.Application\\Compiler.Application.csproj"
               },
-              "e:\\Code\\Compiler\\src\\Compiler.Domain\\Compiler.Domain.csproj": {
-                "projectPath": "e:\\Code\\Compiler\\src\\Compiler.Domain\\Compiler.Domain.csproj"
+              "E:\\Code\\Compiler\\src\\Compiler.Domain\\Compiler.Domain.csproj": {
+                "projectPath": "E:\\Code\\Compiler\\src\\Compiler.Domain\\Compiler.Domain.csproj"
               }
             }
           }

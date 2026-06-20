@@ -14,12 +14,12 @@ namespace Compiler.Domain.Entities
         [JsonIgnore]
         public string idString { get { return id.ToString(); } }
         /// <summary>Nombre del proyecto</summary>
-        public string nombre { get; set; }
+        public string nombre { get; set; } = string.Empty;
         /// <summary>Listado de Aplicaciones que afectan  al proyecto</summary>
-        public List<Guid> aplicaciones { get; set; }
+        public List<Guid> aplicaciones { get; set; } = new List<Guid>();
         /// <summary>Listado de Aplicaciones que afectan  al proyecto</summary>
         [JsonIgnore]
-        public List<Aplicacion> _aplicaciones { get; set; }
+        public List<Aplicacion> _aplicaciones { get; set; } = new List<Aplicacion>();
         public Proyecto()
         {
             id = Guid.NewGuid();

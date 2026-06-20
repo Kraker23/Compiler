@@ -7,7 +7,7 @@
 <div class="mb-3">
     <label for="nombreProyecto" class="form-label">Nuevo proyecto</label>
     <div class="d-flex gap-2">
-        <input id="nombreProyecto" class="form-control" @bind="nuevoNombre" placeholder="Nombre del proyecto" />
+        <input id="nombreProyecto" class="form-control" @bind="nuevoNombre" @bind:event="oninput" placeholder="Nombre del proyecto" />
         <button class="btn btn-primary" @onclick="CrearProyecto" disabled="@string.IsNullOrWhiteSpace(nuevoNombre)">Crear</button>
     </div>
 </div>

@@ -16,7 +16,7 @@ namespace Compiler.Domain.Entities
         [JsonIgnore]
         public string idString { get { return id.ToString(); } }
         /// <summary>Nombre de la Carpeta</summary>
-        public string nombre { get; set; }
+        public string nombre { get; set; } = string.Empty;
         public Carpeta()
         {
             id = Guid.NewGuid();

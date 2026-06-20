@@ -16,7 +16,7 @@ namespace Compiler.Domain.Entities
         [JsonIgnore]
         public string idString { get { return id.ToString(); } }
         /// <summary>Nombre de la Regla</summary>
-        public string texto { get; set; }
+        public string texto { get; set; } = string.Empty;
         /// <summary>de que tipo es la regla</summary>
         public int tipoExclusion { get; set; }
         public ArchivoExclusion()

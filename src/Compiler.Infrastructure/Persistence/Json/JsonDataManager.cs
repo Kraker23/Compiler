@@ -4,9 +4,14 @@ namespace Compiler.Infrastructure.Persistence.Json;
 
 public class JsonDataManager : IJsonDataManager
 {
-    private static string GetArchivoDatos(Type archivo)
+    public JsonDataManager()
     {
-        return Path.Combine("Data", $"{archivo.Name}.json");
+    }
+
+    private string GetPathArchivoDatos(Type archivo)
+    {
+        var dataDirectory = string.IsNullOrWhiteSpace(JsonStorageContext.DataDirectory) ? "Data" : JsonStorageContext.DataDirectory;
+        return Path.Combine(AppContext.BaseDirectory, dataDirectory, $"{archivo.Name}.json");
     }
 
     public T CargarDatos<T>() where T : new()
@@ -17,8 +22,7 @@ public class JsonDataManager : IJsonDataManager
             itemType = typeof(T).GetGenericArguments()[0];
         }
 
-        string archivoDatos = GetArchivoDatos(itemType);
-        string pathArchivoDatos = Path.Combine(AppContext.BaseDirectory, archivoDatos);
+        string pathArchivoDatos = GetPathArchivoDatos(itemType);
         string? directorio = Path.GetDirectoryName(pathArchivoDatos);
 
         if (!string.IsNullOrWhiteSpace(directorio) && !Directory.Exists(directorio))
@@ -46,8 +50,7 @@ public class JsonDataManager : IJsonDataManager
 
     public void GuardarDatos<T>(List<T> datos) where T : new()
     {
-        string archivoDatos = GetArchivoDatos(typeof(T));
-        string pathArchivoDatos = Path.Combine(AppContext.BaseDirectory, archivoDatos);
+        string pathArchivoDatos = GetPathArchivoDatos(typeof(T));
         string? directorio = Path.GetDirectoryName(pathArchivoDatos);
 
         if (!string.IsNullOrWhiteSpace(directorio) && !Directory.Exists(directorio))

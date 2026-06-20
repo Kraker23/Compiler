@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "e:\\Code\\Compiler\\src\\Compiler.Domain\\Compiler.Domain.csproj": {}
+    "E:\\Code\\Compiler\\src\\Compiler.Domain\\Compiler.Domain.csproj": {}
   },
   "projects": {
-    "e:\\Code\\Compiler\\src\\Compiler.Domain\\Compiler.Domain.csproj": {
+    "E:\\Code\\Compiler\\src\\Compiler.Domain\\Compiler.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "e:\\Code\\Compiler\\src\\Compiler.Domain\\Compiler.Domain.csproj",
+        "projectUniqueName": "E:\\Code\\Compiler\\src\\Compiler.Domain\\Compiler.Domain.csproj",
         "projectName": "Compiler.Domain",
-        "projectPath": "e:\\Code\\Compiler\\src\\Compiler.Domain\\Compiler.Domain.csproj",
+        "projectPath": "E:\\Code\\Compiler\\src\\Compiler.Domain\\Compiler.Domain.csproj",
         "packagesPath": "C:\\Users\\Cristian\\.nuget\\packages\\",
-        "outputPath": "e:\\Code\\Compiler\\src\\Compiler.Domain\\obj\\",
+        "outputPath": "E:\\Code\\Compiler\\src\\Compiler.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

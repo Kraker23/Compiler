@@ -6,4 +6,7 @@
     <Project Path="src/Compiler.Tray/Compiler.Tray.csproj" />
     <Project Path="src/Compiler.Web/Compiler.Web.csproj" />
   </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Compiler.Tests/Compiler.Tests.csproj" />
+  </Folder>
 </Solution>

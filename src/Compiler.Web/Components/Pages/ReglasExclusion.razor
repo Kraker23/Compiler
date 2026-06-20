@@ -5,10 +5,19 @@
 
 <h1>Reglas de exclusión</h1>
 
+<div class="border rounded p-3 mb-4">
+    <div class="d-flex align-items-center justify-content-between mb-3">
+        <h2 class="h5 mb-0">@(editandoRegla ? "Editar regla" : "Nueva regla")</h2>
+        @if (editandoRegla)
+        {
+            <button class="btn btn-sm btn-outline-secondary" @onclick="CancelarEdicion">Cancelar edicion</button>
+        }
+    </div>
+
 <div class="row g-3 mb-3">
     <div class="col-md-8">
         <label class="form-label" for="textoExclusion">Texto</label>
-        <input id="textoExclusion" class="form-control" @bind="nuevoTexto" placeholder="Extension, nombre o nombre completo" />
+        <input id="textoExclusion" class="form-control" @bind="nuevoTexto" @bind:event="oninput" placeholder="Extension, nombre o nombre completo" />
     </div>
     <div class="col-md-4">
         <label class="form-label" for="tipoExclusion">Tipo</label>
@@ -22,8 +31,10 @@
 </div>
 
 <div class="d-flex gap-2 mb-3">
-    <button class="btn btn-primary" @onclick="CrearRegla" disabled="@string.IsNullOrWhiteSpace(nuevoTexto)">Crear regla</button>
+    <button class="btn btn-primary" @onclick="GuardarRegla" disabled="@string.IsNullOrWhiteSpace(nuevoTexto)">@(editandoRegla ? "Guardar regla" : "Crear regla")</button>
     <button class="btn btn-outline-secondary" @onclick="Limpiar">Limpiar</button>
+</div>
+
 </div>
 
 @if (!string.IsNullOrWhiteSpace(mensaje))
@@ -37,6 +48,12 @@
 }
 else
 {
+    <div class="mb-3">
+        <label class="form-label" for="filtroReglasExclusion">Buscar</label>
+        <input id="filtroReglasExclusion" class="form-control" @bind="filtroReglas" placeholder="Texto o tipo" />
+        <div class="form-text">Mostrando @ReglasFiltradas.Count() de @reglas.Count reglas.</div>
+    </div>
+
     <table class="table table-striped align-middle">
         <thead>
             <tr>
@@ -46,13 +63,16 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var regla in reglas)
+            @foreach (var regla in ReglasFiltradas)
             {
                 <tr>
                     <td>@regla.texto</td>
                     <td>@regla.tipoExclusion</td>
                     <td>
-                        <button class="btn btn-sm btn-outline-danger" @onclick="() => BorrarRegla(regla.id)">Borrar</button>
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-sm btn-outline-primary" @onclick="() => EditarRegla(regla.id)">Editar</button>
+                            <button class="btn btn-sm btn-outline-danger" @onclick="() => BorrarRegla(regla.id)">Borrar</button>
+                        </div>
                     </td>
                 </tr>
             }
@@ -66,10 +86,13 @@ else
 
     private List<ArchivoExclusion> reglas = [];
     private List<Compiler.Domain.Enums.EnumBase> tipos = getListTipoExclusionAdmision();
+    private string filtroReglas = string.Empty;
     private string nuevoTexto = string.Empty;
     private int nuevoTipo;
     private string mensaje = string.Empty;
     private bool error;
+    private bool editandoRegla;
+    private Guid? reglaEdicionId;
 
     protected override void OnInitialized()
     {
@@ -81,7 +104,23 @@ else
         reglas = ExclusionService.GetArchivoExclusiones();
     }
 
-    private void CrearRegla()
+    private IEnumerable<ArchivoExclusion> ReglasFiltradas
+    {
+        get
+        {
+            var filtro = filtroReglas.Trim();
+            if (string.IsNullOrWhiteSpace(filtro))
+            {
+                return reglas;
+            }
+
+            return reglas.Where(regla =>
+                (regla.texto ?? string.Empty).Contains(filtro, StringComparison.OrdinalIgnoreCase) ||
+                regla.tipoExclusion.ToString().Contains(filtro, StringComparison.OrdinalIgnoreCase));
+        }
+    }
+
+    private void GuardarRegla()
     {
         var texto = nuevoTexto.Trim();
         if (string.IsNullOrWhiteSpace(texto))
@@ -93,14 +132,33 @@ else
 
         ExclusionService.ModificarArchivoExclusion(new ArchivoExclusion
         {
+            id = reglaEdicionId ?? Guid.NewGuid(),
             texto = texto,
             tipoExclusion = nuevoTipo
         });
 
-        mensaje = "Regla de exclusión creada.";
+        mensaje = editandoRegla ? "Regla de exclusión guardada." : "Regla de exclusión creada.";
         error = false;
         Limpiar();
         Cargar();
+    }
+
+    private void EditarRegla(Guid id)
+    {
+        var regla = reglas.FirstOrDefault(x => x.id == id);
+        if (regla == null)
+        {
+            mensaje = "No se pudo cargar la regla seleccionada.";
+            error = true;
+            return;
+        }
+
+        editandoRegla = true;
+        reglaEdicionId = regla.id;
+        nuevoTexto = regla.texto ?? string.Empty;
+        nuevoTipo = regla.tipoExclusion;
+        mensaje = string.Empty;
+        error = false;
     }
 
     private void BorrarRegla(Guid id)
@@ -128,7 +186,14 @@ else
 
     private void Limpiar()
     {
+        editandoRegla = false;
+        reglaEdicionId = null;
         nuevoTexto = string.Empty;
         nuevoTipo = 0;
+    }
+
+    private void CancelarEdicion()
+    {
+        Limpiar();
     }
 }

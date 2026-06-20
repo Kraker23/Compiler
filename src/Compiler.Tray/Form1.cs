@@ -1,6 +1,7 @@
 using Compiler.Application.Contracts.Services;
 using Compiler.Domain.Entities;
 using System.Diagnostics;
+using System.Drawing;
 
 namespace Compiler.Tray;
 
@@ -8,20 +9,24 @@ public partial class Form1 : Form
 {
     private readonly IProyectoService proyectoService;
     private readonly ITaskRunnerService taskRunnerService;
+    private readonly TraySettings traySettings;
     private readonly NotifyIcon notifyIcon;
     private readonly ContextMenuStrip trayMenu;
     private bool permitirCerrar;
 
-    public Form1(IProyectoService proyectoService, ITaskRunnerService taskRunnerService)
+    public Form1(IProyectoService proyectoService, ITaskRunnerService taskRunnerService, TraySettings traySettings)
     {
         this.proyectoService = proyectoService;
         this.taskRunnerService = taskRunnerService;
+        this.traySettings = traySettings;
         InitializeComponent();
 
         trayMenu = new ContextMenuStrip();
+        var iconPath = Path.Combine(AppContext.BaseDirectory, "compilador.ico");
+        var trayIcon = File.Exists(iconPath) ? new Icon(iconPath) : SystemIcons.Application;
         notifyIcon = new NotifyIcon
         {
-            Icon = SystemIcons.Application,
+            Icon = trayIcon,
             Text = "Compiler Next",
             Visible = true,
             ContextMenuStrip = trayMenu
@@ -29,6 +34,7 @@ public partial class Form1 : Form
 
         notifyIcon.DoubleClick += (_, _) => MostrarVentana();
         Load += (_, _) => ConfigurarTray();
+        Load += (_, _) => { if (traySettings.AutoOpenWebOnStart) AbrirWeb(); };
         FormClosing += OnFormClosing;
         WindowState = FormWindowState.Minimized;
         ShowInTaskbar = false;
@@ -106,13 +112,13 @@ public partial class Form1 : Form
         Activate();
     }
 
-    private static void AbrirWeb()
+    private void AbrirWeb()
     {
         try
         {
             Process.Start(new ProcessStartInfo
             {
-                FileName = "http://localhost:5071/proyectos",
+                FileName = traySettings.WebUrl,
                 UseShellExecute = true
             });
         }

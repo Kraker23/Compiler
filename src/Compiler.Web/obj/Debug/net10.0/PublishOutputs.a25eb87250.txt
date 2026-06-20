@@ -1,0 +1,14 @@
+E:\Code\Compiler\artifacts\published\Web\Compiler.Web.exe
+E:\Code\Compiler\artifacts\published\Web\appsettings.Development.json
+E:\Code\Compiler\artifacts\published\Web\appsettings.json
+E:\Code\Compiler\artifacts\published\Web\Compiler.Web.dll
+E:\Code\Compiler\artifacts\published\Web\Compiler.Web.runtimeconfig.json
+E:\Code\Compiler\artifacts\published\Web\Compiler.Web.pdb
+E:\Code\Compiler\artifacts\published\Web\Newtonsoft.Json.dll
+E:\Code\Compiler\artifacts\published\Web\Compiler.Application.dll
+E:\Code\Compiler\artifacts\published\Web\Compiler.Domain.dll
+E:\Code\Compiler\artifacts\published\Web\Compiler.Infrastructure.dll
+E:\Code\Compiler\artifacts\published\Web\Compiler.Application.pdb
+E:\Code\Compiler\artifacts\published\Web\Compiler.Infrastructure.pdb
+E:\Code\Compiler\artifacts\published\Web\Compiler.Domain.pdb
+E:\Code\Compiler\artifacts\published\Web\Compiler.Web.deps.json

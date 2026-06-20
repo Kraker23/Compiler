@@ -24,3 +24,13 @@ e:\Code\Compiler\src\Compiler.Tray\obj\Debug\net10.0-windows\ref\Compiler.Tray.d
 e:\Code\Compiler\src\Compiler.Tray\bin\Debug\net10.0-windows\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 e:\Code\Compiler\src\Compiler.Tray\bin\Debug\net10.0-windows\Newtonsoft.Json.dll
 e:\Code\Compiler\src\Compiler.Tray\bin\Debug\net10.0-windows\Microsoft.Extensions.DependencyInjection.dll
+e:\Code\Compiler\src\Compiler.Tray\bin\Debug\net10.0-windows\appsettings.json
+e:\Code\Compiler\src\Compiler.Tray\bin\Debug\net10.0-windows\Microsoft.Extensions.Configuration.dll
+e:\Code\Compiler\src\Compiler.Tray\bin\Debug\net10.0-windows\Microsoft.Extensions.Configuration.Abstractions.dll
+e:\Code\Compiler\src\Compiler.Tray\bin\Debug\net10.0-windows\Microsoft.Extensions.Configuration.FileExtensions.dll
+e:\Code\Compiler\src\Compiler.Tray\bin\Debug\net10.0-windows\Microsoft.Extensions.Configuration.Json.dll
+e:\Code\Compiler\src\Compiler.Tray\bin\Debug\net10.0-windows\Microsoft.Extensions.FileProviders.Abstractions.dll
+e:\Code\Compiler\src\Compiler.Tray\bin\Debug\net10.0-windows\Microsoft.Extensions.FileProviders.Physical.dll
+e:\Code\Compiler\src\Compiler.Tray\bin\Debug\net10.0-windows\Microsoft.Extensions.FileSystemGlobbing.dll
+e:\Code\Compiler\src\Compiler.Tray\bin\Debug\net10.0-windows\Microsoft.Extensions.Primitives.dll
+e:\Code\Compiler\src\Compiler.Tray\bin\Debug\net10.0-windows\compilador.ico

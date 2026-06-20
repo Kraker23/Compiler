@@ -10,7 +10,7 @@ namespace Compiler.Domain.Enums
     public class EnumBase
     {
         public int Id { get; set; }
-        public string Descripcion { get; set; }
+        public string Descripcion { get; set; } = string.Empty;
         public override string ToString()
         {
             return $"[{Id}]-{Descripcion}"; 

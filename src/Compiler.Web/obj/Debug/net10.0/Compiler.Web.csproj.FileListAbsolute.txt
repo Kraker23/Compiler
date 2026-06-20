@@ -93,3 +93,4 @@ e:\Code\Compiler\src\Compiler.Web\obj\Debug\net10.0\Compiler.Web.pdb
 e:\Code\Compiler\src\Compiler.Web\obj\Debug\net10.0\Compiler.Web.genruntimeconfig.cache
 e:\Code\Compiler\src\Compiler.Web\obj\Debug\net10.0\ref\Compiler.Web.dll
 e:\Code\Compiler\src\Compiler.Web\bin\Debug\net10.0\Newtonsoft.Json.dll
+e:\Code\Compiler\src\Compiler.Web\obj\Debug\net10.0\compressed\e0fzb8h9la-{0}-frfvzfer8p-frfvzfer8p.gz

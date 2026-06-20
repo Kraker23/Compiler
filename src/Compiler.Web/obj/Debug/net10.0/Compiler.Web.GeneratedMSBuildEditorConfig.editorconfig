@@ -12,81 +12,81 @@ build_property.EntryPointFilePath =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Compiler.Web
 build_property.RootNamespace = Compiler.Web
-build_property.ProjectDir = e:\Code\Compiler\src\Compiler.Web\
+build_property.ProjectDir = E:\Code\Compiler\src\Compiler.Web\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 10.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = e:\Code\Compiler\src\Compiler.Web
+build_property.MSBuildProjectDirectory = E:\Code\Compiler\src\Compiler.Web
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 10.0
 build_property.EnableCodeStyleSeverity = 
 
-[e:/Code/Compiler/src/Compiler.Web/Components/App.razor]
+[E:/Code/Compiler/src/Compiler.Web/Components/App.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBcHAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[e:/Code/Compiler/src/Compiler.Web/Components/Pages/Aplicaciones.razor]
+[E:/Code/Compiler/src/Compiler.Web/Components/Pages/Aplicaciones.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBcGxpY2FjaW9uZXMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[e:/Code/Compiler/src/Compiler.Web/Components/Pages/Carpetas.razor]
+[E:/Code/Compiler/src/Compiler.Web/Components/Pages/Carpetas.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDYXJwZXRhcy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[e:/Code/Compiler/src/Compiler.Web/Components/Pages/Counter.razor]
+[E:/Code/Compiler/src/Compiler.Web/Components/Pages/Counter.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb3VudGVyLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[e:/Code/Compiler/src/Compiler.Web/Components/Pages/Ejecucion.razor]
+[E:/Code/Compiler/src/Compiler.Web/Components/Pages/Ejecucion.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFamVjdWNpb24ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[e:/Code/Compiler/src/Compiler.Web/Components/Pages/Error.razor]
+[E:/Code/Compiler/src/Compiler.Web/Components/Pages/Error.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFcnJvci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[e:/Code/Compiler/src/Compiler.Web/Components/Pages/Home.razor]
+[E:/Code/Compiler/src/Compiler.Web/Components/Pages/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xIb21lLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[e:/Code/Compiler/src/Compiler.Web/Components/Pages/NotFound.razor]
+[E:/Code/Compiler/src/Compiler.Web/Components/Pages/NotFound.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xOb3RGb3VuZC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[e:/Code/Compiler/src/Compiler.Web/Components/Pages/Proyectos.razor]
+[E:/Code/Compiler/src/Compiler.Web/Components/Pages/Proyectos.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQcm95ZWN0b3MucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[e:/Code/Compiler/src/Compiler.Web/Components/Pages/ReglasAdmitidos.razor]
+[E:/Code/Compiler/src/Compiler.Web/Components/Pages/ReglasAdmitidos.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xSZWdsYXNBZG1pdGlkb3MucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[e:/Code/Compiler/src/Compiler.Web/Components/Pages/ReglasExclusion.razor]
+[E:/Code/Compiler/src/Compiler.Web/Components/Pages/ReglasExclusion.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xSZWdsYXNFeGNsdXNpb24ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[e:/Code/Compiler/src/Compiler.Web/Components/Pages/Weather.razor]
+[E:/Code/Compiler/src/Compiler.Web/Components/Pages/Weather.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xXZWF0aGVyLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[e:/Code/Compiler/src/Compiler.Web/Components/Routes.razor]
+[E:/Code/Compiler/src/Compiler.Web/Components/Routes.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xSb3V0ZXMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[e:/Code/Compiler/src/Compiler.Web/Components/_Imports.razor]
+[E:/Code/Compiler/src/Compiler.Web/Components/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xfSW1wb3J0cy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[e:/Code/Compiler/src/Compiler.Web/Components/Layout/MainLayout.razor]
+[E:/Code/Compiler/src/Compiler.Web/Components/Layout/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTWFpbkxheW91dC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-obxqcyujqr
 
-[e:/Code/Compiler/src/Compiler.Web/Components/Layout/NavMenu.razor]
+[E:/Code/Compiler/src/Compiler.Web/Components/Layout/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTmF2TWVudS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-tedwv9wd1o
 
-[e:/Code/Compiler/src/Compiler.Web/Components/Layout/ReconnectModal.razor]
+[E:/Code/Compiler/src/Compiler.Web/Components/Layout/ReconnectModal.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcUmVjb25uZWN0TW9kYWwucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-2vrz6v13u0

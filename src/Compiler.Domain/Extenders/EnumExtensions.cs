@@ -64,10 +64,14 @@ namespace Compiler.Domain.Extenders
 
         public static string GetDescription(this Enum value)
         {
-            FieldInfo fieldInfo = value.GetType().GetField(value.ToString());
-            if (fieldInfo == null) return null;
-            var attribute = (DescriptionAttribute)fieldInfo.GetCustomAttribute(typeof(DescriptionAttribute));
-            return attribute.Description;
+            FieldInfo? fieldInfo = value.GetType().GetField(value.ToString());
+            if (fieldInfo == null)
+            {
+                return string.Empty;
+            }
+
+            var attribute = fieldInfo.GetCustomAttribute<DescriptionAttribute>();
+            return attribute?.Description ?? fieldInfo.Name;
         }
     }
 }

@@ -4,12 +4,23 @@
 
 <h1>Carpetas</h1>
 
+<div class="border rounded p-3 mb-4">
+    <div class="d-flex align-items-center justify-content-between mb-3">
+        <h2 class="h5 mb-0">@(editandoCarpeta ? "Editar carpeta" : "Nueva carpeta")</h2>
+        @if (editandoCarpeta)
+        {
+            <button class="btn btn-sm btn-outline-secondary" @onclick="CancelarEdicion">Cancelar edicion</button>
+        }
+    </div>
+
 <div class="mb-3">
     <label for="nombreCarpeta" class="form-label">Nueva carpeta</label>
     <div class="d-flex gap-2">
-        <input id="nombreCarpeta" class="form-control" @bind="nuevoNombre" placeholder="Nombre de la carpeta" />
-        <button class="btn btn-primary" @onclick="CrearCarpeta" disabled="@string.IsNullOrWhiteSpace(nuevoNombre)">Crear</button>
+        <input id="nombreCarpeta" class="form-control" @bind="nuevoNombre" @bind:event="oninput" placeholder="Nombre de la carpeta" />
+        <button class="btn btn-primary" @onclick="GuardarCarpeta" disabled="@string.IsNullOrWhiteSpace(nuevoNombre)">@(editandoCarpeta ? "Guardar" : "Crear")</button>
     </div>
+</div>
+
 </div>
 
 @if (!string.IsNullOrWhiteSpace(mensaje))
@@ -23,6 +34,12 @@
 }
 else
 {
+    <div class="mb-3">
+        <label class="form-label" for="filtroCarpetas">Buscar</label>
+        <input id="filtroCarpetas" class="form-control" @bind="filtroCarpetas" placeholder="Nombre de carpeta" />
+        <div class="form-text">Mostrando @CarpetasFiltradas.Count() de @carpetas.Count carpetas.</div>
+    </div>
+
     <table class="table table-striped align-middle">
         <thead>
             <tr>
@@ -31,12 +48,15 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var carpeta in carpetas)
+            @foreach (var carpeta in CarpetasFiltradas)
             {
                 <tr>
                     <td>@carpeta.nombre</td>
                     <td>
-                        <button class="btn btn-sm btn-outline-danger" @onclick="() => BorrarCarpeta(carpeta.id)">Borrar</button>
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-sm btn-outline-primary" @onclick="() => EditarCarpeta(carpeta.id)">Editar</button>
+                            <button class="btn btn-sm btn-outline-danger" @onclick="() => BorrarCarpeta(carpeta.id)">Borrar</button>
+                        </div>
                     </td>
                 </tr>
             }
@@ -49,9 +69,12 @@ else
     [Inject] private IAplicacionService AplicacionService { get; set; } = default!;
 
     private List<Carpeta> carpetas = [];
+    private string filtroCarpetas = string.Empty;
     private string nuevoNombre = string.Empty;
     private string mensaje = string.Empty;
     private bool error;
+    private bool editandoCarpeta;
+    private Guid? carpetaEdicionId;
 
     protected override void OnInitialized()
     {
@@ -63,7 +86,21 @@ else
         carpetas = CarpetaService.GetCarpetas();
     }
 
-    private void CrearCarpeta()
+    private IEnumerable<Carpeta> CarpetasFiltradas
+    {
+        get
+        {
+            var filtro = filtroCarpetas.Trim();
+            if (string.IsNullOrWhiteSpace(filtro))
+            {
+                return carpetas;
+            }
+
+            return carpetas.Where(carpeta => (carpeta.nombre ?? string.Empty).Contains(filtro, StringComparison.OrdinalIgnoreCase));
+        }
+    }
+
+    private void GuardarCarpeta()
     {
         var nombre = nuevoNombre.Trim();
         if (string.IsNullOrWhiteSpace(nombre))
@@ -79,10 +116,29 @@ else
         };
 
         CarpetaService.ModificarCarpeta(carpeta);
-        mensaje = $"Carpeta '{nombre}' creada.";
+        mensaje = editandoCarpeta ? $"Carpeta '{nombre}' guardada." : $"Carpeta '{nombre}' creada.";
         error = false;
         nuevoNombre = string.Empty;
+        editandoCarpeta = false;
+        carpetaEdicionId = null;
         CargarCarpetas();
+    }
+
+    private void EditarCarpeta(Guid idCarpeta)
+    {
+        var carpeta = carpetas.FirstOrDefault(x => x.id == idCarpeta);
+        if (carpeta == null)
+        {
+            mensaje = "No se pudo cargar la carpeta seleccionada.";
+            error = true;
+            return;
+        }
+
+        editandoCarpeta = true;
+        carpetaEdicionId = carpeta.id;
+        nuevoNombre = carpeta.nombre ?? string.Empty;
+        mensaje = string.Empty;
+        error = false;
     }
 
     private void BorrarCarpeta(Guid idCarpeta)
@@ -106,5 +162,12 @@ else
         mensaje = "Carpeta eliminada.";
         error = false;
         CargarCarpetas();
+    }
+
+    private void CancelarEdicion()
+    {
+        editandoCarpeta = false;
+        carpetaEdicionId = null;
+        nuevoNombre = string.Empty;
     }
 }

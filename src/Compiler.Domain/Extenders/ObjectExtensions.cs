@@ -13,6 +13,16 @@ namespace Compiler.Domain.Extenders
     {
         public static bool isEqualTo<T>(this T val1, T val2)
         {
+            if (ReferenceEquals(val1, val2))
+            {
+                return true;
+            }
+
+            if (val1 is null || val2 is null)
+            {
+                return false;
+            }
+
             PropertyInfo[] propertyInfos = val1.GetType().GetProperties();
             foreach (PropertyInfo p in propertyInfos)
             {
@@ -28,13 +38,25 @@ namespace Compiler.Domain.Extenders
         public static bool CompareObjects<T, T2>(T a, T2 b)
         {
             bool res = true;
+            if (a is null || b is null)
+            {
+                return false;
+            }
+
             var tipoA = typeof(T);
             var tipoB = typeof(T2);
             var props = tipoA.GetProperties().FindAllToList(x => tipoB.GetProperties().Any(y => y.Name == x.Name && y.PropertyType == x.PropertyType));
             foreach (var p in props)
             {
-                var valA = tipoA.GetProperty(p.Name).GetValue(a);
-                var valB = tipoB.GetProperty(p.Name).GetValue(b);
+                var propA = tipoA.GetProperty(p.Name);
+                var propB = tipoB.GetProperty(p.Name);
+                if (propA == null || propB == null)
+                {
+                    return false;
+                }
+
+                var valA = propA.GetValue(a);
+                var valB = propB.GetValue(b);
                 if (valA == null && valB == null)
                 {
                     res = true;
@@ -70,7 +92,7 @@ namespace Compiler.Domain.Extenders
                 {
                     resultado += $".{x.texto}{Environment.NewLine}";
                 }
-                else if (x.tipoExclusion == (int)TipoExclusionAdmision.NombreCompleto
+                else if (x.tipoExclusion == (int)TipoExclusionAdmision.Nombre
                 || x.tipoExclusion == (int)TipoExclusionAdmision.NombreCompleto)
                 {
                     resultado += $"{x.texto}{Environment.NewLine}";

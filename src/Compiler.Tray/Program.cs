@@ -1,5 +1,6 @@
 using Compiler.Application;
 using Compiler.Infrastructure;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Compiler.Tray;
@@ -15,9 +16,19 @@ static class Program
         System.Windows.Forms.Application.EnableVisualStyles();
         System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
 
+        var configuration = new ConfigurationBuilder()
+            .SetBasePath(AppContext.BaseDirectory)
+            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: false)
+            .Build();
+
         var services = new ServiceCollection();
         services.AddApplicationServices();
-        services.AddInfrastructureServices();
+        services.AddSingleton(new TraySettings
+        {
+            WebUrl = configuration["Tray:WebUrl"] ?? "http://localhost:5000/proyectos",
+            AutoOpenWebOnStart = bool.TryParse(configuration["Tray:AutoOpenWebOnStart"], out var autoOpen) && autoOpen
+        });
+        services.AddInfrastructureServices(configuration["Storage:DataDirectory"]);
         services.AddTransient<Form1>();
 
         using var serviceProvider = services.BuildServiceProvider();

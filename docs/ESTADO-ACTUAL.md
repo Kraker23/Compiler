@@ -27,6 +27,7 @@ Capacidades actuales:
 - Crear y borrar proyectos.
 - Asociar aplicaciones a proyectos.
 - Crear y borrar aplicaciones.
+- Editar aplicaciones existentes, incluyendo carpeta y reglas asociadas.
 - Configurar en aplicaciones:
   - carpeta
   - ubicacion de compilacion
@@ -35,7 +36,8 @@ Capacidades actuales:
   - reglas de exclusion
   - reglas de admitidos
 - Crear y borrar carpetas.
-- Crear y borrar reglas de exclusion y admitidos.
+- Editar carpetas existentes.
+- Crear, editar y borrar reglas de exclusion y admitidos.
 - Ejecutar por proyecto:
   - copiar
   - compilar
@@ -55,6 +57,21 @@ Capacidades actuales:
 dotnet build "e:\Code\Compiler\Compiler.Next.slnx"
 ```
 
+### Arrancar Web y Tray
+```powershell
+e:\Code\Compiler\Start-Compiler.ps1
+```
+
+### Arrancar solo Web y Tray publicados
+```powershell
+e:\Code\Compiler\Start-Compiler-RunOnly.ps1
+```
+
+### Detener Web y Tray publicados
+```powershell
+e:\Code\Compiler\Stop-Compiler.ps1
+```
+
 ### Ejecutar Web
 ```powershell
 dotnet run --project "e:\Code\Compiler\src\Compiler.Web\Compiler.Web.csproj"
@@ -66,26 +83,26 @@ dotnet run --project "e:\Code\Compiler\src\Compiler.Tray\Compiler.Tray.csproj"
 ```
 
 ## Estado tecnico importante
-- La persistencia sigue siendo JSON en `AppContext.BaseDirectory/Data/`.
+- La persistencia de Web y Tray usa una carpeta compartida `artifacts/published/SharedData` (via `Storage:DataDirectory = ..\\SharedData`).
 - El servicio compartido de ejecucion usa `xcopy` para copiar y `comandoCompilado` o `dotnet build` como fallback para compilar.
-- El tray abre la web apuntando a una URL local fija; eso aun no esta automatizado.
-- Existen advertencias de nullability heredadas del modelo legacy, pero no bloquean compilacion.
+- El tray abre la web desde una URL configurable en `appsettings.json` y puede autoabrirla al iniciar si se activa esa opcion.
+- La Web publicada se esta sirviendo en `http://localhost:5000` y el tray apunta a esa URL por defecto.
+- La mayor parte de las advertencias de nullability heredadas ya se redujo con inicializacion por defecto en el dominio.
+- Existe una carpeta de salida publicada en `artifacts/published/` para arrancar Web y Tray sin recompilar.
+- El script de arranque inicializa `SharedData` automaticamente desde `Web/Data` y `Tray/Data` si aun no hay datos compartidos.
 
 ## Limitaciones actuales
-- No hay edicion completa de entidades existentes; muchas pantallas permiten crear y borrar, pero no editar en profundidad.
-- La UI sigue siendo funcional/pragmatica; falta una pasada de UX.
-- No hay arranque automatico coordinado entre Web y Tray.
-- No hay pruebas automatizadas todavia.
+- La UI sigue siendo funcional/pragmatica; aun puede pulirse, pero ya tiene filtros y busqueda basica en las pantallas CRUD.
+- No hay arranque automatico completo coordinado entre Web y Tray; solo existe autoapertura opcional de la web desde el tray.
+- Falta una validacion con datos reales de operacion.
 
 ## Siguientes pasos recomendados
-1. Añadir edicion completa de aplicaciones existentes.
-2. Añadir edicion completa de carpetas y reglas.
-3. Probar un flujo real con datos tuyos: crear carpeta, reglas, aplicacion, proyecto y ejecutar copiar/compilar.
-4. Mejorar la gestion de persistencia/configuracion para no depender de rutas implicitas de `AppContext.BaseDirectory`.
-5. Revisar nullability y nombres legacy para reducir deuda tecnica.
-6. Preparar arranque conjunto o deteccion de Web desde Tray.
+1. Probar un flujo real con datos tuyos: crear carpeta, reglas, aplicacion, proyecto y ejecutar copiar/compilar.
+2. Revisar nombres legacy y consistencia de contratos para reducir deuda tecnica restante.
+3. Evaluar si merece la pena un arranque coordinado mas avanzado entre Web y Tray.
+4. Mantener y ampliar las pruebas automatizadas para los casos criticos de negocio.
 
 ## Punto exacto para continuar manana
-- Empezar por `src/Compiler.Web/Components/Pages/Aplicaciones.razor` para convertir el CRUD inicial en una pantalla de edicion real.
-- Despues seguir con `src/Compiler.Web/Components/Pages/Carpetas.razor`, `ReglasExclusion.razor` y `ReglasAdmitidos.razor`.
-- Si se quiere validar funcionalmente antes de refinar UI, ejecutar la web y cargar un caso real completo desde cero.
+- Validar en entorno real el flujo completo con una carpeta, reglas, aplicacion y proyecto de prueba.
+- Si aparece algun detalle de comportamiento, corregir primero la logica antes de tocar la UI.
+- Luego decidir si vale la pena invertir en arranque coordinado mas fuerte o en mas pruebas.

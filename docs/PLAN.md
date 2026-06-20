@@ -79,19 +79,20 @@ Construir una nueva base de aplicación web usando la idea del proyecto actual, 
 - `Compiler.Web` ya expone CRUD inicial de reglas de exclusión (`/reglas-exclusion`) y admitidos (`/reglas-admitidos`).
 - `Compiler.Web` incorpora página de ejecución (`/ejecucion`) para lanzar copiado, compilación y compilar+copiar por proyecto.
 - `Compiler.Web` ya permite asociar aplicaciones a proyectos, y configurar aplicaciones con carpeta y reglas base.
+- `Compiler.Web` ya permite editar aplicaciones, carpetas y reglas existentes desde sus pantallas CRUD.
+- `Compiler.Web` incorpora filtros de busqueda y contadores basicos en las pantallas CRUD principales.
 - `Compiler.Tray` quedó conectado por DI a la misma capa de servicios, con acciones reales de copiar, compilar y compilar+copiar por proyecto.
+- `Compiler.Tray` usa URL y ruta de datos configurables desde `appsettings.json`.
 - Se implementó `ITaskRunnerService` con ejecución unificada de copiado y compilación en Application + Infrastructure.
+- Se añadieron pruebas unitarias para servicios de negocio clave.
 - La solución compila correctamente con integración completa entre capas.
-- El siguiente paso es mejorar edición de entidades existentes y cerrar pruebas funcionales completas con datos reales.
+- El siguiente paso es validar un flujo real completo con datos tuyos y luego decidir si hace falta un arranque coordinado más avanzado.
 
 ## Siguientes pasos
-1. Añadir edición completa de aplicaciones existentes.
-2. Añadir edición completa de carpetas existentes.
-3. Añadir edición completa de reglas de exclusión y admitidos.
-4. Ejecutar una prueba funcional real con datos completos desde la web.
-5. Mejorar configuración/persistencia para no depender solo de `AppContext.BaseDirectory`.
-6. Reducir deuda técnica: nullability, nombres legacy y consistencia de contratos.
-7. Revisar arranque coordinado o detección automática entre Web y Tray.
+1. Ejecutar una prueba funcional real con datos completos desde la web.
+2. Reducir deuda técnica restante: nombres legacy y consistencia de contratos.
+3. Revisar si hace falta un arranque coordinado más avanzado entre Web y Tray.
+4. Mantener y ampliar las pruebas automatizadas para los casos críticos de negocio.
 
 ## Checklist de implementación inicial
 - [x] Crear la nueva solución y proyectos base.

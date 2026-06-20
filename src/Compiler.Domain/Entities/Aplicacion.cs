@@ -16,26 +16,26 @@ namespace Compiler.Domain.Entities
         /// <summary>IdCarpeta</summary>
         public Guid? fk_IdCarpeta { get; set; }
         /// <summary>Nombre de la Aplicacion</summary>
-        public string nombre { get; set; }
+        public string nombre { get; set; } = string.Empty;
         /// <summary>Ubicacion de la aplicacion (csproj o sln)</summary>
-        public string ubicacionAplicacion { get; set; }
+        public string ubicacionAplicacion { get; set; } = string.Empty;
         /// <summary>Ubicacion donde se encuentra el compilado</summary>
-        public string carpetaCompilado { get; set; }
+        public string carpetaCompilado { get; set; } = string.Empty;
         /// <summary> Ruta Destino a donde se Copiara </summary>
-        public string carpetaPublicacion { get; set; }
+        public string carpetaPublicacion { get; set; } = string.Empty;
         /// <summary> el comando que se usara para compilar </summary>
-        public string comandoCompilado { get; set; }
+        public string comandoCompilado { get; set; } = string.Empty;
 
         /// <summary>Listado de Reglas para copiar</summary>
-        public List<Guid> archivosExcluidos { get; set; }
+        public List<Guid> archivosExcluidos { get; set; } = new List<Guid>();
         [JsonIgnore]
-        public List<ArchivoExclusion> _archivosExcluidos { get; set; }
+        public List<ArchivoExclusion> _archivosExcluidos { get; set; } = new List<ArchivoExclusion>();
 
 
         /// <summary>Listado de Reglas para copiar</summary>
-        public List<Guid> archivosAdmitidos { get; set; }
+        public List<Guid> archivosAdmitidos { get; set; } = new List<Guid>();
         [JsonIgnore]
-        public List<ArchivoAdmitido> _archivosAdmitidos { get; set; }
+        public List<ArchivoAdmitido> _archivosAdmitidos { get; set; } = new List<ArchivoAdmitido>();
         [JsonIgnore]
         public bool isNew { get; set; } = false;
 

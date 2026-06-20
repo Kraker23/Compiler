@@ -108,8 +108,8 @@
           "framework": "net10.0",
           "targetAlias": "net10.0",
           "projectReferences": {
-            "e:\\Code\\Compiler\\src\\Compiler.Domain\\Compiler.Domain.csproj": {
-              "projectPath": "e:\\Code\\Compiler\\src\\Compiler.Domain\\Compiler.Domain.csproj"
+            "E:\\Code\\Compiler\\src\\Compiler.Domain\\Compiler.Domain.csproj": {
+              "projectPath": "E:\\Code\\Compiler\\src\\Compiler.Domain\\Compiler.Domain.csproj"
             }
           }
         }

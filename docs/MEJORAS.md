@@ -9,6 +9,7 @@
 - Objetivo: evitar duplicar lógica entre web, notifyicon y posibles futuros clientes.
 - Impacto: alto.
 - Esfuerzo: medio.
+- Estado: completada.
 - Acciones:
   - Definir contrato de servicio de tareas en capa de aplicación.
   - Implementar ejecución en infraestructura (PowerShell/comandos).
@@ -19,6 +20,7 @@
 - Objetivo: ordenar flujos de Proyectos, Aplicaciones y Reglas.
 - Impacto: alto.
 - Esfuerzo: medio.
+- Estado: parcialmente completada.
 - Acciones:
   - Vistas separadas para consulta, edición y ejecución.
   - Confirmaciones y errores con componentes web, sin dependencias desktop.
@@ -29,6 +31,7 @@
 - Objetivo: evitar rutas rígidas y parámetros dispersos.
 - Impacto: alto.
 - Esfuerzo: bajo.
+- Estado: completada.
 - Acciones:
   - Configurar rutas de datos/publicación en settings.
   - Definir valores por entorno (desarrollo, producción).
@@ -39,6 +42,7 @@
 - Objetivo: reducir deuda técnica para acelerar cambios.
 - Impacto: medio.
 - Esfuerzo: medio.
+- Estado: completada.
 - Acciones:
   - Normalizar nombres de interfaces y métodos.
   - Eliminar dependencias externas no controladas.
@@ -49,10 +53,12 @@
 - Objetivo: mantener acciones rápidas sin duplicar UI completa.
 - Impacto: medio.
 - Esfuerzo: medio.
+- Estado: parcialmente completada.
 - Acciones:
   - Menú dinámico por proyectos favoritos.
   - Últimas ejecuciones y estado de tarea.
   - Acción de abrir vista web en contexto.
+  - Autoapertura opcional de la web al arrancar.
 - Riesgo actual que resuelve: tray limitado o inconsistente con la web.
 
 ## Secuencia recomendada

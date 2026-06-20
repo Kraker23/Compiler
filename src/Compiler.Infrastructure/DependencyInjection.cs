@@ -9,9 +9,10 @@ namespace Compiler.Infrastructure;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
+    public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, string? dataDirectory = null)
     {
         services.AddSingleton<ICommandRunner, CommandRunner>();
+        JsonStorageContext.DataDirectory = string.IsNullOrWhiteSpace(dataDirectory) ? "Data" : dataDirectory;
         services.AddSingleton<IJsonDataManager, JsonDataManager>();
 
         services.AddTransient<IProyectoData, ProyectoData>();

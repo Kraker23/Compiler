@@ -4,10 +4,19 @@
 
 <h1>Aplicaciones</h1>
 
+<div class="border rounded p-3 mb-4">
+    <div class="d-flex align-items-center justify-content-between mb-3">
+        <h2 class="h5 mb-0">@(editandoAplicacion ? "Editar aplicacion" : "Nueva aplicacion")</h2>
+        @if (editandoAplicacion)
+        {
+            <button class="btn btn-sm btn-outline-secondary" @onclick="CancelarEdicion">Cancelar edicion</button>
+        }
+    </div>
+
 <div class="row g-3 mb-3">
     <div class="col-md-4">
         <label class="form-label" for="nombreAplicacion">Nombre</label>
-        <input id="nombreAplicacion" class="form-control" @bind="nuevoNombre" placeholder="Nombre de la aplicacion" />
+        <input id="nombreAplicacion" class="form-control" @bind="nuevoNombre" @bind:event="oninput" placeholder="Nombre de la aplicacion" />
     </div>
     <div class="col-md-4">
         <label class="form-label" for="carpetaAplicacion">Carpeta</label>
@@ -87,8 +96,9 @@
 </div>
 
 <div class="d-flex gap-2 mb-3">
-    <button class="btn btn-primary" @onclick="CrearAplicacion" disabled="@string.IsNullOrWhiteSpace(nuevoNombre)">Crear aplicacion</button>
+    <button class="btn btn-primary" @onclick="GuardarAplicacion" disabled="@string.IsNullOrWhiteSpace(nuevoNombre)">@(editandoAplicacion ? "Guardar aplicacion" : "Crear aplicacion")</button>
     <button class="btn btn-outline-secondary" @onclick="LimpiarFormulario">Limpiar</button>
+</div>
 </div>
 
 @if (!string.IsNullOrWhiteSpace(mensaje))
@@ -102,6 +112,12 @@
 }
 else
 {
+    <div class="mb-3">
+        <label class="form-label" for="filtroAplicaciones">Buscar</label>
+        <input id="filtroAplicaciones" class="form-control" @bind="filtroAplicaciones" placeholder="Nombre, ubicacion, compilado o publicacion" />
+        <div class="form-text">Mostrando @AplicacionesFiltradas.Count() de @aplicaciones.Count aplicaciones.</div>
+    </div>
+
     <table class="table table-striped align-middle">
         <thead>
             <tr>
@@ -115,7 +131,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var aplicacion in aplicaciones)
+            @foreach (var aplicacion in AplicacionesFiltradas)
             {
                 <tr>
                     <td>@aplicacion.nombre</td>
@@ -125,7 +141,10 @@ else
                     <td>@aplicacion.carpetaPublicacion</td>
                     <td>E:@(aplicacion.archivosExcluidos?.Count ?? 0) / A:@(aplicacion.archivosAdmitidos?.Count ?? 0)</td>
                     <td>
-                        <button class="btn btn-sm btn-outline-danger" @onclick="() => BorrarAplicacion(aplicacion.id)">Borrar</button>
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-sm btn-outline-primary" @onclick="() => EditarAplicacion(aplicacion.id)">Editar</button>
+                            <button class="btn btn-sm btn-outline-danger" @onclick="() => BorrarAplicacion(aplicacion.id)">Borrar</button>
+                        </div>
                     </td>
                 </tr>
             }
@@ -143,6 +162,7 @@ else
     private List<Carpeta> carpetas = [];
     private List<ArchivoExclusion> reglasExclusion = [];
     private List<ArchivoAdmitido> reglasAdmitidos = [];
+    private string filtroAplicaciones = string.Empty;
     private string nuevoNombre = string.Empty;
     private Guid? nuevaCarpetaId;
     private string nuevaUbicacion = string.Empty;
@@ -153,6 +173,8 @@ else
     private HashSet<Guid> selectedAdmitidoIds = [];
     private string mensaje = string.Empty;
     private bool error;
+    private bool editandoAplicacion;
+    private Guid? aplicacionEdicionId;
 
     protected override void OnInitialized()
     {
@@ -167,7 +189,26 @@ else
         reglasAdmitidos = ArchivoAdmitidoService.GetArchivoAdmitidos();
     }
 
-    private void CrearAplicacion()
+    private IEnumerable<Aplicacion> AplicacionesFiltradas
+    {
+        get
+        {
+            var filtro = filtroAplicaciones.Trim();
+            if (string.IsNullOrWhiteSpace(filtro))
+            {
+                return aplicaciones;
+            }
+
+            filtro = filtro.ToLowerInvariant();
+            return aplicaciones.Where(aplicacion =>
+                (aplicacion.nombre ?? string.Empty).Contains(filtro, StringComparison.OrdinalIgnoreCase) ||
+                (aplicacion.ubicacionAplicacion ?? string.Empty).Contains(filtro, StringComparison.OrdinalIgnoreCase) ||
+                (aplicacion.carpetaCompilado ?? string.Empty).Contains(filtro, StringComparison.OrdinalIgnoreCase) ||
+                (aplicacion.carpetaPublicacion ?? string.Empty).Contains(filtro, StringComparison.OrdinalIgnoreCase));
+        }
+    }
+
+    private void GuardarAplicacion()
     {
         var nombre = nuevoNombre.Trim();
         if (string.IsNullOrWhiteSpace(nombre))
@@ -179,6 +220,7 @@ else
 
         var aplicacion = new Aplicacion
         {
+            id = editandoAplicacion ? aplicacionEdicionId ?? Guid.NewGuid() : Guid.NewGuid(),
             fk_IdCarpeta = nuevaCarpetaId,
             nombre = nombre,
             ubicacionAplicacion = nuevaUbicacion.Trim(),
@@ -190,10 +232,34 @@ else
         };
 
         AplicacionService.ModificarAplicacion(aplicacion);
-        mensaje = $"Aplicacion '{nombre}' creada.";
+        mensaje = editandoAplicacion ? $"Aplicacion '{nombre}' guardada." : $"Aplicacion '{nombre}' creada.";
         error = false;
         LimpiarFormulario();
         CargarAplicaciones();
+    }
+
+    private void EditarAplicacion(Guid idAplicacion)
+    {
+        var aplicacion = AplicacionService.GetAplicacion(idAplicacion);
+        if (aplicacion == null)
+        {
+            mensaje = "No se pudo cargar la aplicacion seleccionada.";
+            error = true;
+            return;
+        }
+
+        editandoAplicacion = true;
+        aplicacionEdicionId = aplicacion.id;
+        nuevoNombre = aplicacion.nombre ?? string.Empty;
+        nuevaCarpetaId = aplicacion.fk_IdCarpeta;
+        nuevaUbicacion = aplicacion.ubicacionAplicacion ?? string.Empty;
+        nuevaCarpetaCompilado = aplicacion.carpetaCompilado ?? string.Empty;
+        nuevaCarpetaPublicacion = aplicacion.carpetaPublicacion ?? string.Empty;
+        nuevoComandoCompilado = aplicacion.comandoCompilado ?? string.Empty;
+        selectedExclusionIds = [.. (aplicacion.archivosExcluidos ?? [])];
+        selectedAdmitidoIds = [.. (aplicacion.archivosAdmitidos ?? [])];
+        mensaje = string.Empty;
+        error = false;
     }
 
     private void BorrarAplicacion(Guid idAplicacion)
@@ -214,6 +280,8 @@ else
 
     private void LimpiarFormulario()
     {
+        editandoAplicacion = false;
+        aplicacionEdicionId = null;
         nuevoNombre = string.Empty;
         nuevaCarpetaId = null;
         nuevaUbicacion = string.Empty;
@@ -222,6 +290,11 @@ else
         nuevoComandoCompilado = string.Empty;
         selectedExclusionIds.Clear();
         selectedAdmitidoIds.Clear();
+    }
+
+    private void CancelarEdicion()
+    {
+        LimpiarFormulario();
     }
 
     private void CambiarExclusion(Guid id, object? value)

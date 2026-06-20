@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "5Afws9/qRx8=",
+  "dgSpecHash": "BGM94CU9kc0=",
   "success": true,
-  "projectFilePath": "e:\\Code\\Compiler\\src\\Compiler.Web\\Compiler.Web.csproj",
+  "projectFilePath": "E:\\Code\\Compiler\\src\\Compiler.Web\\Compiler.Web.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Cristian\\.nuget\\packages\\microsoft.aspnetcore.app.internal.assets\\10.0.8\\microsoft.aspnetcore.app.internal.assets.10.0.8.nupkg.sha512",
     "C:\\Users\\Cristian\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
