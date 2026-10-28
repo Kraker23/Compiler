@@ -57,7 +57,8 @@
     object selectionTree { get; set; }
 
     private List<TreeNode> tree { get; set; }
-    private List<string> carpetas { get; set; }
+    // private List<string> carpetas { get; set; }
+    // private List<string> carpetasBase { get; set; }
     private List<string> archivos { get; set; }
     protected override void OnInitialized()
     {
@@ -81,16 +82,16 @@
             //  var searchPattern = new System.Text.RegularExpressions.Regex(@"$(?<=\.(dll|exe))", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
             var searchPattern = new System.Text.RegularExpressions.Regex(pattern, System.Text.RegularExpressions.RegexOptions.IgnoreCase);
 
-            var files = System.IO.Directory.EnumerateFiles(aplicacion.carpetaCompilado, "*", System.IO.SearchOption.AllDirectories)
+            archivos = System.IO.Directory.EnumerateFiles(aplicacion.carpetaCompilado, "*", System.IO.SearchOption.AllDirectories)
                 .Where(f => searchPattern.IsMatch(f))
                 .ToList();
 
 
-   
-            carpetas= System.IO.Directory.GetDirectories(aplicacion.carpetaCompilado, "*", System.IO.SearchOption.AllDirectories).ToList();
-            archivos = System.IO.Directory.GetFiles(aplicacion.carpetaCompilado, "*.dll", System.IO.SearchOption.AllDirectories).ToList();
 
-            CargarTree();
+            //carpetasBase= System.IO.Directory.GetDirectories(aplicacion.carpetaCompilado, "*", System.IO.SearchOption.TopDirectoryOnly).ToList();
+            //archivos = System.IO.Directory.GetFiles(aplicacion.carpetaCompilado, "*.dll", System.IO.SearchOption.AllDirectories).ToList();
+
+            CargarTree(aplicacion.carpetaCompilado);
         }
         else
         {
@@ -100,28 +101,37 @@
 
     #region Tree
 
-    void CargarTree()
+    void CargarTree(string carpeta)
     {
-        tree = new List<TreeNode>();
-       /* foreach (Carpeta carpetaAux in carpetas)
+        if(tree ==null)
+            tree = new List<TreeNode>();
+
+        List<string> list = System.IO.Directory.GetDirectories(carpeta, "*", System.IO.SearchOption.TopDirectoryOnly).ToList();
+        List<string> carpetas = list;
+
+        ///falta pasar ala recursiva el nodo padre
+        foreach (string carpetaAux in carpetas)
         {
             TreeNode aux = new TreeNode();
-            aux.Id = carpetaAux.id;
-            aux.Text = carpetaAux.nombre;
+            //aux.Id = carpetaAux.id;
+            aux.Text = Functions.getLastFolder(carpetaAux);
             aux.value = carpetaAux;
-            // aux.Template = "folder";
-            aux.Children = CargarAplicacionesByCarpeta(carpetaAux.id);
+
+            //aux.Template = "folder";
+            //List<string> carpetas = System.IO.Directory.GetDirectories(carpetaAux, "*", System.IO.SearchOption.TopDirectoryOnly).ToList();
+            CargarTree(carpetaAux);
+            //aux.Children = CargarAplicacionesByCarpeta(carpetaAux.id);
             tree.Add(aux);
 
         }
-        foreach (Aplicacion aplicacionAux in aplicaciones.Where(x => x.fk_IdCarpeta == null))
+        /*foreach (Aplicacion aplicacionAux in aplicaciones.Where(x => x.fk_IdCarpeta == null))
         {
             TreeNode aux = new TreeNode();
             aux.Id = aplicacionAux.id;
             aux.Text = aplicacionAux.nombre;
             aux.value = aplicacionAux;
             tree.Add(aux);
-        }*/
+            }*/
     }
 
     List<TreeNode> CargarAplicacionesByCarpeta(Guid guid)
@@ -137,17 +147,17 @@
                 aux.Text = aplicacionAux.nombre;
                 aux.value = aplicacionAux;
                 treeApps.Add(aux);
-            }
+                }
             return treeApps;
-        }*/
+            }*/
         return null;
     }
 
     RenderFragment<RadzenTreeItem> FolderTemplate = (context) => builder =>
        {
            TreeNode objTreeNode = context.Value as TreeNode;
-           builder.OpenComponent<RadzenIcon>(0);
-           if (objTreeNode.value is Carpeta)
+           builder.OpenComponent<RadzenIcon>(0);           
+           if (!Functions.isfile(objTreeNode.value.ToString()))//(objTreeNode.value is Carpeta)
            {
                builder.AddAttribute(1, "Icon", "folder");
                builder.AddAttribute(1, "IconColor", "#FFBA01");
@@ -179,7 +189,7 @@
     }
 
 
-   
+
 
     #endregion
 
@@ -193,11 +203,12 @@
     }
     void CompilarClick(MenuItemEventArgs args)
     {
-        
+
     }
 
-    
+
    
+
 
    
 }

@@ -1355,7 +1355,7 @@
         },
         "runtime": {
           "Compiler.BL.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         }
@@ -1367,7 +1367,7 @@
         },
         "runtime": {
           "Compiler.EF.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         }
@@ -1381,7 +1381,7 @@
         },
         "runtime": {
           "Compiler.Shared.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         }
@@ -1402,7 +1402,7 @@
         },
         "runtime": {
           "Compiler.UI.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         }

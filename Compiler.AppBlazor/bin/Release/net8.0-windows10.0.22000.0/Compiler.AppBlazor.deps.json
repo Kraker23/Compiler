@@ -15,21 +15,21 @@
           "Utilities.Clases": "1.0.0.0",
           "Utilities.Controls": "1.0.0.0",
           "Utilities.Extensions": "1.0.0.0",
-          "runtimepack.Microsoft.Windows.SDK.NET.Ref": "10.0.22000.54"
+          "runtimepack.Microsoft.Windows.SDK.NET.Ref": "10.0.22000.57"
         },
         "runtime": {
           "Compiler.AppBlazor.dll": {}
         }
       },
-      "runtimepack.Microsoft.Windows.SDK.NET.Ref/10.0.22000.54": {
+      "runtimepack.Microsoft.Windows.SDK.NET.Ref/10.0.22000.57": {
         "runtime": {
           "Microsoft.Windows.SDK.NET.dll": {
             "assemblyVersion": "10.0.22000.38",
-            "fileVersion": "10.0.22000.52"
+            "fileVersion": "10.0.22000.55"
           },
           "WinRT.Runtime.dll": {
-            "assemblyVersion": "2.1.0.0",
-            "fileVersion": "2.1.6.47881"
+            "assemblyVersion": "2.2.0.0",
+            "fileVersion": "2.2.0.48161"
           }
         }
       },
@@ -263,7 +263,7 @@
         },
         "runtime": {
           "Compiler.BL.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         }
@@ -275,7 +275,7 @@
         },
         "runtime": {
           "Compiler.EF.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         }
@@ -289,7 +289,7 @@
         },
         "runtime": {
           "Compiler.Shared.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         }
@@ -350,7 +350,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "runtimepack.Microsoft.Windows.SDK.NET.Ref/10.0.22000.54": {
+    "runtimepack.Microsoft.Windows.SDK.NET.Ref/10.0.22000.57": {
       "type": "runtimepack",
       "serviceable": false,
       "sha512": ""

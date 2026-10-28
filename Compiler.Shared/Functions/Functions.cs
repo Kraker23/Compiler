@@ -10,6 +10,25 @@ namespace Compiler.Shared
 {
     public static class Functions
     {
+
+        #region Files
+        public static string getLastFolder(string folder)
+        {
+            return folder.Substring(folder.LastIndexOf("\\") + 1);
+        }
+
+        public static bool isfile(string file)
+        {
+            if (!string.IsNullOrEmpty(file))
+            {
+                string nameFile = getLastFolder(file);
+                return nameFile.LastIndexOf(".") > 0;
+            }
+            return false;
+        }
+        #endregion
+
+
         public static string GetPattern(Aplicacion aplicacion)
         {
             return GetPattern(aplicacion._archivosAdmitidos, aplicacion._archivosExcluidos);
